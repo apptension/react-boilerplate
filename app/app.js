@@ -18,32 +18,28 @@ import FontFaceObserver from 'fontfaceobserver';
 import { useScroll } from 'react-router-scroll';
 import 'sanitize.css/sanitize.css';
 
-// Import root app
-import App from 'containers/App';
-
-// Import selector for `syncHistoryWithStore`
-import { makeSelectLocationState } from 'containers/App/selectors';
-
-// Import Language Provider
-import LanguageProvider from 'containers/LanguageProvider';
-
 // Load the favicon, the manifest.json file and the .htaccess file
 /* eslint-disable import/no-webpack-loader-syntax */
 import '!file-loader?name=[name].[ext]!./favicon.ico';
 import '!file-loader?name=[name].[ext]!./manifest.json';
-import 'file-loader?name=[name].[ext]!./.htaccess'; // eslint-disable-line import/extensions
 /* eslint-enable import/no-webpack-loader-syntax */
 
-import configureStore from './store';
+// Import selector for `syncHistoryWithStore`
+import { selectLocationState } from './modules/app/app.selectors';
 
-// Import i18n messages
-import { translationMessages } from './i18n';
+// Import IntlProvider for `syncHistoryWithStore`
+import IntlProvider from './utils/IntlProvider.container';
+
+import configureStore from './modules/store';
 
 // Import CSS reset and Global Styles
 import './global-styles';
 
 // Import routes
-import createRoutes from './routes';
+import routes from './routes';
+
+// Import DEFAULT_LOCALE
+import { DEFAULT_LOCALE } from './modules/locales/locales.constants';
 
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
@@ -67,58 +63,44 @@ const store = configureStore(initialState, browserHistory);
 // is under the non-default key ("routing"), selectLocationState
 // must be provided for resolving how to retrieve the "route" in the state
 const history = syncHistoryWithStore(browserHistory, store, {
-  selectLocationState: makeSelectLocationState(),
+  selectLocationState: selectLocationState(),
 });
 
-// Set up the router, wrapping all Routes in the App component
-const rootRoute = {
-  component: App,
-  childRoutes: createRoutes(store),
-};
 
-const render = (messages) => {
+const render = () => {
   ReactDOM.render(
     <Provider store={store}>
-      <LanguageProvider messages={messages}>
+      <IntlProvider locale={DEFAULT_LOCALE}>
         <Router
           history={history}
-          routes={rootRoute}
+          routes={routes}
           render={
             // Scroll to top when going to a new page, imitating default browser
             // behaviour
             applyRouterMiddleware(useScroll())
           }
         />
-      </LanguageProvider>
+      </IntlProvider>
     </Provider>,
     document.getElementById('app')
   );
 };
 
-// Hot reloadable translation json files
-if (module.hot) {
-  // modules.hot.accept does not accept dynamic dependencies,
-  // have to be constants at compile-time
-  module.hot.accept('./i18n', () => {
-    render(translationMessages);
-  });
-}
-
 // Chunked polyfill for browsers without Intl support
 if (!window.Intl) {
   (new Promise((resolve) => {
-    resolve(import('intl'));
+    resolve(require('intl'));
   }))
     .then(() => Promise.all([
-      import('intl/locale-data/jsonp/en.js'),
-      import('intl/locale-data/jsonp/de.js'),
+      require('intl/locale-data/jsonp/en.js'),
+      require('intl/locale-data/jsonp/de.js'),
     ]))
-    .then(() => render(translationMessages))
+    .then(() => render())
     .catch((err) => {
       throw err;
     });
 } else {
-  render(translationMessages);
+  render();
 }
 
 // Install ServiceWorker and AppCache in the end since
