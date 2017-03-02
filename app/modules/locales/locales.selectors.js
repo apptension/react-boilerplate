@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 
 const selectLocalesDomain = () => (state) => state.get('locales');
 
-export const selectLocalesLang = () => createSelector(
+export const selectLocalesLanguage = () => createSelector(
   selectLocalesDomain(),
-  (state) => state.get('lang')
+  (state) => state.get('language')
 );

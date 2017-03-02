@@ -17,7 +17,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import FontFaceObserver from 'fontfaceobserver';
 import { useScroll } from 'react-router-scroll';
-import 'sanitize.css/sanitize.css';
+import 'normalize.css/normalize.css';
 
 // Load the favicon, the manifest.json file and the .htaccess file
 /* eslint-disable import/no-webpack-loader-syntax */
@@ -28,13 +28,9 @@ import '!file-loader?name=[name].[ext]!./manifest.json';
 // Import selector for `syncHistoryWithStore`
 import { selectLocationState } from './modules/router/router.selectors';
 
-// Import IntlProvider for `syncHistoryWithStore`
-import IntlProvider from './utils/intl/intl.container';
-
 import configureStore from './modules/store';
 
 // Import i18n messages
-import { translationMessages } from './i18n';
 
 // Import CSS reset and Global Styles
 import './global-styles';
@@ -73,20 +69,18 @@ const history = syncHistoryWithStore(browserHistory, store, {
 });
 
 
-const render = (messages) => {
+const render = () => {
   ReactDOM.render(
     <Provider store={store}>
-      <IntlProvider messages={messages}>
-        <Router
-          history={history}
-          routes={routes}
-          render={
-            // Scroll to top when going to a new page, imitating default browser
-            // behaviour
-            applyRouterMiddleware(useScroll())
-          }
-        />
-      </IntlProvider>
+      <Router
+        history={history}
+        routes={routes}
+        render={
+          // Scroll to top when going to a new page, imitating default browser
+          // behaviour
+          applyRouterMiddleware(useScroll())
+        }
+      />
     </Provider>,
     document.getElementById('app')
   );
@@ -101,21 +95,17 @@ if (!window.Intl) {
       require('intl/locale-data/jsonp/en.js'),
       require('intl/locale-data/jsonp/de.js'),
     ]))
-    .then(() => render(translationMessages))
+    .then(() => render())
     .catch((err) => {
       throw err;
     });
 } else {
-  render(translationMessages);
+  render();
 }
 
 if (module.hot) {
   module.hot.accept('./routes', () => {
-    render(translationMessages);
-  });
-
-  module.hot.accept('./i18n', () => {
-    render(translationMessages);
+    render();
   });
 }
 

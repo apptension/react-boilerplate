@@ -3,7 +3,8 @@ import Helmet from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 
 import messages from './home.messages';
-import MaintainerList from './components/maintainerList/maintainerList.component';
+import MaintainerList from './maintainerList/maintainerList.component';
+import LanguageSelector from './languageSelector/languageSelector.component';
 
 class Home extends PureComponent {
   componentWillMount() {
@@ -25,6 +26,12 @@ class Home extends PureComponent {
         </h1>
 
         <MaintainerList items={this.props.maintainers} />
+
+        <LanguageSelector
+          language={this.props.language}
+          setLanguage={this.props.setLanguage}
+          router={this.props.router}
+        />
       </div>
     );
   }
@@ -32,7 +39,10 @@ class Home extends PureComponent {
 
 Home.propTypes = {
   maintainers: PropTypes.object,
+  language: PropTypes.string.isRequired,
   getMaintainers: PropTypes.func.isRequired,
+  setLanguage: PropTypes.func.isRequired,
+  router: PropTypes.object.isRequired,
 };
 
 export default Home;
