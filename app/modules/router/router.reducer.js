@@ -1,4 +1,5 @@
 import { Record } from 'immutable';
+import { createReducer } from 'reduxsauce';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
 
@@ -6,17 +7,14 @@ const StateRecord = new Record({
   locationBeforeTransitions: null,
 });
 
-const initialState = new StateRecord({});
+export const INITIAL_STATE = new StateRecord({});
 
-function routeReducer(state = initialState, action) {
-  switch (action.type) {
-    case LOCATION_CHANGE:
-      return state.merge({
-        locationBeforeTransitions: action.payload,
-      });
-    default:
-      return state;
-  }
-}
+export const locationChangeHandler = (state = INITIAL_STATE, action) => state.merge({
+  locationBeforeTransitions: action.payload,
+});
 
-export default routeReducer;
+export const HANDLERS = {
+  [LOCATION_CHANGE]: locationChangeHandler,
+};
+
+export default createReducer(INITIAL_STATE, HANDLERS);

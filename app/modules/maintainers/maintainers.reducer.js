@@ -1,25 +1,19 @@
 import { fromJS, Record } from 'immutable';
-import { GET_MAINTAINERS, GET_MAINTAINERS_SUCCESS, GET_MAINTAINERS_FAIL } from './maintainers.constants';
+import { createReducer } from 'reduxsauce';
+
+import { ACTION_TYPES } from './maintainers.constants';
 
 
 const StateRecord = new Record({
   data: null,
 });
 
-const initialState = new StateRecord({});
+export const INITIAL_STATE = new StateRecord({});
 
-function maintainersReducer(state = initialState, action) {
-  switch (action.type) {
-    case GET_MAINTAINERS:
-      return state;
-    case GET_MAINTAINERS_SUCCESS:
-      return state
-        .set('data', fromJS(action.data));
-    case GET_MAINTAINERS_FAIL:
-      return state;
-    default:
-      return state;
-  }
-}
+export const getSuccessHandler = (state = INITIAL_STATE, action) => state.set('data', fromJS(action.data));
 
-export default maintainersReducer;
+export const HANDLERS = {
+  [ACTION_TYPES.GET_SUCCESS]: getSuccessHandler,
+};
+
+export default createReducer(INITIAL_STATE, HANDLERS);

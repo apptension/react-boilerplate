@@ -1,2 +1,8 @@
+import { createTypes } from 'reduxsauce';
+
+
 export const DEFAULT_LOCALE = 'en';
-export const SET_LANG = 'locales/SET_LANG';
+
+export const ACTION_TYPES = createTypes(`
+  SET_LANG
+`, { prefix: 'LOCALES_' });

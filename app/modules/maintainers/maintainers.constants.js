@@ -1,3 +1,8 @@
-export const GET_MAINTAINERS = 'maintainers/GET_MAINTAINERS';
-export const GET_MAINTAINERS_SUCCESS = 'maintainers/GET_MAINTAINERS_SUCCESS';
-export const GET_MAINTAINERS_FAIL = 'maintainers/GET_MAINTAINERS_FAIL';
+import { createTypes } from 'reduxsauce';
+
+
+export const ACTION_TYPES = createTypes(`
+  GET
+  GET_SUCCESS
+  GET_FAIL
+`, { prefix: 'MAINTAINERS_' });

@@ -1,22 +1,22 @@
-import { GET_MAINTAINERS, GET_MAINTAINERS_SUCCESS, GET_MAINTAINERS_FAIL } from './maintainers.constants';
+import { ACTION_TYPES } from './maintainers.constants';
 
 
 export function getMaintainers() {
   return {
-    type: GET_MAINTAINERS,
+    type: ACTION_TYPES.GET,
   };
 }
 
 export function getMaintainersSuccess(dataValue) {
   return {
-    type: GET_MAINTAINERS_SUCCESS,
+    type: ACTION_TYPES.GET_SUCCESS,
     data: dataValue,
   };
 }
 
 export function getMaintainersError(data) {
   return {
-    type: GET_MAINTAINERS_FAIL,
+    type: ACTION_TYPES.GET_FAIL,
     error: data,
   };
 }

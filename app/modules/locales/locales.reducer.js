@@ -1,19 +1,20 @@
 import { Record } from 'immutable';
+import { createReducer } from 'reduxsauce';
 
-import { DEFAULT_LOCALE, SET_LANG } from './locales.constants';
+import { DEFAULT_LOCALE, ACTION_TYPES } from './locales.constants';
 
 
 const StateRecord = new Record({
   lang: DEFAULT_LOCALE,
 });
 
-const initialState = new StateRecord({});
+export const INITIAL_STATE = new StateRecord({});
 
-export default function localesReducer(state = initialState, action) {
-  switch (action.type) {
-    case SET_LANG:
-      return state.set('lang', action.payload);
-    default:
-      return state;
-  }
-}
+export const setLangHandler = (state = INITIAL_STATE, action) => state.set('lang', action.payload);
+
+export const HANDLERS = {
+  [ACTION_TYPES.SET_LANG]: setLangHandler,
+};
+
+export default createReducer(INITIAL_STATE, HANDLERS);
+
