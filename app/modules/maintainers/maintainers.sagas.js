@@ -8,7 +8,7 @@ import { ACTION_TYPES } from './maintainers.constants';
 
 export function* loadMaintainers() {
   try {
-    const data = yield call(request, '/mock/maintainers.json');
+    const data = yield call(request, '/fixtures/maintainers.json');
     yield put(getMaintainersSuccess(data));
   } catch (e) {
     yield put(getMaintainersError(e.message));

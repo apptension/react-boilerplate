@@ -4,7 +4,6 @@
 
 const path = require('path');
 const webpack = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = (options) => ({
   entry: options.entry,
@@ -62,10 +61,6 @@ module.exports = (options) => ({
     }],
   },
   plugins: options.plugins.concat([
-    new CopyWebpackPlugin([{
-      from: path.join(process.cwd(), 'app', 'mock'),
-      to: 'mock',
-    }]),
     new webpack.ProvidePlugin({
       // make fetch available
       fetch: 'exports-loader?self.fetch!whatwg-fetch',
