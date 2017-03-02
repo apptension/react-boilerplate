@@ -29,18 +29,18 @@ import '!file-loader?name=[name].[ext]!./manifest.json';
 import { selectLocationState } from './modules/router/router.selectors';
 
 // Import IntlProvider for `syncHistoryWithStore`
-import IntlProvider from './utils/IntlProvider.container';
+import IntlProvider from './utils/intl/intl.container';
 
 import configureStore from './modules/store';
+
+// Import i18n messages
+import { translationMessages } from './i18n';
 
 // Import CSS reset and Global Styles
 import './global-styles';
 
 // Import routes
 import routes from './routes';
-
-// Import DEFAULT_LOCALE
-import { DEFAULT_LOCALE } from './modules/locales/locales.constants';
 
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
@@ -73,10 +73,10 @@ const history = syncHistoryWithStore(browserHistory, store, {
 });
 
 
-const render = () => {
+const render = (messages) => {
   ReactDOM.render(
     <Provider store={store}>
-      <IntlProvider locale={DEFAULT_LOCALE}>
+      <IntlProvider messages={messages}>
         <Router
           history={history}
           routes={routes}
@@ -101,17 +101,21 @@ if (!window.Intl) {
       require('intl/locale-data/jsonp/en.js'),
       require('intl/locale-data/jsonp/de.js'),
     ]))
-    .then(() => render())
+    .then(() => render(translationMessages))
     .catch((err) => {
       throw err;
     });
 } else {
-  render();
+  render(translationMessages);
 }
 
 if (module.hot) {
   module.hot.accept('./routes', () => {
-    render();
+    render(translationMessages);
+  });
+
+  module.hot.accept('./i18n', () => {
+    render(translationMessages);
   });
 }
 

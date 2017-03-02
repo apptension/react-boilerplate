@@ -1,5 +1,3 @@
 {
-  "home": {
-    "welcomeMessage": "Hello World!"
-  }
+  "home.welcome": "Hello World!"
 }

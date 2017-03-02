@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import App from './app.component';
 
 
-function mapStateToProps() {
-  return {};
-}
+const mapStateToProps = createStructuredSelector({
+});
 
 export default connect(mapStateToProps, {})(App);

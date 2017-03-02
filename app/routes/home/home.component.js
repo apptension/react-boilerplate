@@ -2,6 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 
+import messages from './home.messages';
 
 const Home = () => (
   <div className="home">
@@ -12,7 +13,7 @@ const Home = () => (
       ]}
     />
 
-    <FormattedMessage id="home.welcomeMessage" />
+    <FormattedMessage {...messages.welcome} />
   </div>
 );
 

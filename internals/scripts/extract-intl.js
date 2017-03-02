@@ -15,7 +15,7 @@ const presets = pkg.babel.presets;
 const plugins = pkg.babel.plugins || [];
 
 const i18n = require('../../app/i18n');
-import { DEFAULT_LOCALE } from '../../app/containers/App/constants';
+import { DEFAULT_LOCALE } from '../../app/modules/locales/locales.constants';
 
 require('shelljs/global');
 
@@ -38,7 +38,7 @@ const task = (message) => {
     clearTimeout(progress);
     return addCheckmark(() => newLine());
   }
-}
+};
 
 // Wrap async functions below into a promise
 const glob = (pattern) => new Promise((resolve, reject) => {
@@ -80,8 +80,8 @@ for (const locale of locales) {
 }
 
 /* push `react-intl` plugin to the existing plugins that are already configured in `package.json`
-   Example: 
-   ``` 
+   Example:
+   ```
   "babel": {
     "plugins": [
       ["transform-object-rest-spread", { "useBuiltIns": true }]
@@ -93,7 +93,7 @@ for (const locale of locales) {
   }
   ```
 */
-plugins.push(['react-intl'])
+plugins.push(['react-intl']);
 
 const extractFromFile = async (fileName) => {
   try {
@@ -118,12 +118,12 @@ const extractFromFile = async (fileName) => {
 (async function main() {
   const memoryTaskDone = task('Storing language files in memory');
   const files = await glob(FILES_TO_PARSE);
-  memoryTaskDone()
+  memoryTaskDone();
 
   const extractTaskDone = task('Run extraction on all files');
   // Run extraction on all files that match the glob on line 16
   await Promise.all(files.map((fileName) => extractFromFile(fileName)));
-  extractTaskDone()
+  extractTaskDone();
 
   // Make the directory if it doesn't exist, especially for first run
   mkdir('-p', 'app/translations');
