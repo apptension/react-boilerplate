@@ -61,7 +61,9 @@
       "react",
       "stage-0"
     ],
-    "plugins": ["react-hot-loader/babel"],
+    "plugins": [
+      "react-hot-loader/babel"
+    ],
     "env": {
       "production": {
         "only": [
@@ -233,6 +235,7 @@
     "react-router": "^3.0.2",
     "react-router-redux": "4.0.6",
     "react-router-scroll": "0.4.1",
+    "react-tap-event-plugin": "^2.0.1",
     "redux": "3.6.0",
     "redux-immutable": "3.0.8",
     "redux-saga": "0.14.0",
