@@ -17,7 +17,6 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import FontFaceObserver from 'fontfaceobserver';
 import { useScroll } from 'react-router-scroll';
-import { isString } from 'lodash';
 import 'sanitize.css/sanitize.css';
 
 // Load the favicon, the manifest.json file and the .htaccess file
@@ -111,14 +110,6 @@ if (!window.Intl) {
 }
 
 if (module.hot) {
-  const orgError = console.error; // eslint-disable-line no-console
-  console.error = (...args) => { // eslint-disable-line no-console
-    if (args && args.length === 1 && isString(args[0]) && args[0].indexOf('You cannot change <Router routes>;') > -1) {
-      return;
-    }
-    orgError.apply(console, args);
-  };
-
   module.hot.accept('./routes', () => {
     render();
   });

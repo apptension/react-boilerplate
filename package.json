@@ -223,7 +223,6 @@
     "fontfaceobserver": "2.0.7",
     "immutable": "3.8.1",
     "intl": "1.2.5",
-    "invariant": "2.2.2",
     "ip": "1.1.4",
     "lodash": "4.17.2",
     "minimist": "1.2.0",
@@ -242,7 +241,6 @@
     "reselect": "2.5.4",
     "sanitize.css": "4.1.0",
     "styled-components": "1.1.2",
-    "warning": "3.0.0",
     "whatwg-fetch": "2.0.1"
   },
   "devDependencies": {
