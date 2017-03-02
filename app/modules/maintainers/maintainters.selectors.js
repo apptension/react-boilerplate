@@ -5,5 +5,5 @@ const selectMaintainersDomain = () => (state) => state.get('maintainers');
 
 export const selectMaintainersData = () => createSelector(
   selectMaintainersDomain(),
-  (state) => state.get('data')
+  (state) => state.get('list')
 );

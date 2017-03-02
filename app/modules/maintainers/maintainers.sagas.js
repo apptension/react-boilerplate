@@ -3,7 +3,7 @@ import { takeLatest } from 'redux-saga';
 
 import request from '../../utils/request';
 import { getMaintainersSuccess, getMaintainersError } from './maintainers.actions';
-import { GET_MAINTAINERS } from './maintainers.constants';
+import { ACTION_TYPES } from './maintainers.constants';
 
 
 export function* loadMaintainers() {
@@ -16,9 +16,11 @@ export function* loadMaintainers() {
 }
 
 export function* loadMaintainersSaga() {
-  yield takeLatest(GET_MAINTAINERS, loadMaintainers);
+  yield takeLatest(ACTION_TYPES.GET, loadMaintainers);
 }
 
-export default [
-  loadMaintainersSaga,
-];
+export default function* maintainersSaga() {
+  yield [
+    loadMaintainersSaga(),
+  ];
+}
