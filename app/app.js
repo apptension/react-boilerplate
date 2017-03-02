@@ -11,9 +11,9 @@ import 'babel-polyfill';
 // Import all the third party stuff
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
+import { applyRouterMiddleware, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
+import { AppContainer } from 'react-hot-loader';
 import FontFaceObserver from 'fontfaceobserver';
 import { useScroll } from 'react-router-scroll';
 import 'sanitize.css/sanitize.css';
@@ -27,19 +27,13 @@ import '!file-loader?name=[name].[ext]!./manifest.json';
 // Import selector for `syncHistoryWithStore`
 import { selectLocationState } from './modules/app/app.selectors';
 
-// Import IntlProvider for `syncHistoryWithStore`
-import IntlProvider from './utils/IntlProvider.container';
-
 import configureStore from './modules/store';
 
 // Import CSS reset and Global Styles
 import './global-styles';
 
 // Import routes
-import routes from './routes';
-
-// Import DEFAULT_LOCALE
-import { DEFAULT_LOCALE } from './modules/locales/locales.constants';
+import Root from './routes';
 
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
@@ -67,21 +61,19 @@ const history = syncHistoryWithStore(browserHistory, store, {
 });
 
 
-const render = () => {
+const render = (Component) => {
   ReactDOM.render(
-    <Provider store={store}>
-      <IntlProvider locale={DEFAULT_LOCALE}>
-        <Router
-          history={history}
-          routes={routes}
-          render={
-            // Scroll to top when going to a new page, imitating default browser
-            // behaviour
-            applyRouterMiddleware(useScroll())
-          }
-        />
-      </IntlProvider>
-    </Provider>,
+    <AppContainer>
+      <Component
+        history={history}
+        store={store}
+        render={
+          // Scroll to top when going to a new page, imitating default browser
+          // behaviour
+          applyRouterMiddleware(useScroll())
+        }
+      />
+    </AppContainer>,
     document.getElementById('app')
   );
 };
@@ -95,12 +87,21 @@ if (!window.Intl) {
       require('intl/locale-data/jsonp/en.js'),
       require('intl/locale-data/jsonp/de.js'),
     ]))
-    .then(() => render())
+    .then(() => render(Root))
     .catch((err) => {
       throw err;
     });
 } else {
-  render();
+  render(Root);
+}
+
+if (module.hot) {
+  module.hot.accept(() => {
+    ReactDOM.render(
+      render(Root),
+      document.getElementById('app')
+    );
+  });
 }
 
 // Install ServiceWorker and AppCache in the end since
