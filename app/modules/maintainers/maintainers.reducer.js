@@ -1,5 +1,5 @@
 import { fromJS, Record } from 'immutable';
-import { GET_USERS, GET_USERS_SUCCESS, GET_USERS_FAIL } from './user.constants';
+import { GET_MAINTAINERS, GET_MAINTAINERS_SUCCESS, GET_MAINTAINERS_FAIL } from './maintainers.constants';
 
 
 const StateRecord = new Record({
@@ -8,18 +8,18 @@ const StateRecord = new Record({
 
 const initialState = new StateRecord({});
 
-function userReducer(state = initialState, action) {
+function maintainersReducer(state = initialState, action) {
   switch (action.type) {
-    case GET_USERS:
+    case GET_MAINTAINERS:
       return state;
-    case GET_USERS_SUCCESS:
+    case GET_MAINTAINERS_SUCCESS:
       return state
         .set('data', fromJS(action.data));
-    case GET_USERS_FAIL:
+    case GET_MAINTAINERS_FAIL:
       return state;
     default:
       return state;
   }
 }
 
-export default userReducer;
+export default maintainersReducer;

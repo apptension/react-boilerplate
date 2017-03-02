@@ -26,7 +26,7 @@ import '!file-loader?name=[name].[ext]!./manifest.json';
 /* eslint-enable import/no-webpack-loader-syntax */
 
 // Import selector for `syncHistoryWithStore`
-import { selectLocationState } from './modules/app/app.selectors';
+import { selectLocationState } from './modules/router/router.selectors';
 
 // Import IntlProvider for `syncHistoryWithStore`
 import IntlProvider from './utils/IntlProvider.container';
