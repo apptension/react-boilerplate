@@ -19,12 +19,6 @@ import FontFaceObserver from 'fontfaceobserver';
 import { useScroll } from 'react-router-scroll';
 import 'normalize.css/normalize.css';
 
-// Load the favicon, the manifest.json file and the .htaccess file
-/* eslint-disable import/no-webpack-loader-syntax */
-import '!file-loader?name=[name].[ext]!./favicon.ico';
-import '!file-loader?name=[name].[ext]!./manifest.json';
-/* eslint-enable import/no-webpack-loader-syntax */
-
 // Import selector for `syncHistoryWithStore`
 import { selectLocationState } from './modules/router/router.selectors';
 

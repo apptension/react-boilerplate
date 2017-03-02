@@ -4,6 +4,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 module.exports = (options) => ({
   entry: options.entry,
@@ -61,6 +62,7 @@ module.exports = (options) => ({
     }],
   },
   plugins: options.plugins.concat([
+    new FaviconsWebpackPlugin(path.join(process.cwd(), 'app', 'images', 'favicon.png')),
     new webpack.ProvidePlugin({
       // make fetch available
       fetch: 'exports-loader?self.fetch!whatwg-fetch',
