@@ -11,11 +11,12 @@ import 'babel-polyfill';
 // Import all the third party stuff
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { applyRouterMiddleware, browserHistory } from 'react-router';
+import { Provider } from 'react-redux';
+import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import { AppContainer } from 'react-hot-loader';
 import FontFaceObserver from 'fontfaceobserver';
 import { useScroll } from 'react-router-scroll';
+import { isString } from 'lodash';
 import 'sanitize.css/sanitize.css';
 
 // Load the favicon, the manifest.json file and the .htaccess file
@@ -27,13 +28,19 @@ import '!file-loader?name=[name].[ext]!./manifest.json';
 // Import selector for `syncHistoryWithStore`
 import { selectLocationState } from './modules/app/app.selectors';
 
+// Import IntlProvider for `syncHistoryWithStore`
+import IntlProvider from './utils/IntlProvider.container';
+
 import configureStore from './modules/store';
 
 // Import CSS reset and Global Styles
 import './global-styles';
 
 // Import routes
-import Root from './routes';
+import routes from './routes';
+
+// Import DEFAULT_LOCALE
+import { DEFAULT_LOCALE } from './modules/locales/locales.constants';
 
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
@@ -61,19 +68,21 @@ const history = syncHistoryWithStore(browserHistory, store, {
 });
 
 
-const render = (Component) => {
+const render = () => {
   ReactDOM.render(
-    <AppContainer>
-      <Component
-        history={history}
-        store={store}
-        render={
-          // Scroll to top when going to a new page, imitating default browser
-          // behaviour
-          applyRouterMiddleware(useScroll())
-        }
-      />
-    </AppContainer>,
+    <Provider store={store}>
+      <IntlProvider locale={DEFAULT_LOCALE}>
+        <Router
+          history={history}
+          routes={routes}
+          render={
+            // Scroll to top when going to a new page, imitating default browser
+            // behaviour
+            applyRouterMiddleware(useScroll())
+          }
+        />
+      </IntlProvider>
+    </Provider>,
     document.getElementById('app')
   );
 };
@@ -87,20 +96,25 @@ if (!window.Intl) {
       require('intl/locale-data/jsonp/en.js'),
       require('intl/locale-data/jsonp/de.js'),
     ]))
-    .then(() => render(Root))
+    .then(() => render())
     .catch((err) => {
       throw err;
     });
 } else {
-  render(Root);
+  render();
 }
 
 if (module.hot) {
-  module.hot.accept(() => {
-    ReactDOM.render(
-      render(Root),
-      document.getElementById('app')
-    );
+  const orgError = console.error; // eslint-disable-line no-console
+  console.error = (...args) => { // eslint-disable-line no-console
+    if (args && args.length === 1 && isString(args[0]) && args[0].indexOf('You cannot change <Router routes>;') > -1) {
+      return;
+    }
+    orgError.apply(console, args);
+  };
+
+  module.hot.accept('./routes', () => {
+    render();
   });
 }
 
