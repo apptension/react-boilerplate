@@ -6,15 +6,17 @@ import Maintainer from '../maintainer/maintainer.component';
 
 
 const MaintainerList = ({ items }) => (
-  <ul className="maintainer-list">
+  <div className="maintainer-list">
     <h2>
       <FormattedMessage {...messages.welcome} />:
     </h2>
 
-    {items.toArray().map((item, key) => (
-      <Maintainer key={key} data={item} />
-    ))}
-  </ul>
+    <ul>
+      {items.toArray().map((item, key) => (
+        <Maintainer key={key} data={item} />
+      ))}
+    </ul>
+  </div>
 );
 
 MaintainerList.propTypes = {

@@ -1,0 +1,17 @@
+@import "maintainerList/maintainerList";
+
+.home {
+  padding: 40px;
+}
+
+.home__title {
+  line-height: 50px;
+}
+
+.home__title-logo {
+  @include retina-sprite($logo-desktop-group);
+
+  display: inline-block;
+  margin-right: 20px;
+  vertical-align: middle;
+}

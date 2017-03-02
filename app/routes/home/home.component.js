@@ -21,7 +21,8 @@ class Home extends PureComponent {
           ]}
         />
 
-        <h1>
+        <h1 className="home__title">
+          <i className="home__title-logo" />
           <FormattedMessage {...messages.welcome} />
         </h1>
 

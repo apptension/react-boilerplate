@@ -18,16 +18,12 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import FontFaceObserver from 'fontfaceobserver';
 import { useScroll } from 'react-router-scroll';
 import 'normalize.css/normalize.css';
+import './main.scss';
 
 // Import selector for `syncHistoryWithStore`
 import { selectLocationState } from './modules/router/router.selectors';
 
 import configureStore from './modules/store';
-
-// Import i18n messages
-
-// Import CSS reset and Global Styles
-import './global-styles';
 
 // Import routes
 import routes from './routes';
