@@ -1,8 +1,10 @@
 # Don't check auto-generated stuff into git
 coverage
 build
+junit
 generated
 node_modules
+.nyc_output
 stats.json
 
 # Cruft
