@@ -172,7 +172,7 @@
     "rimraf": "2.5.4",
     "sass-loader": "^6.0.2",
     "shelljs": "0.7.5",
-    "sinon": "^1.17.7",
+    "sinon": "2.0.0-pre",
     "style-loader": "0.13.1",
     "url-loader": "0.5.7",
     "webpack": "2.2.0-rc.3",
