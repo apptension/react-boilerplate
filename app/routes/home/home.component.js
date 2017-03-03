@@ -1,6 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import Helmet from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
+import envConfig from 'env-config';
 
 import messages from './home.messages';
 import MaintainerList from './maintainerList/maintainerList.component';
@@ -25,6 +26,8 @@ class Home extends PureComponent {
           <i className="home__title-logo" />
           <FormattedMessage {...messages.welcome} />
         </h1>
+
+        <div>Environment: {envConfig.name}</div>
 
         <MaintainerList items={this.props.maintainers} />
 

@@ -109,6 +109,9 @@ module.exports = (options) => ({
     new webpack.NamedModulesPlugin(),
   ]),
   resolve: {
+    alias: {
+      'env-config': path.join(process.cwd(), 'app', 'environment', `${process.env.NODE_ENV}.js`),
+    },
     modules: ['app', 'node_modules'],
     extensions: [
       '.js',
