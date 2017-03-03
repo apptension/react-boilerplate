@@ -7,9 +7,16 @@ import messages from './home.messages';
 import MaintainerList from './maintainerList/maintainerList.component';
 import LanguageSelector from './languageSelector/languageSelector.component';
 
+
 class Home extends PureComponent {
   componentWillMount() {
-    this.props.getMaintainers();
+    this.props.getMaintainers(this.props.language);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.language !== this.props.language) {
+      this.props.getMaintainers(this.props.language);
+    }
   }
 
   render() {

@@ -36,7 +36,6 @@ class App extends PureComponent {
 
         <IntlProvider
           locale={this.props.locale}
-          key={this.props.locale}
           messages={translationMessages[this.props.locale]}
         >
           {React.Children.only(this.props.children)}

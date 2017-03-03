@@ -1,23 +1,27 @@
 import { ACTION_TYPES } from './maintainers.constants';
 
 
-export function getMaintainers() {
+export function getMaintainers(language) {
   return {
     type: ACTION_TYPES.GET,
+    payload: {
+      language,
+    },
   };
 }
 
-export function getMaintainersSuccess(dataValue) {
+export function getMaintainersSuccess(data) {
   return {
     type: ACTION_TYPES.GET_SUCCESS,
-    data: dataValue,
+    payload: data,
   };
 }
 
 export function getMaintainersError(data) {
   return {
     type: ACTION_TYPES.GET_FAIL,
-    error: data,
+    payload: data,
+    error: true,
   };
 }
 

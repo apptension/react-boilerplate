@@ -1,13 +1,11 @@
-/**
- * Create the store with asynchronously loaded reducers
- */
-
 import { createStore, applyMiddleware, compose } from 'redux';
-import { fromJS } from 'immutable';
+import createLogger from 'redux-logger';
+import { fromJS, Iterable } from 'immutable';
 import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 import createReducer from './reducers';
 import rootSaga from './sagas';
+
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -17,28 +15,40 @@ export default function configureStore(initialState = {}, history) {
     routerMiddleware(history),
   ];
 
-  const enhancers = [
-    applyMiddleware(...middlewares),
-  ];
+  const enhancers = [];
 
-  // If Redux DevTools Extension is installed use it, otherwise use Redux compose
-  /* eslint-disable no-underscore-dangle */
-  const composeEnhancers =
-    process.env.NODE_ENV !== 'production' &&
-    typeof window === 'object' &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
-      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
-  /* eslint-enable */
+  if (process.env.NODE_ENV === 'development') {
+    const { persistState } = require('redux-devtools');
+
+    const stateTransformer = (state) => {
+      if (Iterable.isIterable(state)) return state.toJS();
+      return state;
+    };
+
+    middlewares.push(createLogger({ stateTransformer }));
+
+    const getDebugSessionKey = () => {
+      const matches = window.location.href.match(/[?&]debug_session=([^&#]+)\b/);
+      return (matches && matches.length > 0) ? matches[1] : null;
+    };
+
+    Array.prototype.push.apply(enhancers, [
+      require('../utils/devtools.component').instrument(),
+      persistState(getDebugSessionKey(), (state) => fromJS(state)),
+    ]);
+  }
 
   const store = createStore(
     createReducer(),
     fromJS(initialState),
-    composeEnhancers(...enhancers)
+    compose(
+      applyMiddleware(...middlewares),
+      ...enhancers,
+    )
   );
 
   sagaMiddleware.run(rootSaga);
 
-  // Make reducers hot reloadable, see http://mxs.is/googmo
   /* istanbul ignore next */
   if (module.hot) {
     module.hot.accept('./reducers', () => {

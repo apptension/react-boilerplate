@@ -10,7 +10,7 @@ const StateRecord = new Record({
 
 export const INITIAL_STATE = new StateRecord({});
 
-export const getSuccessHandler = (state = INITIAL_STATE, action) => state.set('list', fromJS(action.data));
+export const getSuccessHandler = (state = INITIAL_STATE, action) => state.set('list', fromJS(action.payload));
 
 export const HANDLERS = {
   [ACTION_TYPES.GET_SUCCESS]: getSuccessHandler,

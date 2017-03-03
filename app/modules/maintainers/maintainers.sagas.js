@@ -6,9 +6,9 @@ import { getMaintainersSuccess, getMaintainersError } from './maintainers.action
 import { ACTION_TYPES } from './maintainers.constants';
 
 
-export function* loadMaintainers() {
+export function* loadMaintainers(action) {
   try {
-    const data = yield call(request, '/fixtures/maintainers.json');
+    const data = yield call(request, `/fixtures/maintainers.json?language=${action.payload.language}`);
     yield put(getMaintainersSuccess(data));
   } catch (e) {
     yield put(getMaintainersError(e.message));

@@ -58,6 +58,19 @@ const history = syncHistoryWithStore(browserHistory, store, {
   selectLocationState: selectLocationState(),
 });
 
+if (process.env.NODE_ENV) {
+  const DevToolsComponent = require('./utils/devtools.component');
+  const devToolsRoot = window.document.createElement('div');
+
+  window.document.body.appendChild(devToolsRoot);
+
+  ReactDOM.render(
+    <Provider store={store}>
+      <DevToolsComponent />
+    </Provider>,
+    devToolsRoot
+  );
+}
 
 const render = () => {
   ReactDOM.render(
@@ -93,6 +106,7 @@ if (!window.Intl) {
   render();
 }
 
+/* istanbul ignore next */
 if (module.hot) {
   module.hot.accept('./routes', () => {
     render();
