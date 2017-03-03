@@ -24,7 +24,7 @@
     "build": "cross-env NODE_ENV=production webpack --config internals/webpack/webpack.prod.babel.js --color -p --progress",
     "build:clean": "npm run test:clean && rimraf ./build",
     "build:dll": "node ./internals/scripts/dependencies.js",
-    "start": "cross-env NODE_ENV=development node server",
+    "start": "cross-env NODE_ENV=development SHOW_VERSION=true node server",
     "start:tunnel": "cross-env NODE_ENV=development ENABLE_TUNNEL=true node server",
     "start:production": "npm run test && npm run build && npm run start:prod",
     "start:prod": "cross-env NODE_ENV=production node server",
@@ -254,7 +254,6 @@
     "reduxsauce": "^0.4.1",
     "reselect": "2.5.4",
     "styled-components": "1.1.2",
-    "webpack-spritesmith": "^0.3.1",
     "whatwg-fetch": "2.0.1"
   },
   "devDependencies": {
@@ -312,7 +311,9 @@
     "style-loader": "0.13.1",
     "url-loader": "0.5.7",
     "webpack": "2.2.0-rc.3",
+    "webpack-appversion-plugin": "^1.0.6",
     "webpack-dev-middleware": "1.9.0",
-    "webpack-hot-middleware": "2.15.0"
+    "webpack-hot-middleware": "2.15.0",
+    "webpack-spritesmith": "^0.3.1"
   }
 }
