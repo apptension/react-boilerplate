@@ -8,11 +8,13 @@
  * the webpack process.
  */
 
+/* eslint-disable import/no-extraneous-dependencies */
 const { join } = require('path');
 const defaults = require('lodash/defaultsDeep');
 const webpack = require('webpack');
-const pkg = require(join(process.cwd(), 'package.json'));
+const pkg = require('../../package.json');
 const dllPlugin = require('../config').dllPlugin;
+/* eslint-enable import/no-extraneous-dependencies */
 
 if (!pkg.dllPlugin) { process.exit(0); }
 

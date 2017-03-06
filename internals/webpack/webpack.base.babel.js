@@ -2,11 +2,13 @@
  * COMMON WEBPACK CONFIGURATION
  */
 
+/* eslint-disable import/no-extraneous-dependencies */
 const path = require('path');
 const webpack = require('webpack');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const WebpackAppversionPlugin = require('webpack-appversion-plugin');
 const SpritesmithPlugin = require('webpack-spritesmith');
+/* eslint-enable import/no-extraneous-dependencies */
 
 const buildSpritePlugin = (name) => new SpritesmithPlugin({
   retina: '-2x',
@@ -29,13 +31,13 @@ const buildSpritePlugin = (name) => new SpritesmithPlugin({
 module.exports = (options) => {
   const webpackConfig = {
     entry: options.entry,
-    output: Object.assign({ // Compile into js/build.js
+    output: Object.assign({
       path: path.resolve(process.cwd(), 'build'),
       publicPath: '/',
-    }, options.output), // Merge with env dependent settings
+    }, options.output),
     module: {
       loaders: [{
-        test: /\.js$/, // Transform all .js files required somewhere with Babel
+        test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: options.babelQuery,
@@ -127,7 +129,7 @@ module.exports = (options) => {
       ],
     },
     devtool: options.devtool,
-    target: 'web', // Make web variables accessible to webpack, e.g. window
+    target: 'web',
     performance: options.performance || {},
   };
 

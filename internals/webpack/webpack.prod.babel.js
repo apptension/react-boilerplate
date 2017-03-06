@@ -1,8 +1,9 @@
-// Important modules this config uses
+/* eslint-disable import/no-extraneous-dependencies */
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OfflinePlugin = require('offline-plugin');
+/* eslint-enable import/no-extraneous-dependencies */
 
 module.exports = require('./webpack.base.babel')({
   // In production, we skip all hot-reloading stuff

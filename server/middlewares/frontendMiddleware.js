@@ -2,13 +2,16 @@
 const express = require('express');
 const path = require('path');
 const compression = require('compression');
-const pkg = require(path.resolve(process.cwd(), 'package.json'));
+const pkg = require('../../package.json');
 
 // Dev middleware
 const addDevMiddlewares = (app, webpackConfig) => {
+  /* eslint-disable import/no-extraneous-dependencies */
   const webpack = require('webpack');
   const webpackDevMiddleware = require('webpack-dev-middleware');
   const webpackHotMiddleware = require('webpack-hot-middleware');
+  /* eslint-enable import/no-extraneous-dependencies */
+
   const compiler = webpack(webpackConfig);
   const middleware = webpackDevMiddleware(compiler, {
     noInfo: true,

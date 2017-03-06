@@ -20,7 +20,11 @@ export function* loadMaintainers(action) {
 }
 
 export function* loadMaintainersSaga() {
-  yield takeLatest(ACTION_TYPES.GET, loadMaintainers);
+  try {
+    yield takeLatest(ACTION_TYPES.GET, loadMaintainers);
+  } catch (e) {
+    yield put(getMaintainersError(e));
+  }
 }
 
 export default function* maintainersSaga() {

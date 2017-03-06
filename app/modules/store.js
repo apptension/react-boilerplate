@@ -21,7 +21,9 @@ export default function configureStore(initialState = {}, history) {
     const { persistState } = require('redux-devtools');
 
     const stateTransformer = (state) => {
-      if (Iterable.isIterable(state)) return state.toJS();
+      if (Iterable.isIterable(state)) {
+        return state.toJS();
+      }
       return state;
     };
 
