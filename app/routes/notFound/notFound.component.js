@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
 
 
-const NotFound = () => (
-  <div className="not-found">
-    <Helmet
-      title="Not Found"
-    />
+export default class NotFound extends PureComponent {
+  render() {
+    return (
+      <div className="not-found">
+        <Helmet
+          title="Not Found"
+        />
 
-    <h1>404</h1>
-  </div>
-);
-
-export default NotFound;
+        <h1>404</h1>
+      </div>
+    );
+  }
+}

@@ -1,14 +1,16 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 
 
-const Maintainer = ({ data }) => (
-  <li className="maintainer">
-    {data.get('firstName')} {data.get('lastName')} &lt;{data.get('email')}&gt;
-  </li>
-);
+export default class Maintainer extends PureComponent {
+  static propTypes = {
+    data: PropTypes.object.isRequired,
+  };
 
-Maintainer.propTypes = {
-  data: PropTypes.object.isRequired,
-};
-
-export default Maintainer;
+  render() {
+    return (
+      <li className="maintainer">
+        {this.props.data.get('firstName')} {this.props.data.get('lastName')} &lt;{this.props.data.get('email')}&gt;
+      </li>
+    );
+  }
+}

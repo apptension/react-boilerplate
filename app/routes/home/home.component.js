@@ -8,7 +8,15 @@ import MaintainerList from './maintainerList/maintainerList.component';
 import LanguageSelector from './languageSelector/languageSelector.component';
 
 
-class Home extends PureComponent {
+export default class Home extends PureComponent {
+  static propTypes = {
+    maintainers: PropTypes.object,
+    language: PropTypes.string.isRequired,
+    getMaintainers: PropTypes.func.isRequired,
+    setLanguage: PropTypes.func.isRequired,
+    router: PropTypes.object.isRequired,
+  };
+
   componentWillMount() {
     this.props.getMaintainers(this.props.language);
   }
@@ -44,13 +52,3 @@ class Home extends PureComponent {
     );
   }
 }
-
-Home.propTypes = {
-  maintainers: PropTypes.object,
-  language: PropTypes.string.isRequired,
-  getMaintainers: PropTypes.func.isRequired,
-  setLanguage: PropTypes.func.isRequired,
-  router: PropTypes.object.isRequired,
-};
-
-export default Home;

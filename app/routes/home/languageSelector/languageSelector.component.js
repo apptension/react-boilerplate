@@ -5,7 +5,13 @@ import { appLocales } from '../../../i18n';
 import { DEFAULT_LOCALE } from '../../../modules/locales/locales.constants';
 
 
-class LanguageSelector extends PureComponent {
+export default class LanguageSelector extends PureComponent {
+  static propTypes = {
+    language: PropTypes.string.isRequired,
+    setLanguage: PropTypes.func.isRequired,
+    router: PropTypes.object.isRequired,
+  };
+
   handleLanguageChange = ({ target: { value } }) => {
     this.props.setLanguage(value);
 
@@ -31,11 +37,3 @@ class LanguageSelector extends PureComponent {
     );
   }
 }
-
-LanguageSelector.propTypes = {
-  language: PropTypes.string.isRequired,
-  setLanguage: PropTypes.func.isRequired,
-  router: PropTypes.object.isRequired,
-};
-
-export default LanguageSelector;
