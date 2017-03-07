@@ -20,7 +20,7 @@ class App extends PureComponent {
   }
 
   render() {
-    if (!this.props.locale) {
+    if (!this.props.language) {
       return null;
     }
 
@@ -35,8 +35,8 @@ class App extends PureComponent {
         />
 
         <IntlProvider
-          locale={this.props.locale}
-          messages={translationMessages[this.props.locale]}
+          locale={this.props.language}
+          messages={translationMessages[this.props.language]}
         >
           {React.Children.only(this.props.children)}
         </IntlProvider>
@@ -46,7 +46,7 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  locale: PropTypes.string,
+  language: PropTypes.string,
   router: PropTypes.object.isRequired,
   setLanguage: PropTypes.func.isRequired,
   children: PropTypes.node,

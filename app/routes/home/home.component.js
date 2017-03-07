@@ -13,9 +13,9 @@ class Home extends PureComponent {
     this.props.getMaintainers(this.props.language);
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.language !== this.props.language) {
-      this.props.getMaintainers(this.props.language);
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.language !== this.props.language) {
+      this.props.getMaintainers(nextProps.language);
     }
   }
 
@@ -24,9 +24,6 @@ class Home extends PureComponent {
       <div className="home">
         <Helmet
           title="Homepage"
-          meta={[
-            { name: 'description', content: 'Homepage of Apptension React Boilerplate' },
-          ]}
         />
 
         <h1 className="home__title">

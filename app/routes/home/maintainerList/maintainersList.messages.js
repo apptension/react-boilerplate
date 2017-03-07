@@ -2,7 +2,7 @@ import { defineMessages } from 'react-intl';
 
 
 export default defineMessages({
-  welcome: {
+  title: {
     id: 'home.maintainerList.title',
     defaultMessage: 'Maintainers',
   },

@@ -11,7 +11,7 @@ chai.use(chaiEnzyme());
 chai.config.includeStack = true;
 
 const aliases = {
-  config: join(process.cwd(), 'app/environment/test.js'),
+  'env-config': join(process.cwd(), 'app/environment/test.js'),
 };
 
 Module.prototype.require = function require(path) {
@@ -45,3 +45,5 @@ Object.keys(document.defaultView).forEach((property) => {
 global.navigator = {
   userAgent: 'node.js',
 };
+
+global.fetch = () => {};

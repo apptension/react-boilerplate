@@ -51,7 +51,6 @@ export default function configureStore(initialState = {}, history) {
 
   sagaMiddleware.run(rootSaga);
 
-  /* istanbul ignore next */
   if (module.hot) {
     module.hot.accept('./reducers', () => {
       const createReducers = require('./reducers').default;

@@ -1,4 +1,4 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put, fork } from 'redux-saga/effects';
 import { takeLatest } from 'redux-saga';
 import { stringify } from 'query-string';
 
@@ -7,7 +7,7 @@ import { getMaintainersSuccess, getMaintainersError } from './maintainers.action
 import { ACTION_TYPES } from './maintainers.constants';
 
 
-export function* loadMaintainers(action) {
+export function* fetchMaintainersSaga(action) {
   try {
     const data = yield call(request, `/fixtures/maintainers.json?${stringify({
       language: action.payload.language,
@@ -19,9 +19,9 @@ export function* loadMaintainers(action) {
   }
 }
 
-export function* loadMaintainersSaga() {
+export function* getMaintainersSaga() {
   try {
-    yield takeLatest(ACTION_TYPES.GET, loadMaintainers);
+    yield call(takeLatest, ACTION_TYPES.GET, fetchMaintainersSaga);
   } catch (e) {
     yield put(getMaintainersError(e));
   }
@@ -29,6 +29,6 @@ export function* loadMaintainersSaga() {
 
 export default function* maintainersSaga() {
   yield [
-    loadMaintainersSaga(),
+    fork(getMaintainersSaga),
   ];
 }

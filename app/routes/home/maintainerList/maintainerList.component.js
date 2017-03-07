@@ -7,8 +7,8 @@ import Maintainer from '../maintainer/maintainer.component';
 
 const MaintainerList = ({ items }) => (
   <div className="maintainer-list">
-    <h2>
-      <FormattedMessage {...messages.welcome} />:
+    <h2 className="maintainer-list__title">
+      <FormattedMessage {...messages.title} />:
     </h2>
 
     <ul>

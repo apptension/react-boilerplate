@@ -1,10 +1,11 @@
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import { get } from 'lodash';
 
+import { appLocales } from '../../../i18n';
 import { DEFAULT_LOCALE } from '../../../modules/locales/locales.constants';
 
 
-class LanguageSelector extends Component {
+class LanguageSelector extends PureComponent {
   handleLanguageChange = ({ target: { value } }) => {
     this.props.setLanguage(value);
 
@@ -16,14 +17,16 @@ class LanguageSelector extends Component {
     if (targetUrl.slice(-1) === '/' && targetUrl !== '/') {
       targetUrl = targetUrl.slice(0, -1);
     }
+
     this.props.router.push(targetUrl);
   };
 
   render() {
     return (
-      <select value={this.props.language} onChange={this.handleLanguageChange}>
-        <option value="en">en</option>
-        <option value="de">de</option>
+      <select className="language-selector" value={this.props.language} onChange={this.handleLanguageChange}>
+        {appLocales.map((locale, index) => (
+          <option key={index} value={locale}>{locale}</option>
+        ))}
       </select>
     );
   }

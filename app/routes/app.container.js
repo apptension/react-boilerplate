@@ -7,7 +7,7 @@ import { setLanguage } from '../modules/locales/locales.actions';
 
 
 const mapStateToProps = createStructuredSelector({
-  locale: selectLocalesLanguage(),
+  language: selectLocalesLanguage(),
 });
 
 export default connect(mapStateToProps, {

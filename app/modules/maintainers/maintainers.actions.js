@@ -17,10 +17,10 @@ export function getMaintainersSuccess(data) {
   };
 }
 
-export function getMaintainersError(data) {
+export function getMaintainersError(error) {
   return {
     type: ACTION_TYPES.GET_FAIL,
-    payload: data,
+    payload: error,
     error: true,
   };
 }

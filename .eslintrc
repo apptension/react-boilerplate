@@ -8,7 +8,9 @@
   },
   "rules": {
     "new-cap": [2, { "capIsNewExceptions": ["List", "Map"] }],
-    "babel/new-cap": [2, { "capIsNewExceptions": ["List", "Map"] }]
+    "babel/new-cap": [2, { "capIsNewExceptions": ["List", "Map"] }],
+    "redux-saga/yield-effects": 0, // https://github.com/pke/eslint-plugin-redux-saga/issues/15
+    "redux-saga/no-unhandled-errors": 0 // https://github.com/pke/eslint-plugin-redux-saga/issues/15
   },
   "settings": {
     "import/core-modules": ["env-config"]
