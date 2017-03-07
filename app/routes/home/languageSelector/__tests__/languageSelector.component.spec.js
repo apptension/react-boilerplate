@@ -2,7 +2,6 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { spy } from 'sinon';
-import { fromJS } from 'immutable';
 
 import LanguageSelector from '../languageSelector.component';
 import { appLocales } from '../../../../i18n';
