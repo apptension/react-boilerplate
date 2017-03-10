@@ -1,7 +1,7 @@
 {
   "name": "react-boilerplate",
   "version": "3.4.0",
-  "description": "A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices",
+  "description": "Apptension's React Boilerplate",
   "repository": {
     "type": "git",
     "url": "git://github.com/react-boilerplate/react-boilerplate.git"
@@ -10,7 +10,7 @@
     "npm": ">=3",
     "node": ">=5"
   },
-  "author": "Max Stoiber",
+  "author": "Apptension",
   "license": "MIT",
   "scripts": {
     "prepush": "npm run lint:eslint .",
@@ -109,7 +109,6 @@
     "redux-saga": "0.14.0",
     "reduxsauce": "^0.4.1",
     "reselect": "2.5.4",
-    "styled-components": "1.1.2",
     "whatwg-fetch": "2.0.1"
   },
   "devDependencies": {
