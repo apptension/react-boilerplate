@@ -127,7 +127,7 @@ This is the place to keep `.json` files with translation messages. You should no
 
 This folder contain any images used in your application. `/sprites` directory is used by `spritesimth` plugin.
 
-### `internals/`
+#### `internals/`
 
 You can call this area the "engine" of your app. Your source code cannot be executed as-is in the web browser.
 It needs to pass through webpack to get converted into a form that web browsers understand. While it's certainly 
