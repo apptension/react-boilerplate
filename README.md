@@ -81,6 +81,7 @@ Here's a curated list of packages that you should have knowledge of, before star
 - [ ] [Mocha](https://mochajs.org/)
 - [ ] [Sinon](http://sinonjs.org/)
 - [ ] [Chai](http://chaijs.com/)
+- [ ] [Enzyme](https://github.com/airbnb/enzyme)
 - [ ] [Istanbul](https://github.com/gotwarlost/istanbul/)
 
 #### Linting
