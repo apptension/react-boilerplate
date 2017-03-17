@@ -60,7 +60,7 @@ Here's a curated list of packages that you should have knowledge of, before star
 - [ ] [React Router](https://github.com/ReactTraining/react-router)
 - [ ] [React Intl](https://github.com/yahoo/react-intl)
 - [ ] [Redux](http://redux.js.org/)
-- [ ] [Redux Saga](http://yelouafi.github.io/redux-saga/)
+- [ ] [Redux Saga](https://redux-saga.github.io/redux-saga/)
 - [ ] [Redux Sauce](https://github.com/skellock/reduxsauce/)
 - [ ] [Reselect](https://github.com/reactjs/reselect)
 - [ ] [ImmutableJS](https://facebook.github.io/immutable-js/)
