@@ -7,7 +7,14 @@ import { appLocales, translationMessages } from '../i18n';
 import { DEFAULT_LOCALE } from '../modules/locales/locales.constants';
 
 
-class App extends PureComponent {
+export default class App extends PureComponent {
+  static propTypes = {
+    language: PropTypes.string,
+    router: PropTypes.object.isRequired,
+    setLanguage: PropTypes.func.isRequired,
+    children: PropTypes.node,
+  };
+
   componentWillMount() {
     const language = get(this.props.router, 'params.lang', DEFAULT_LOCALE);
 
@@ -44,12 +51,3 @@ class App extends PureComponent {
     );
   }
 }
-
-App.propTypes = {
-  language: PropTypes.string,
-  router: PropTypes.object.isRequired,
-  setLanguage: PropTypes.func.isRequired,
-  children: PropTypes.node,
-};
-
-export default App;
