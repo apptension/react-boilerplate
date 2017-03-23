@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { fromJS } from 'immutable';
 
 import maintainersReducer from '../maintainers.reducer';
-import { ACTION_TYPES } from '../maintainers.constants';
+import { maintainersActionsTypes } from '../maintainers.actions';
 
 
 describe('Maintainers: reducer', () => {
@@ -21,7 +21,7 @@ describe('Maintainers: reducer', () => {
   it('should set data on GET_SUCCESS', () => {
     const payload = ['object-1', 'object-2'];
     const expectedState = state.set('list', payload);
-    const action = { payload, type: ACTION_TYPES.GET_SUCCESS };
+    const action = { payload, type: maintainersActionsTypes.GET_MAINTAINERS_SUCCESS };
     expect(maintainersReducer(state, action).toJS()).to.deep.equal(expectedState.toJS());
   });
 });

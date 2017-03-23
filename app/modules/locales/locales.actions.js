@@ -1,9 +1,8 @@
-import { ACTION_TYPES } from './locales.constants';
+import { createActions } from 'reduxsauce';
 
+const { Types, Creators } = createActions({
+  setLanguage: ['payload'],
+}, {});
 
-export function setLanguage(data) {
-  return {
-    type: ACTION_TYPES.SET_LANGUAGE,
-    payload: data,
-  };
-}
+export const localesActions = Creators;
+export const localesActionsTypes = Types;

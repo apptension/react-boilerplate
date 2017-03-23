@@ -1,27 +1,11 @@
-import { ACTION_TYPES } from './maintainers.constants';
+import { createActions } from 'reduxsauce';
 
+const { Types, Creators } = createActions({
+  getMaintainers: ['payload'],
+  getMaintainersSuccess: ['payload'],
+  getMaintainersError: ['payload'],
+}, {});
 
-export function getMaintainers(language) {
-  return {
-    type: ACTION_TYPES.GET,
-    payload: {
-      language,
-    },
-  };
-}
-
-export function getMaintainersSuccess(data) {
-  return {
-    type: ACTION_TYPES.GET_SUCCESS,
-    payload: data,
-  };
-}
-
-export function getMaintainersError(error) {
-  return {
-    type: ACTION_TYPES.GET_FAIL,
-    payload: error,
-    error: true,
-  };
-}
+export const maintainersActions = Creators;
+export const maintainersActionsTypes = Types;
 

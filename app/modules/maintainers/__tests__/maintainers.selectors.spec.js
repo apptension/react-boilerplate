@@ -14,7 +14,7 @@ describe('Maintainers: selectors', () => {
 
   describe('selectMaintainersList', () => {
     it('should select list', () => {
-      expect(selectMaintainersList()(mockedState)).to.be.equal(list);
+      expect(selectMaintainersList(mockedState)).to.be.equal(list);
     });
   });
 });

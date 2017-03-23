@@ -4,8 +4,7 @@ import { expect } from 'chai';
 
 import request from '../../../utils/request';
 import maintainersSaga, { getMaintainersSaga, fetchMaintainersSaga } from '../maintainers.sagas';
-import { getMaintainersSuccess, getMaintainersError } from '../maintainers.actions';
-import { ACTION_TYPES } from '../maintainers.constants';
+import { maintainersActions, maintainersActionsTypes } from '../maintainers.actions';
 
 
 describe('Maintainers: sagas', () => {
@@ -26,7 +25,7 @@ describe('Maintainers: sagas', () => {
       const loadMaintainersGenerator = getMaintainersSaga();
 
       expect(loadMaintainersGenerator.next().value)
-        .to.deep.equal(call(takeLatest, ACTION_TYPES.GET, fetchMaintainersSaga));
+        .to.deep.equal(call(takeLatest, maintainersActionsTypes.GET_MAINTAINERS, fetchMaintainersSaga));
     });
 
     it('should dispatch error action on exception', () => {
@@ -35,7 +34,7 @@ describe('Maintainers: sagas', () => {
 
       loadMaintainersGenerator.next();
       expect(loadMaintainersGenerator.throw(error).value)
-        .to.deep.equal(put(getMaintainersError(error)));
+        .to.deep.equal(put(maintainersActions.getMaintainersError(error)));
     });
   });
 
@@ -56,7 +55,7 @@ describe('Maintainers: sagas', () => {
       fetchMaintainersGenerator.next();
 
       expect(fetchMaintainersGenerator.next(maintainersData).value)
-        .to.deep.equal(put(getMaintainersSuccess(maintainersData)));
+        .to.deep.equal(put(maintainersActions.getMaintainersSuccess(maintainersData)));
     });
 
     it('should dispatch error action on exception', () => {
@@ -66,7 +65,7 @@ describe('Maintainers: sagas', () => {
 
       fetchMaintainersGenerator.next();
       expect(fetchMaintainersGenerator.throw(error).value)
-        .to.deep.equal(put(getMaintainersError(error)));
+        .to.deep.equal(put(maintainersActions.getMaintainersError(error)));
     });
   });
 });

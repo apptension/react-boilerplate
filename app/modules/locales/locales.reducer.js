@@ -1,7 +1,7 @@
 import { Record } from 'immutable';
 import { createReducer } from 'reduxsauce';
 
-import { ACTION_TYPES } from './locales.constants';
+import { localesActionsTypes } from './locales.actions';
 
 
 const StateRecord = new Record({
@@ -13,7 +13,7 @@ export const INITIAL_STATE = new StateRecord({});
 export const setLanguageHandler = (state = INITIAL_STATE, action) => state.set('language', action.payload);
 
 export const HANDLERS = {
-  [ACTION_TYPES.SET_LANGUAGE]: setLanguageHandler,
+  [localesActionsTypes.SET_LANGUAGE]: setLanguageHandler,
 };
 
 export default createReducer(INITIAL_STATE, HANDLERS);
