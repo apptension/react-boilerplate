@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux-immutable';
 
-import routerReducer from './router/router.reducer';
-import localesReducer from './locales/locales.reducer';
-import maintainersReducer from './maintainers/maintainers.reducer';
+import { reducer as routerReducer } from './router/router.redux';
+import { reducer as localesReducer } from './locales/locales.redux';
+import { reducer as maintainersReducer } from './maintainers/maintainers.redux';
 
 
 export default function createReducer() {

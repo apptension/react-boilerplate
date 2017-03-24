@@ -5,16 +5,16 @@ import { spy } from 'sinon';
 import { FormattedMessage } from 'react-intl';
 import Helmet from 'react-helmet';
 
-import Home from '../home.component';
+import { Home } from '../home.component';
 import messages from '../home.messages';
-import MaintainerList from '../maintainerList/maintainerList.component';
-import LanguageSelector from '../languageSelector/languageSelector.component';
+import { MaintainerList } from '../maintainerList/maintainerList.component';
+import { LanguageSelector } from '../languageSelector/languageSelector.component';
 
 
 describe('Home: Component', () => {
   const defaultProps = {
-    getMaintainers: () => {},
-    maintainers: [1, 2, 3],
+    fetchMaintainers: () => {},
+    items: [1, 2, 3],
     language: 'en',
     setLanguage: () => {},
     router: {},
@@ -58,7 +58,7 @@ describe('Home: Component', () => {
 
   it('should pass items prop to <MaintainerList />', () => {
     const wrapper = shallow(component({}));
-    expect(wrapper.find(MaintainerList).prop('items')).to.be.equal(defaultProps.maintainers);
+    expect(wrapper.find(MaintainerList).prop('items')).to.be.equal(defaultProps.items);
   });
 
   it('should render <LanguageSelector />', () => {
@@ -78,20 +78,20 @@ describe('Home: Component', () => {
     expect(setLanguage.calledOnce).to.be.equal(true);
   });
 
-  it('should dispatch getMaintainers action on mount', () => {
-    const getMaintainers = spy();
-    shallow(component({ getMaintainers }));
+  it('should dispatch fetchMaintainers action on mount', () => {
+    const fetchMaintainers = spy();
+    shallow(component({ fetchMaintainers }));
 
-    expect(getMaintainers.getCall(0).args[0]).to.be.equal(defaultProps.language);
+    expect(fetchMaintainers.getCall(0).args[0]).to.be.equal(defaultProps.language);
   });
 
-  it('should dispatch getMaintainers action on language change', () => {
-    const getMaintainers = spy();
+  it('should dispatch fetchMaintainers action on language change', () => {
+    const fetchMaintainers = spy();
     const newLanguage = 'de';
-    const wrapper = shallow(component({ getMaintainers, language: 'en' }));
-    getMaintainers.reset();
+    const wrapper = shallow(component({ fetchMaintainers, language: 'en' }));
+    fetchMaintainers.reset();
     wrapper.setProps({ language: newLanguage });
 
-    expect(getMaintainers.getCall(0).args[0]).to.be.equal(newLanguage);
+    expect(fetchMaintainers.getCall(0).args[0]).to.be.equal(newLanguage);
   });
 });

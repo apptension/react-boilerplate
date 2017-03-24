@@ -6,8 +6,8 @@ import Helmet from 'react-helmet';
 import { IntlProvider } from 'react-intl';
 
 import { translationMessages } from '../../i18n';
-import { DEFAULT_LOCALE } from '../../modules/locales/locales.constants';
-import App from '../app.component';
+import { DEFAULT_LOCALE } from '../../modules/locales/locales.redux';
+import { App } from '../app.component';
 
 
 describe('App: Component', () => {

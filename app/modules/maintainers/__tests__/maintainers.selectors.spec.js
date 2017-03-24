@@ -1,20 +1,20 @@
 import { expect } from 'chai';
 import { fromJS } from 'immutable';
 
-import { selectMaintainersList } from '../maintainers.selectors';
+import { selectMaintainersItems } from '../maintainers.selectors';
 
 describe('Maintainers: selectors', () => {
-  const list = fromJS(['list-item-1', 'list-item-2']);
+  const items = fromJS(['list-item-1', 'list-item-2']);
 
   const mockedState = fromJS({
     maintainers: {
-      list,
+      items,
     },
   });
 
   describe('selectMaintainersList', () => {
     it('should select list', () => {
-      expect(selectMaintainersList(mockedState)).to.be.equal(list);
+      expect(selectMaintainersItems(mockedState)).to.be.equal(items);
     });
   });
 });

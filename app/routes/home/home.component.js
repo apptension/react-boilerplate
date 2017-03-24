@@ -4,26 +4,26 @@ import { FormattedMessage } from 'react-intl';
 import envConfig from 'env-config';
 
 import messages from './home.messages';
-import MaintainerList from './maintainerList/maintainerList.component';
-import LanguageSelector from './languageSelector/languageSelector.component';
+import { MaintainerList } from './maintainerList/maintainerList.component';
+import { LanguageSelector } from './languageSelector/languageSelector.component';
 
 
-export default class Home extends PureComponent {
+export class Home extends PureComponent {
   static propTypes = {
-    maintainers: PropTypes.object,
+    items: PropTypes.object,
     language: PropTypes.string.isRequired,
-    getMaintainers: PropTypes.func.isRequired,
+    fetchMaintainers: PropTypes.func.isRequired,
     setLanguage: PropTypes.func.isRequired,
     router: PropTypes.object.isRequired,
   };
 
   componentWillMount() {
-    this.props.getMaintainers(this.props.language);
+    this.props.fetchMaintainers(this.props.language);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.language !== this.props.language) {
-      this.props.getMaintainers(nextProps.language);
+      this.props.fetchMaintainers(nextProps.language);
     }
   }
 
@@ -41,7 +41,7 @@ export default class Home extends PureComponent {
 
         <div>Environment: {envConfig.name}</div>
 
-        <MaintainerList items={this.props.maintainers} />
+        <MaintainerList items={this.props.items} />
 
         <LanguageSelector
           language={this.props.language}

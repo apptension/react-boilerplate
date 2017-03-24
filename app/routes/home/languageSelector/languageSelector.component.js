@@ -2,10 +2,10 @@ import React, { PropTypes, PureComponent } from 'react';
 import { get } from 'lodash';
 
 import { appLocales } from '../../../i18n';
-import { DEFAULT_LOCALE } from '../../../modules/locales/locales.constants';
+import { DEFAULT_LOCALE } from '../../../modules/locales/locales.redux';
 
 
-export default class LanguageSelector extends PureComponent {
+export class LanguageSelector extends PureComponent {
   static propTypes = {
     language: PropTypes.string.isRequired,
     setLanguage: PropTypes.func.isRequired,

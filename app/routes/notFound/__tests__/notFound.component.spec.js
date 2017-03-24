@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import Helmet from 'react-helmet';
 
-import NotFound from '../notFound.component';
+import { NotFound } from '../notFound.component';
 
 
 describe('NotFound: Component', () => {

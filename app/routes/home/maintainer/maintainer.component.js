@@ -1,7 +1,7 @@
 import React, { PropTypes, PureComponent } from 'react';
 
 
-export default class Maintainer extends PureComponent {
+export class Maintainer extends PureComponent {
   static propTypes = {
     data: PropTypes.object.isRequired,
   };

@@ -4,8 +4,8 @@ import { shallow } from 'enzyme';
 import { fromJS } from 'immutable';
 import { FormattedMessage } from 'react-intl';
 
-import MaintainerList from '../maintainerList.component';
-import Maintainer from '../../maintainer/maintainer.component';
+import { MaintainerList } from '../maintainerList.component';
+import { Maintainer } from '../../maintainer/maintainer.component';
 import messages from '../maintainersList.messages';
 
 
