@@ -2,10 +2,10 @@ import React, { PropTypes, PureComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import messages from './maintainersList.messages';
-import Maintainer from '../maintainer/maintainer.component';
+import { Maintainer } from '../maintainer/maintainer.component';
 
 
-export default class MaintainerList extends PureComponent {
+export class MaintainerList extends PureComponent {
   static propTypes = {
     items: PropTypes.object.isRequired,
   };

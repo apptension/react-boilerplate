@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { fromJS } from 'immutable';
 
-import Maintainer from '../maintainer.component';
+import { Maintainer } from '../maintainer.component';
 
 
 describe('Maintainer: Component', () => {

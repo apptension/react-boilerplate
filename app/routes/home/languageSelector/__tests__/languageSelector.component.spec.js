@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { spy } from 'sinon';
 
-import LanguageSelector from '../languageSelector.component';
+import { LanguageSelector } from '../languageSelector.component';
 import { appLocales } from '../../../../i18n';
 
 

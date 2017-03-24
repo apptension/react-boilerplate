@@ -4,8 +4,7 @@ import { expect } from 'chai';
 
 import request from '../../../utils/request';
 import maintainersSaga, { getMaintainersSaga, fetchMaintainersSaga } from '../maintainers.sagas';
-import { getMaintainersSuccess, getMaintainersError } from '../maintainers.actions';
-import { ACTION_TYPES } from '../maintainers.constants';
+import { MaintainersActions, MaintainersTypes } from '../maintainers.redux';
 
 
 describe('Maintainers: sagas', () => {
@@ -22,33 +21,33 @@ describe('Maintainers: sagas', () => {
   });
 
   describe('getMaintainersSaga', () => {
-    it('should take latest GET action', () => {
+    it('should take latest FETCH action', () => {
       const loadMaintainersGenerator = getMaintainersSaga();
 
       expect(loadMaintainersGenerator.next().value)
-        .to.deep.equal(call(takeLatest, ACTION_TYPES.GET, fetchMaintainersSaga));
+        .to.deep.equal(call(takeLatest, MaintainersTypes.FETCH, fetchMaintainersSaga));
     });
 
-    it('should dispatch error action on exception', () => {
+    it('should dispatch fetchError action on exception', () => {
       const loadMaintainersGenerator = getMaintainersSaga();
       const error = new Error('error');
 
       loadMaintainersGenerator.next();
       expect(loadMaintainersGenerator.throw(error).value)
-        .to.deep.equal(put(getMaintainersError(error)));
+        .to.deep.equal(put(MaintainersActions.fetchError(error)));
     });
   });
 
   describe('fetchMaintainersSaga', () => {
     it('should call request function with proper url', () => {
-      const action = { payload: { language: 'en' } };
+      const action = { language: 'en' };
       const fetchMaintainersGenerator = fetchMaintainersSaga(action);
 
       expect(fetchMaintainersGenerator.next().value)
         .to.deep.equal(call(request, '/fixtures/maintainers.json?language=en'));
     });
 
-    it('should dispatch getMaintainersSuccess on success request', () => {
+    it('should dispatch fetchSuccess on success request', () => {
       const action = { payload: { language: 'en' } };
       const maintainersData = [1, 2, 3];
       const fetchMaintainersGenerator = fetchMaintainersSaga(action);
@@ -56,17 +55,17 @@ describe('Maintainers: sagas', () => {
       fetchMaintainersGenerator.next();
 
       expect(fetchMaintainersGenerator.next(maintainersData).value)
-        .to.deep.equal(put(getMaintainersSuccess(maintainersData)));
+        .to.deep.equal(put(MaintainersActions.fetchSuccess(maintainersData)));
     });
 
-    it('should dispatch error action on exception', () => {
+    it('should dispatch fetchError action on exception', () => {
       const action = { payload: { language: 'en' } };
       const fetchMaintainersGenerator = fetchMaintainersSaga(action);
       const error = new Error('error');
 
       fetchMaintainersGenerator.next();
       expect(fetchMaintainersGenerator.throw(error).value)
-        .to.deep.equal(put(getMaintainersError(error)));
+        .to.deep.equal(put(MaintainersActions.fetchError(error)));
     });
   });
 });

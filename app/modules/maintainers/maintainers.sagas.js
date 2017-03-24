@@ -3,27 +3,26 @@ import { takeLatest } from 'redux-saga';
 import { stringify } from 'query-string';
 
 import request from '../../utils/request';
-import { getMaintainersSuccess, getMaintainersError } from './maintainers.actions';
-import { ACTION_TYPES } from './maintainers.constants';
+import { MaintainersTypes, MaintainersActions } from './maintainers.redux';
 
 
 export function* fetchMaintainersSaga(action) {
   try {
     const data = yield call(request, `/fixtures/maintainers.json?${stringify({
-      language: action.payload.language,
+      language: action.language,
     })}`);
 
-    yield put(getMaintainersSuccess(data));
+    yield put(MaintainersActions.fetchSuccess(data));
   } catch (e) {
-    yield put(getMaintainersError(e));
+    yield put(MaintainersActions.fetchError(e));
   }
 }
 
 export function* getMaintainersSaga() {
   try {
-    yield call(takeLatest, ACTION_TYPES.GET, fetchMaintainersSaga);
+    yield call(takeLatest, MaintainersTypes.FETCH, fetchMaintainersSaga);
   } catch (e) {
-    yield put(getMaintainersError(e));
+    yield put(MaintainersActions.fetchError(e));
   }
 }
 
