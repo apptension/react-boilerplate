@@ -1,5 +1,4 @@
-import { fork, call, put } from 'redux-saga/effects';
-import { takeLatest } from 'redux-saga';
+import { fork, call, put, takeLatest } from 'redux-saga/effects';
 import { expect } from 'chai';
 
 import request from '../../../utils/request';
@@ -25,7 +24,7 @@ describe('Maintainers: sagas', () => {
       const loadMaintainersGenerator = getMaintainersSaga();
 
       expect(loadMaintainersGenerator.next().value)
-        .to.deep.equal(call(takeLatest, MaintainersTypes.FETCH, fetchMaintainersSaga));
+        .to.deep.equal(takeLatest(MaintainersTypes.FETCH, fetchMaintainersSaga));
     });
 
     it('should dispatch fetchError action on exception', () => {
