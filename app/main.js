@@ -11,6 +11,7 @@ import 'babel-polyfill';
 // Import all the third party stuff
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
@@ -74,17 +75,19 @@ if (process.env.NODE_ENV) {
 
 const render = () => {
   ReactDOM.render(
-    <Provider store={store}>
-      <Router
-        history={history}
-        routes={routes}
-        render={
-          // Scroll to top when going to a new page, imitating default browser
-          // behaviour
-          applyRouterMiddleware(useScroll())
-        }
-      />
-    </Provider>,
+    <AppContainer>
+      <Provider store={store}>
+        <Router
+          history={history}
+          routes={routes}
+          render={
+            // Scroll to top when going to a new page, imitating default browser
+            // behaviour
+            applyRouterMiddleware(useScroll())
+          }
+        />
+      </Provider>
+    </AppContainer>,
     document.getElementById('app')
   );
 };
