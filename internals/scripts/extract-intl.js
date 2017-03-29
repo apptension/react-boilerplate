@@ -4,18 +4,19 @@
    and package them in the translation json files in the translations file.
  */
 const fs = require('fs');
+const path = require('path');
 const nodeGlob = require('glob');
 const transform = require('babel-core').transform;
 
 const animateProgress = require('./helpers/progress');
 const addCheckmark = require('./helpers/checkmark');
 
-const pkg = require('../../package.json');
-const presets = pkg.babel.presets;
-const plugins = pkg.babel.plugins || [];
+const babel = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), '.babelrc')).toString());
+const presets = babel.presets;
+const plugins = babel.plugins || [];
 
 const i18n = require('../../app/i18n');
-import { DEFAULT_LOCALE } from '../../app/modules/locales/locales.constants';
+import { DEFAULT_LOCALE } from '../../app/modules/locales/locales.redux';
 
 require('shelljs/global');
 
