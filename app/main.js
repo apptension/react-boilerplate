@@ -5,12 +5,13 @@
  * code.
  */
 
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 // Needed for redux-saga es6 generator support
 import 'babel-polyfill';
 
 // Import all the third party stuff
-import React from 'react';
-import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
