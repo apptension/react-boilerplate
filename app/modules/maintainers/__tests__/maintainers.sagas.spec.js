@@ -1,70 +1,63 @@
-import { fork, call, put, takeLatest } from 'redux-saga/effects';
+import SagaTester from 'redux-saga-tester';
 import { expect } from 'chai';
+import { fromJS } from 'immutable';
+import { sandbox } from 'sinon';
 
-import request from '../../../utils/request';
-import maintainersSaga, { getMaintainersSaga, fetchMaintainersSaga } from '../maintainers.sagas';
-import { MaintainersActions, MaintainersTypes } from '../maintainers.redux';
+import maintainersSaga, {} from '../maintainers.sagas';
+import * as apiSaga from '../../api/api.sagas';
+import { MaintainersActions } from '../maintainers.redux';
 
 
 describe('Maintainers: sagas', () => {
-  describe('maintainersSaga', () => {
-    it('should yield all aggregated sagas', () => {
-      const maintainersGenerator = maintainersSaga();
+  let sagaTester = null;
+  let userSandbox = null;
 
-      const result = maintainersGenerator.next();
-
-      expect(result.value).to.include(fork(getMaintainersSaga));
-
-      expect(maintainersGenerator.next().done).to.be.true;
+  beforeEach(() => {
+    sagaTester = new SagaTester({
+      initialState: fromJS({
+        // locales: { language: 'en' },
+        // user: { redirectUrl: '/some-url' },
+      }),
     });
+    sagaTester.start(maintainersSaga);
+
+    userSandbox = sandbox.create();
+    userSandbox.stub(global, 'fetch').callsFake(() => Promise.resolve({
+      json: () => {},
+    }));
   });
 
-  describe('getMaintainersSaga', () => {
-    it('should take latest FETCH action', () => {
-      const loadMaintainersGenerator = getMaintainersSaga();
-
-      expect(loadMaintainersGenerator.next().value)
-        .to.deep.equal(takeLatest(MaintainersTypes.FETCH, fetchMaintainersSaga));
-    });
-
-    it('should dispatch fetchError action on exception', () => {
-      const loadMaintainersGenerator = getMaintainersSaga();
-      const error = new Error('error');
-
-      loadMaintainersGenerator.next();
-      expect(loadMaintainersGenerator.throw(error).value)
-        .to.deep.equal(put(MaintainersActions.fetchError(error)));
-    });
+  afterEach(() => {
+    userSandbox.restore();
   });
 
-  describe('fetchMaintainersSaga', () => {
-    it('should call request function with proper url', () => {
-      const action = { language: 'en' };
-      const fetchMaintainersGenerator = fetchMaintainersSaga(action);
+  describe('loginSaga', () => {
+    it('should pass proper params to get', () => {
+      userSandbox.stub(apiSaga, 'get').callsFake(() => 'somedata');
 
-      expect(fetchMaintainersGenerator.next().value)
-        .to.deep.equal(call(request, '/fixtures/maintainers.json?language=en'));
+      sagaTester.dispatch(MaintainersActions.fetch('en'));
+
+      expect(apiSaga.get.firstCall.args).to.deep.equal([
+        '/fixtures/maintainers.json', { language: 'en' },
+      ]);
     });
 
-    it('should dispatch fetchSuccess on success request', () => {
-      const action = { payload: { language: 'en' } };
-      const maintainersData = [1, 2, 3];
-      const fetchMaintainersGenerator = fetchMaintainersSaga(action);
+    it('should dispatch fetchSuccess action after successful API call', () => {
+      userSandbox.stub(apiSaga, 'get').callsFake(() => 'somedata');
 
-      fetchMaintainersGenerator.next();
+      sagaTester.dispatch(MaintainersActions.fetch('en'));
 
-      expect(fetchMaintainersGenerator.next(maintainersData).value)
-        .to.deep.equal(put(MaintainersActions.fetchSuccess(maintainersData)));
+      expect(sagaTester.getCalledActions()).to.include(MaintainersActions.fetchSuccess('somedata'));
     });
 
-    it('should dispatch fetchError action on exception', () => {
-      const action = { payload: { language: 'en' } };
-      const fetchMaintainersGenerator = fetchMaintainersSaga(action);
-      const error = new Error('error');
+    it('should dispatch fetchError action after not successful API call', () => {
+      userSandbox.stub(apiSaga, 'get').callsFake(() => {
+        throw 'error';
+      });
 
-      fetchMaintainersGenerator.next();
-      expect(fetchMaintainersGenerator.throw(error).value)
-        .to.deep.equal(put(MaintainersActions.fetchError(error)));
+      sagaTester.dispatch(MaintainersActions.fetch('en'));
+
+      expect(sagaTester.getCalledActions()).to.include(MaintainersActions.fetchError('error'));
     });
   });
 });
