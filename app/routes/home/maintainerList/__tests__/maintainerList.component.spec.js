@@ -30,7 +30,7 @@ describe('MaintainerList: Component', () => {
 
   it('should render title message inside .maintainer-list__title', () => {
     const wrapper = shallow(component({}));
-    expect(wrapper.find('.maintainer-list__title').find(FormattedMessage).prop('id')).to.be.equal(messages.title.id);
+    expect(wrapper.find('.maintainer-list__title').find(FormattedMessage).prop('id')).to.equal(messages.title.id);
   });
 
   it('should proper number of <Maintainer />', () => {
@@ -42,7 +42,7 @@ describe('MaintainerList: Component', () => {
     const wrapper = shallow(component({}));
 
     defaultProps.items.forEach((item, index) => {
-      expect(wrapper.find(Maintainer).at(index).prop('data')).to.be.equal(item);
+      expect(wrapper.find(Maintainer).at(index).prop('data')).to.equal(item);
     });
   });
 });

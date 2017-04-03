@@ -26,6 +26,6 @@ describe('Maintainer: Component', () => {
 
   it('should render proper text inside .maintainer', () => {
     const wrapper = shallow(component({}));
-    expect(wrapper.find('.maintainer').render().text()).to.be.equal('John Doe <john.doe@example.com>');
+    expect(wrapper.find('.maintainer').render().text()).to.equal('John Doe <john.doe@example.com>');
   });
 });

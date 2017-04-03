@@ -44,7 +44,7 @@ describe('Maintainers: redux', () => {
 
     it('should return proper payload', () => {
       const data = { key: 'value' };
-      expect(MaintainersActions.fetchSuccess(data).data).to.be.equal(data);
+      expect(MaintainersActions.fetchSuccess(data).data).to.equal(data);
     });
   });
 

@@ -139,6 +139,7 @@
     "eslint": "3.11.1",
     "eslint-config-apptension-react": "^0.0.10",
     "eslint-import-resolver-webpack": "0.8.0",
+    "eslint-plugin-chai-friendly": "^0.2.0",
     "eventsource-polyfill": "0.9.6",
     "exports-loader": "0.6.3",
     "favicons-webpack-plugin": "^0.0.7",

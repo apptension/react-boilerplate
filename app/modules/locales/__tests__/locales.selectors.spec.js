@@ -14,7 +14,7 @@ describe('Locales: selectors', () => {
 
   describe('selectLocalesLanguage', () => {
     it('should select language', () => {
-      expect(selectLocalesLanguage(mockedState)).to.be.equal(language);
+      expect(selectLocalesLanguage(mockedState)).to.equal(language);
     });
   });
 });

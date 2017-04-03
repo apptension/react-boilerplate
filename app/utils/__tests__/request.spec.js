@@ -14,7 +14,7 @@ describe('Utils: request', () => {
 
     request('/correct-url')
       .then((json) => {
-        expect(json.exampleKey).to.be.equal('exampleValue');
+        expect(json.exampleKey).to.equal('exampleValue');
         global.fetch.restore();
         done();
       });
@@ -28,8 +28,8 @@ describe('Utils: request', () => {
 
     request('/incorrect-url')
       .catch((err) => {
-        expect(err.response.status).to.be.equal(404);
-        expect(err.response.statusText).to.be.equal('Not Found');
+        expect(err.response.status).to.equal(404);
+        expect(err.response.statusText).to.equal('Not Found');
 
         global.fetch.restore();
         done();

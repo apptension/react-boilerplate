@@ -6,11 +6,16 @@
     "mocha": true,
     "es6": true
   },
+  "plugins": [
+    "chai-friendly"
+  ],
   "rules": {
     "new-cap": [2, { "capIsNewExceptions": ["List", "Map"] }],
     "babel/new-cap": [2, { "capIsNewExceptions": ["List", "Map"] }],
     "redux-saga/yield-effects": 0, // https://github.com/pke/eslint-plugin-redux-saga/issues/15
-    "redux-saga/no-unhandled-errors": 0 // https://github.com/pke/eslint-plugin-redux-saga/issues/15
+    "redux-saga/no-unhandled-errors": 0, // https://github.com/pke/eslint-plugin-redux-saga/issues/15
+    "no-unused-expressions": 0, // https://github.com/eslint/eslint/issues/2102
+    "chai-friendly/no-unused-expressions": 1 // https://github.com/eslint/eslint/issues/2102
   },
   "settings": {
     "import/core-modules": ["env-config"]

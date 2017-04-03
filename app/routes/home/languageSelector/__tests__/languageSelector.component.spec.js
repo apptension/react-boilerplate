@@ -35,8 +35,8 @@ describe('LanguageSelector: Component', () => {
     const wrapper = shallow(component({}));
     const languageSelectorProps = wrapper.find('.language-selector').props();
 
-    expect(languageSelectorProps.value).to.be.equal(defaultProps.language);
-    expect(languageSelectorProps.onChange).to.be.equal(wrapper.instance().handleLanguageChange);
+    expect(languageSelectorProps.value).to.equal(defaultProps.language);
+    expect(languageSelectorProps.onChange).to.equal(wrapper.instance().handleLanguageChange);
 
     languageSelectorProps.onChange({ target: { value: 'de' } });
   });
@@ -50,7 +50,7 @@ describe('LanguageSelector: Component', () => {
     const wrapper = shallow(component({}));
 
     appLocales.forEach((locale, index) => {
-      expect(wrapper.find('.language-selector').find('option').at(index).prop('value')).to.be.equal(locale);
+      expect(wrapper.find('.language-selector').find('option').at(index).prop('value')).to.equal(locale);
     });
   });
 
@@ -58,7 +58,7 @@ describe('LanguageSelector: Component', () => {
     const wrapper = shallow(component({}));
 
     appLocales.forEach((locale, index) => {
-      expect(wrapper.find('.language-selector').find('option').at(index).render().text()).to.be.equal(locale);
+      expect(wrapper.find('.language-selector').find('option').at(index).render().text()).to.equal(locale);
     });
   });
 
@@ -66,8 +66,8 @@ describe('LanguageSelector: Component', () => {
     const wrapper = shallow(component({}));
     const languageSelectorProps = wrapper.find('.language-selector').props();
 
-    expect(languageSelectorProps.value).to.be.equal(defaultProps.language);
-    expect(languageSelectorProps.onChange).to.be.equal(wrapper.instance().handleLanguageChange);
+    expect(languageSelectorProps.value).to.equal(defaultProps.language);
+    expect(languageSelectorProps.onChange).to.equal(wrapper.instance().handleLanguageChange);
 
     languageSelectorProps.onChange({ target: { value: 'de' } });
   });
@@ -78,7 +78,7 @@ describe('LanguageSelector: Component', () => {
     const languageSelectorOnChange = wrapper.find('.language-selector').prop('onChange');
 
     languageSelectorOnChange({ target: { value: 'de' } });
-    expect(setLanguage.getCall(0).args[0]).to.be.equal('de');
+    expect(setLanguage.firstCall.args[0]).to.equal('de');
   });
 
   it('should redirect to proper url from non-default language location', () => {
@@ -95,7 +95,7 @@ describe('LanguageSelector: Component', () => {
     const languageSelectorOnChange = wrapper.find('.language-selector').prop('onChange');
 
     languageSelectorOnChange({ target: { value: 'de' } });
-    expect(router.push.getCall(0).args[0]).to.be.equal('/de/some-location');
+    expect(router.push.firstCall.args[0]).to.equal('/de/some-location');
   });
 
 
@@ -113,6 +113,6 @@ describe('LanguageSelector: Component', () => {
     const languageSelectorOnChange = wrapper.find('.language-selector').prop('onChange');
 
     languageSelectorOnChange({ target: { value: 'de' } });
-    expect(router.push.getCall(0).args[0]).to.be.equal('/de/some-location');
+    expect(router.push.firstCall.args[0]).to.equal('/de/some-location');
   });
 });

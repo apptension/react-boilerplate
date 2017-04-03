@@ -15,7 +15,7 @@ describe('Maintainers: sagas', () => {
 
       expect(result.value).to.include(fork(getMaintainersSaga));
 
-      expect(maintainersGenerator.next().done).to.be.equal(true);
+      expect(maintainersGenerator.next().done).to.be.true;
     });
   });
 

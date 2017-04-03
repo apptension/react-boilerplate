@@ -13,14 +13,14 @@ describe('Home: Container', () => {
 
       mapDispatchToProps(dispatch).setLanguage();
 
-      expect(dispatch.getCall(0).args[0]).to.deep.equal(LocalesActions.setLanguage());
+      expect(dispatch.firstCall.args[0]).to.deep.equal(LocalesActions.setLanguage());
     });
     it('should call MaintainersActions.fetch', () => {
       const dispatch = spy();
 
       mapDispatchToProps(dispatch).fetchMaintainers();
 
-      expect(dispatch.getCall(0).args[0]).to.deep.equal(MaintainersActions.fetch());
+      expect(dispatch.firstCall.args[0]).to.deep.equal(MaintainersActions.fetch());
     });
   });
 });

@@ -48,7 +48,7 @@ describe('Home: Component', () => {
 
   it('should render welcome message inside .home__title', () => {
     const wrapper = shallow(component({}));
-    expect(wrapper.find('.home__title').find(FormattedMessage).prop('id')).to.be.equal(messages.welcome.id);
+    expect(wrapper.find('.home__title').find(FormattedMessage).prop('id')).to.equal(messages.welcome.id);
   });
 
   it('should render <MaintainerList />', () => {
@@ -58,7 +58,7 @@ describe('Home: Component', () => {
 
   it('should pass items prop to <MaintainerList />', () => {
     const wrapper = shallow(component({}));
-    expect(wrapper.find(MaintainerList).prop('items')).to.be.equal(defaultProps.items);
+    expect(wrapper.find(MaintainerList).prop('items')).to.equal(defaultProps.items);
   });
 
   it('should render <LanguageSelector />', () => {
@@ -71,18 +71,18 @@ describe('Home: Component', () => {
     const wrapper = shallow(component({ setLanguage }));
     const languageSelectorProps = wrapper.find(LanguageSelector).props();
 
-    expect(languageSelectorProps.language).to.be.equal(defaultProps.language);
-    expect(languageSelectorProps.router).to.be.equal(defaultProps.router);
+    expect(languageSelectorProps.language).to.equal(defaultProps.language);
+    expect(languageSelectorProps.router).to.equal(defaultProps.router);
 
     languageSelectorProps.setLanguage();
-    expect(setLanguage.calledOnce).to.be.equal(true);
+    expect(setLanguage.calledOnce).to.be.true;
   });
 
   it('should dispatch fetchMaintainers action on mount', () => {
     const fetchMaintainers = spy();
     shallow(component({ fetchMaintainers }));
 
-    expect(fetchMaintainers.getCall(0).args[0]).to.be.equal(defaultProps.language);
+    expect(fetchMaintainers.firstCall.args[0]).to.equal(defaultProps.language);
   });
 
   it('should dispatch fetchMaintainers action on language change', () => {
@@ -92,6 +92,6 @@ describe('Home: Component', () => {
     fetchMaintainers.reset();
     wrapper.setProps({ language: newLanguage });
 
-    expect(fetchMaintainers.getCall(0).args[0]).to.be.equal(newLanguage);
+    expect(fetchMaintainers.firstCall.args[0]).to.equal(newLanguage);
   });
 });

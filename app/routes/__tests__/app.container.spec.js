@@ -12,7 +12,7 @@ describe('App: Container', () => {
 
       mapDispatchToProps(dispatch).setLanguage();
 
-      expect(dispatch.getCall(0).args[0]).to.deep.equal(LocalesActions.setLanguage());
+      expect(dispatch.firstCall.args[0]).to.deep.equal(LocalesActions.setLanguage());
     });
   });
 });
