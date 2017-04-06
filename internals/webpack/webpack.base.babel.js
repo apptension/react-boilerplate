@@ -32,7 +32,7 @@ module.exports = (options) => {
   const webpackConfig = {
     entry: options.entry,
     output: Object.assign({
-      path: path.resolve(process.cwd(), 'build'),
+      path: path.resolve(process.cwd(), 'dist'),
       publicPath: '/',
     }, options.output),
     module: {
