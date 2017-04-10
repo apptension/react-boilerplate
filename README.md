@@ -110,10 +110,10 @@ should keep your business loigc here
 This folder contains environment configs. Webpack uses proper config depending on application environment. Config can be used 
 by importing `env-config`
   
-#### `app/fixuters`
+#### `app/fixtures`
 
 This boilerplate comes with preconfigured fixtures integration which means that you can put any `.json` files in this
-folder and easily fetch it as fixtures using sagas. Those files are available by calling `/fixuters/*.json` url.
+folder and easily fetch it as fixtures using sagas. Those files are available by calling `/fixtures/*.json` url.
 
 #### `app/styles`
 
