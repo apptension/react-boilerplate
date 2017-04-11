@@ -61,7 +61,7 @@ const history = syncHistoryWithStore(browserHistory, store, {
 });
 
 if (process.env.NODE_ENV) {
-  const DevToolsComponent = require('./utils/devtools.component');
+  const DevToolsComponent = require('./utils/devtools.component').default;
   const devToolsRoot = window.document.createElement('div');
 
   window.document.body.appendChild(devToolsRoot);
