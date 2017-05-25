@@ -60,7 +60,7 @@ const history = syncHistoryWithStore(browserHistory, store, {
   selectLocationState: selectLocationState(),
 });
 
-if (process.env.NODE_ENV) {
+if (process.env.NODE_ENV === 'development') {
   const DevToolsComponent = require('./utils/devtools.component').default;
   const devToolsRoot = window.document.createElement('div');
 
