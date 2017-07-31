@@ -29,7 +29,7 @@ const plugins = [
   }),
   new CircularDependencyPlugin({
     exclude: /a\.js|node_modules/,
-    failOnError: false, // show a warning when there is a circular dependency
+    failOnError: false,
   }),
 ];
 
@@ -40,7 +40,7 @@ module.exports = require('./webpack.base.babel')({
     'eventsource-polyfill',
     'react-hot-loader/patch',
     'webpack-hot-middleware/client',
-    path.join(process.cwd(), 'app/main.js'), // Start with app/main.js
+    path.join(process.cwd(), 'app/main.js'),
   ],
 
   // Don't use hashes in dev mode for better performance
@@ -51,15 +51,6 @@ module.exports = require('./webpack.base.babel')({
 
   // Add development plugins
   plugins: dependencyHandlers().concat(plugins), // eslint-disable-line no-use-before-define
-
-  // Tell babel that we want to hot-reload
-  babelQuery: {
-    // require.resolve solves the issue of relative presets when dealing with
-    // locally linked packages. This is an issue with babel and webpack.
-    // See https://github.com/babel/babel-loader/issues/149 and
-    // https://github.com/webpack/webpack/issues/1866
-    presets: ['babel-preset-react-hmre'].map(require.resolve),
-  },
 
   // Emit a source map for easier debugging
   devtool: 'cheap-module-eval-source-map',
@@ -148,11 +139,12 @@ function templateContent() {
 
   if (!dllPlugin) { return html; }
 
-  const doc = cheerio(html);
-  const body = doc.find('body');
+  const $ = cheerio.load(html);
+
+  const body = $('body');
   const dllNames = !dllPlugin.dlls ? ['reactBoilerplateDeps'] : Object.keys(dllPlugin.dlls);
 
   dllNames.forEach((dllName) => body.append(`<script data-dll='true' src='/${dllName}.dll.js'></script>`));
 
-  return doc.toString();
+  return $.html();
 }
