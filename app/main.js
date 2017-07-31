@@ -18,7 +18,6 @@ import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import FontFaceObserver from 'fontfaceobserver';
-import { useScroll } from 'react-router-scroll';
 import 'normalize.css/normalize.css';
 import './main.scss';
 
@@ -81,11 +80,6 @@ const render = () => {
         <Router
           history={history}
           routes={routes}
-          render={
-            // Scroll to top when going to a new page, imitating default browser
-            // behaviour
-            applyRouterMiddleware(useScroll())
-          }
         />
       </Provider>
     </AppContainer>,
