@@ -14,20 +14,14 @@ import 'babel-polyfill';
 // Import all the third party stuff
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
-import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
+import { ConnectedRouter } from 'react-router-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import FontFaceObserver from 'fontfaceobserver';
 import 'normalize.css/normalize.css';
 import './main.scss';
 
-// Import selector for `syncHistoryWithStore`
-import { selectLocationState } from './modules/router/router.selectors';
-
 import configureStore from './modules/store';
-
-// Import routes
-import routes from './routes';
 
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
@@ -50,14 +44,8 @@ injectTapEventPlugin();
 // Optionally, this could be changed to leverage a created history
 // e.g. `const browserHistory = useRouterHistory(createBrowserHistory)();`
 const initialState = {};
+const browserHistory = createHistory();
 const store = configureStore(initialState, browserHistory);
-
-// Sync history and store, as the react-router-redux reducer
-// is under the non-default key ("routing"), selectLocationState
-// must be provided for resolving how to retrieve the "route" in the state
-const history = syncHistoryWithStore(browserHistory, store, {
-  selectLocationState: selectLocationState(),
-});
 
 if (process.env.NODE_ENV === 'development') {
   const DevToolsComponent = require('./utils/devtools.component').default;
@@ -74,13 +62,14 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const render = () => {
+  const NextApp = require('./routes').default;
+
   ReactDOM.render(
     <AppContainer>
       <Provider store={store}>
-        <Router
-          history={history}
-          routes={routes}
-        />
+        <ConnectedRouter history={browserHistory}>
+
+        </ConnectedRouter>
       </Provider>
     </AppContainer>,
     document.getElementById('app')
