@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { DEFAULT_LOCALE } from '../modules/locales/locales.redux';
 
 import App from './app.container';
 import Home from './home';
@@ -10,7 +11,7 @@ export class RootContainer extends PureComponent {
     return (
       <App>
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" render={() => <Redirect to={DEFAULT_LOCALE} />} />
 
           <Route exact path="/:lang" component={Home} />
 

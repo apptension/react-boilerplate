@@ -10,26 +10,30 @@ import { DEFAULT_LOCALE } from '../modules/locales/locales.redux';
 export class App extends PureComponent {
   static propTypes = {
     language: PropTypes.string,
-    // router: PropTypes.object.isRequired,
     setLanguage: PropTypes.func.isRequired,
     children: PropTypes.node,
+    match: PropTypes.object.isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired,
   };
 
-  // componentWillMount() {
-  //   const language = get(this.props.router, 'params.lang', DEFAULT_LOCALE);
+  componentWillMount() {
+    const language = get(this.props.match, 'params.lang', DEFAULT_LOCALE);
 
-  //   if (appLocales.indexOf(language) === -1) {
-  //     this.props.setLanguage(DEFAULT_LOCALE);
-  //     this.props.router.push('/404');
-  //   } else {
-  //     this.props.setLanguage(language);
-  //   }
-  // }
+    if (appLocales.indexOf(language) === -1) {
+      this.props.setLanguage(DEFAULT_LOCALE);
+      this.props.history.push('/404');
+    } else {
+      this.props.setLanguage(language);
+    }
+  }
 
   render() {
-    // if (!this.props.language) {
-    //   return null;
-    // }
+    if (!this.props.language) {
+      return null;
+    }
+
     return (
       <div className="app">
         <Helmet

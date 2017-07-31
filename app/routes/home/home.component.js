@@ -14,7 +14,10 @@ export class Home extends PureComponent {
     language: PropTypes.string.isRequired,
     fetchMaintainers: PropTypes.func.isRequired,
     setLanguage: PropTypes.func.isRequired,
-    router: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired,
   };
 
   componentWillMount() {
@@ -46,7 +49,8 @@ export class Home extends PureComponent {
         <LanguageSelector
           language={this.props.language}
           setLanguage={this.props.setLanguage}
-          router={this.props.router}
+          match={this.props.match}
+          history={this.props.history}
         />
       </div>
     );

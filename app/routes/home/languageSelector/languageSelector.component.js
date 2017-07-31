@@ -9,22 +9,22 @@ export class LanguageSelector extends PureComponent {
   static propTypes = {
     language: PropTypes.string.isRequired,
     setLanguage: PropTypes.func.isRequired,
-    router: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired,
   };
 
   handleLanguageChange = ({ target: { value } }) => {
     this.props.setLanguage(value);
 
-    const currentLanguage = get(this.props.router, 'params.lang', DEFAULT_LOCALE);
-    const currentLanguageUrl = currentLanguage !== DEFAULT_LOCALE ? `/${currentLanguage}` : '';
-    const targetLanguageUrl = value !== DEFAULT_LOCALE ? `/${value}` : '';
-
-    let targetUrl = this.props.router.location.pathname.replace(currentLanguageUrl, targetLanguageUrl);
+    const currentLanguage = get(this.props.match, 'params.lang', DEFAULT_LOCALE);
+    let targetUrl = this.props.match.url.replace(currentLanguage, value);
     if (targetUrl.slice(-1) === '/' && targetUrl !== '/') {
       targetUrl = targetUrl.slice(0, -1);
     }
 
-    this.props.router.push(targetUrl);
+    this.props.history.push(targetUrl);
   };
 
   render() {
