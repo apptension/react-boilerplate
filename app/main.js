@@ -68,7 +68,7 @@ const render = () => {
     <AppContainer>
       <Provider store={store}>
         <ConnectedRouter history={browserHistory}>
-
+          <NextApp />
         </ConnectedRouter>
       </Provider>
     </AppContainer>,

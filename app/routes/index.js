@@ -1,18 +1,24 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import App from './app.container';
-import HomeRoute from './home';
-import NotFoundRoute from './notFound';
+import Home from './home';
+import NotFound from './notFound';
 
-export default (
-  <Switch>
-    <Route component={App}>
-      <Route path="/" component={HomeRoute} />
+export class RootContainer extends PureComponent {
+  render() {
+    return (
+      <App>
+        <Switch>
+          <Route exact path="/" component={Home} />
 
-      <Route path="/:lang" component={HomeRoute} />
+          <Route exact path="/:lang" component={Home} />
 
-      <Route path="*" component={NotFoundRoute} />
-    </Route>
-  </Switch>
-);
+          <Route component={NotFound} />
+        </Switch>
+      </App>
+    );
+  }
+}
+
+export default RootContainer;
