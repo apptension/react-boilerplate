@@ -10,15 +10,17 @@ import { appLocales } from '../../../../i18n';
 describe('LanguageSelector: Component', () => {
   const defaultProps = {
     language: 'en',
-    setLanguage: () => {},
-    router: {
+    setLanguage: () => { },
+    match: {
       params: {
         lang: 'en',
       },
-      location: {
-        pathname: '/',
-      },
-      push: () => {},
+    },
+    location: {
+      pathname: '/en',
+    },
+    history: {
+      push: () => { },
     },
   };
 
@@ -68,8 +70,6 @@ describe('LanguageSelector: Component', () => {
 
     expect(languageSelectorProps.value).to.equal(defaultProps.language);
     expect(languageSelectorProps.onChange).to.equal(wrapper.instance().handleLanguageChange);
-
-    languageSelectorProps.onChange({ target: { value: 'de' } });
   });
 
   it('should dispatch setLanguage action', () => {
@@ -78,41 +78,28 @@ describe('LanguageSelector: Component', () => {
     const languageSelectorOnChange = wrapper.find('.language-selector').prop('onChange');
 
     languageSelectorOnChange({ target: { value: 'de' } });
-    expect(setLanguage.firstCall.args[0]).to.equal('de');
+    expect(setLanguage.calledOnce).to.equal(true);
+    expect(setLanguage.calledWith('de')).to.equal(true);
   });
 
-  it('should redirect to proper url from non-default language location', () => {
+  it('should redirect to proper url from previous language location', () => {
     const router = {
-      params: {
-        lang: 'fr',
+      match: {
+        params: {
+          lang: 'fr',
+        },
       },
       location: {
         pathname: '/fr/some-location',
       },
-      push: spy(),
+      history: {
+        push: spy(),
+      },
     };
-    const wrapper = shallow(component({ router }));
+    const wrapper = shallow(component(router));
     const languageSelectorOnChange = wrapper.find('.language-selector').prop('onChange');
 
     languageSelectorOnChange({ target: { value: 'de' } });
-    expect(router.push.firstCall.args[0]).to.equal('/de/some-location');
-  });
-
-
-  it('should redirect to proper url from default language location', () => {
-    const router = {
-      params: {
-        lang: 'en',
-      },
-      location: {
-        pathname: '/some-location',
-      },
-      push: spy(),
-    };
-    const wrapper = shallow(component({ router }));
-    const languageSelectorOnChange = wrapper.find('.language-selector').prop('onChange');
-
-    languageSelectorOnChange({ target: { value: 'de' } });
-    expect(router.push.firstCall.args[0]).to.equal('/de/some-location');
+    expect(router.history.push.calledWith('/de/some-location')).to.equal(true);
   });
 });

@@ -10,6 +10,7 @@ export class LanguageSelector extends PureComponent {
   static propTypes = {
     language: PropTypes.string.isRequired,
     setLanguage: PropTypes.func.isRequired,
+    location: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired,
     history: PropTypes.shape({
       push: PropTypes.func.isRequired,
@@ -20,7 +21,7 @@ export class LanguageSelector extends PureComponent {
     this.props.setLanguage(value);
 
     const currentLanguage = get(this.props.match, 'params.lang', DEFAULT_LOCALE);
-    let targetUrl = this.props.match.url.replace(currentLanguage, value);
+    let targetUrl = this.props.location.pathname.replace(currentLanguage, value);
     if (targetUrl.slice(-1) === '/' && targetUrl !== '/') {
       targetUrl = targetUrl.slice(0, -1);
     }

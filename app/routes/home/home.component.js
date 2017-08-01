@@ -16,6 +16,7 @@ export class Home extends PureComponent {
     fetchMaintainers: PropTypes.func.isRequired,
     setLanguage: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
     history: PropTypes.shape({
       push: PropTypes.func.isRequired,
     }).isRequired,
@@ -50,6 +51,7 @@ export class Home extends PureComponent {
           setLanguage={this.props.setLanguage}
           match={this.props.match}
           history={this.props.history}
+          location={this.props.location}
         />
       </div>
     );
