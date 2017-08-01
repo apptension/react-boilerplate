@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import { fromJS } from 'immutable';
 import { sandbox } from 'sinon';
 
-import maintainersSaga, {} from '../maintainers.sagas';
+import maintainersSaga, { } from '../maintainers.sagas';
 import * as apiSaga from '../../api/api.sagas';
 import { MaintainersActions } from '../maintainers.redux';
 
@@ -23,7 +23,7 @@ describe('Maintainers: sagas', () => {
 
     userSandbox = sandbox.create();
     userSandbox.stub(global, 'fetch').callsFake(() => Promise.resolve({
-      json: () => {},
+      json: () => { },
     }));
   });
 
@@ -31,33 +31,30 @@ describe('Maintainers: sagas', () => {
     userSandbox.restore();
   });
 
-  describe('loginSaga', () => {
-    it('should pass proper params to get', () => {
-      userSandbox.stub(apiSaga, 'get').callsFake(() => 'somedata');
+  it('should pass proper params to get', () => {
+    userSandbox.stub(apiSaga, 'get').callsFake(() => 'somedata');
 
-      sagaTester.dispatch(MaintainersActions.fetch('en'));
+    sagaTester.dispatch(MaintainersActions.fetch('en'));
 
-      expect(apiSaga.get.firstCall.args).to.deep.equal([
-        '/fixtures/maintainers.json', { language: 'en' },
-      ]);
+    expect(apiSaga.get.firstCall.args).to.deep.equal([
+      '/fixtures/maintainers.json', { language: 'en' },
+    ]);
+  });
+
+  it('should dispatch fetchSuccess action after successful API call', () => {
+    userSandbox.stub(apiSaga, 'get').callsFake(() => 'somedata');
+
+    sagaTester.dispatch(MaintainersActions.fetch('en'));
+    expect(sagaTester.getCalledActions()).to.deep.include(MaintainersActions.fetchSuccess('somedata'));
+  });
+
+  it('should dispatch fetchError action after not successful API call', () => {
+    userSandbox.stub(apiSaga, 'get').callsFake(() => {
+      throw 'error';
     });
 
-    it('should dispatch fetchSuccess action after successful API call', () => {
-      userSandbox.stub(apiSaga, 'get').callsFake(() => 'somedata');
+    sagaTester.dispatch(MaintainersActions.fetch('en'));
 
-      sagaTester.dispatch(MaintainersActions.fetch('en'));
-
-      expect(sagaTester.getCalledActions()).to.include(MaintainersActions.fetchSuccess('somedata'));
-    });
-
-    it('should dispatch fetchError action after not successful API call', () => {
-      userSandbox.stub(apiSaga, 'get').callsFake(() => {
-        throw 'error';
-      });
-
-      sagaTester.dispatch(MaintainersActions.fetch('en'));
-
-      expect(sagaTester.getCalledActions()).to.include(MaintainersActions.fetchError('error'));
-    });
+    expect(sagaTester.getCalledActions()).to.deep.include(MaintainersActions.fetchError('error'));
   });
 });
