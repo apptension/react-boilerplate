@@ -13,7 +13,7 @@
   "author": "Apptension",
   "license": "MIT",
   "scripts": {
-    "prepush": "npm run lint:eslint .",
+    "precommit": "npm run lint:eslint .",
     "analyze:clean": "rimraf stats.json",
     "preanalyze": "npm run analyze:clean",
     "analyze": "node ./internals/scripts/analyze.js",
