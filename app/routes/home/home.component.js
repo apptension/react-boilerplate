@@ -33,9 +33,7 @@ export class Home extends PureComponent {
   render() {
     return (
       <div className="home">
-        <Helmet
-          title="Homepage"
-        />
+        <Helmet title="Homepage" />
 
         <h1 className="home__title">
           <i className="home__title-logo" />

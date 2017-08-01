@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from '../modules/locales/locales.redux';
 
 import App from './app.container';
@@ -9,17 +9,20 @@ import NotFound from './notFound';
 export class RootContainer extends PureComponent {
   render() {
     return (
-      <App>
-        <Switch>
-          <Route exact path="/" render={() => <Redirect to={DEFAULT_LOCALE} />} />
+      <Switch>
+        <Route exact path="/" render={() => <Redirect to={DEFAULT_LOCALE} />} />
+        <Route path="/:lang">
+          <App>
+            <Switch>
+              <Route exact path="/:lang" component={Home} />
 
-          <Route exact path="/:lang" component={Home} />
-
-          <Route component={NotFound} />
-        </Switch>
-      </App>
+              <Route component={NotFound} />
+            </Switch>
+          </App>
+        </Route>
+      </Switch>
     );
   }
 }
 
-export default RootContainer;
+export default withRouter(RootContainer);
