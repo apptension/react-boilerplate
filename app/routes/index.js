@@ -12,11 +12,11 @@ export class RootContainer extends PureComponent {
       <Switch>
         <Route exact path="/" render={() => <Redirect to={DEFAULT_LOCALE} />} />
 
+        <Route exact path="/404" component={NotFound} />
+
         <Route path="/:lang">
           <App>
             <Switch>
-              <Route exact path="/404" component={NotFound} />
-
               <Route exact path="/:lang" component={Home} />
 
               <Route component={NotFound} />
