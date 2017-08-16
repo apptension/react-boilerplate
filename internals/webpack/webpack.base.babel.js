@@ -7,7 +7,26 @@ const path = require('path');
 const webpack = require('webpack');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const WebpackAppversionPlugin = require('webpack-appversion-plugin');
-/* eslint-enable import/no-extraneous-dependencies */
+const SpritesmithPlugin = require('webpack-spritesmith');
+/* eslint-enable import/no-extraneous-dependencies */ /* eslint-enable import/no-extraneous-dependencies */
+
+const buildSpritePlugin = (name) => new SpritesmithPlugin({
+  retina: '-2x',
+  src: {
+    cwd: path.join(process.cwd(), `app/images/sprites/${name}`),
+    glob: '*.png',
+  },
+  target: {
+    image: path.join(process.cwd(), `app/images/generated/${name}-sprite.png`),
+    css: path.join(process.cwd(), `app/styles/generated/${name}-sprites.scss`),
+  },
+  apiOptions: {
+    cssImageRef: `images/generated/${name}-sprite.png`,
+  },
+  spritesmithOptions: {
+    padding: 2,
+  },
+});
 
 module.exports = (options) => {
   const webpackConfig = {
@@ -85,6 +104,8 @@ module.exports = (options) => {
     },
     plugins: options.plugins.concat([
       new FaviconsWebpackPlugin(path.join(process.cwd(), 'app', 'images', 'favicon.png')),
+      buildSpritePlugin('mobile'),
+      buildSpritePlugin('desktop'),
       new webpack.ProvidePlugin({
         // make fetch available
         fetch: 'exports-loader?self.fetch!whatwg-fetch',
