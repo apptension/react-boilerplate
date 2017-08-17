@@ -17,6 +17,7 @@ export class App extends PureComponent {
     history: PropTypes.shape({
       push: PropTypes.func.isRequired,
     }).isRequired,
+    location: PropTypes.object.isRequired,
   };
 
   componentWillMount() {
@@ -48,6 +49,7 @@ export class App extends PureComponent {
         <IntlProvider
           locale={this.props.language}
           messages={translationMessages[this.props.language]}
+          location={this.props.location}
         >
           {React.Children.only(this.props.children)}
         </IntlProvider>
