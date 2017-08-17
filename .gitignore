@@ -6,6 +6,7 @@ generated
 node_modules
 .nyc_output
 stats.json
+dist
 
 # Cruft
 .DS_Store
