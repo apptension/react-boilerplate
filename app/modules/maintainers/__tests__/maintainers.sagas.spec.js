@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import { fromJS } from 'immutable';
 import { sandbox } from 'sinon';
 
-import maintainersSaga, { } from '../maintainers.sagas';
+import maintainersSaga from '../maintainers.sagas';
 import * as apiSaga from '../../api/api.sagas';
 import { MaintainersActions } from '../maintainers.redux';
 
