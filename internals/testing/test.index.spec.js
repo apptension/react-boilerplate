@@ -4,7 +4,7 @@ import assert from 'assert';
 import Module from 'module';
 import chai from 'chai';
 import chaiEnzyme from 'chai-enzyme';
-import { jsdom } from 'jsdom';
+import { JSDOM } from 'jsdom';
 
 
 chai.use(chaiEnzyme());
@@ -31,8 +31,10 @@ Module.prototype.require = function require(path) {
   return Module._load(path, this); // eslint-disable-line no-underscore-dangle
 };
 
+const { document } = (new JSDOM('')).window;
+
 global.__DEBUG__ = true; // eslint-disable-line no-underscore-dangle
-global.document = jsdom('');
+global.document = document;
 global.window = document.defaultView;
 global.requestAnimationFrame = (func) => setTimeout(func);
 

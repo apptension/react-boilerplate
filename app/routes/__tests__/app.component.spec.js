@@ -16,12 +16,13 @@ describe('App: Component', () => {
     setLanguage: () => {
     },
     language: 'en',
-    router: {
+    match: {
       params: {
         lang: 'en',
       },
-      push: () => {
-      },
+    },
+    history: {
+      push: () => { },
     },
   };
 
@@ -75,37 +76,49 @@ describe('App: Component', () => {
 
   it('should redirect to /404 when given locale doesn\'t exist', () => {
     const router = {
-      params: {
-        lang: 'non-existing-locale',
+      match: {
+        params: {
+          lang: 'non-existing-locale',
+        },
       },
-      push: spy(),
+      history: {
+        push: spy(),
+      },
     };
 
-    mount(component({ router }));
-    expect(router.push.firstCall.args[0]).to.equal('/404');
+    mount(component(router));
+    expect(router.history.push.firstCall.args[0]).to.equal('/404');
   });
 
   it('should set DEFAULT_LOCALE when no lang param is given', () => {
     const setLanguage = spy();
     const router = {
-      params: {},
-      push: spy(),
+      match: {
+        params: {},
+      },
+      history: {
+        push: () => {},
+      },
     };
 
-    mount(component({ router, setLanguage }));
+    mount(component({ ...router, setLanguage }));
     expect(setLanguage.firstCall.args[0]).to.equal(DEFAULT_LOCALE);
   });
 
   it('should set proper language from param', () => {
     const setLanguage = spy();
     const router = {
-      params: {
-        lang: 'de',
+      match: {
+        params: {
+          lang: 'de',
+        },
       },
-      push: spy(),
+      history: {
+        push: () => {},
+      },
     };
 
-    mount(component({ router, setLanguage }));
+    mount(component({ ...router, setLanguage }));
     expect(setLanguage.firstCall.args[0]).to.equal('de');
   });
 });

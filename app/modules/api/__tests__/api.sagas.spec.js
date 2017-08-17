@@ -28,8 +28,7 @@ describe('Api: sagas', () => {
         .to.deep.equal(call(fetch, 'www.domain.com', {
           optionKey: 'optionValue',
           headers: { 'Content-Type': 'application/json' },
-        }
-      ));
+        }));
     });
 
     it('should parse response', () => {
@@ -61,8 +60,7 @@ describe('Api: sagas', () => {
         .to.deep.equal(call(requestSaga, 'www.domain.com?bodyKey=bodyValue', {
           method: 'GET',
           optionKey: 'optionValue',
-        }
-      ));
+        }));
 
       expect(postGenerator.next().done).to.equal(true);
     });
@@ -77,8 +75,7 @@ describe('Api: sagas', () => {
           method: 'POST',
           body: { bodyKey: 'bodyValue' },
           optionKey: 'optionValue',
-        }
-      ));
+        }));
 
       expect(postGenerator.next().done).to.equal(true);
     });

@@ -17,7 +17,9 @@ describe('Home: Component', () => {
     items: [1, 2, 3],
     language: 'en',
     setLanguage: () => {},
-    router: {},
+    location: {},
+    match: {},
+    histrory: { push: () => {} },
   };
 
   const component = (props) => (
@@ -72,7 +74,9 @@ describe('Home: Component', () => {
     const languageSelectorProps = wrapper.find(LanguageSelector).props();
 
     expect(languageSelectorProps.language).to.equal(defaultProps.language);
-    expect(languageSelectorProps.router).to.equal(defaultProps.router);
+    expect(languageSelectorProps.location).to.equal(defaultProps.location);
+    expect(languageSelectorProps.match).to.equal(defaultProps.match);
+    expect(languageSelectorProps.history).to.equal(defaultProps.history);
 
     languageSelectorProps.setLanguage();
     expect(setLanguage.calledOnce).to.be.true;

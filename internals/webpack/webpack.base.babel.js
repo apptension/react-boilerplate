@@ -8,7 +8,7 @@ const webpack = require('webpack');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const WebpackAppversionPlugin = require('webpack-appversion-plugin');
 const SpritesmithPlugin = require('webpack-spritesmith');
-/* eslint-enable import/no-extraneous-dependencies */
+/* eslint-enable import/no-extraneous-dependencies */ /* eslint-enable import/no-extraneous-dependencies */
 
 const buildSpritePlugin = (name) => new SpritesmithPlugin({
   retina: '-2x',
@@ -51,6 +51,9 @@ module.exports = (options) => {
         include: /node_modules/,
         loaders: ['style-loader', 'css-loader'],
       }, {
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        loader: 'file-loader',
+      }, {
         test: /\.scss$/,
         use: [{
           loader: 'style-loader',
@@ -60,21 +63,27 @@ module.exports = (options) => {
           loader: 'sass-loader',
         }],
       }, {
-        test: /\.(eot|svg|ttf|woff|woff2)$/,
-        loader: 'file-loader',
-      }, {
         test: /\.(jpg|png|gif)$/,
-        loaders: [
-          'file-loader',
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              query: {
+                name: '[name].[ext]',
+              },
+            },
+          },
           {
             loader: 'image-webpack-loader',
-            query: {
-              progressive: true,
-              optimizationLevel: 7,
-              interlaced: false,
-              pngquant: {
-                quality: '65-90',
-                speed: 4,
+            options: {
+              query: {
+                progressive: true,
+                optimizationLevel: 7,
+                interlaced: false,
+                pngquant: {
+                  quality: '65-90',
+                  speed: 4,
+                },
               },
             },
           },
@@ -114,7 +123,7 @@ module.exports = (options) => {
     ]),
     resolve: {
       alias: {
-        'env-config': path.join(process.cwd(), 'app', 'environment', `${process.env.NODE_ENV}.js`),
+        'env-config': path.join(process.cwd(), 'app', 'environment', `${process.env.ENV_CONFIG || 'development'}.js`),
       },
       modules: ['app', 'node_modules'],
       extensions: [
