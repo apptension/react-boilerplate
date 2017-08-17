@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 import envConfig from 'env-config';
+import { Link } from 'react-router-dom';
 
 import messages from './home.messages';
 import { MaintainerList } from './maintainerList/maintainerList.component';
@@ -45,6 +46,10 @@ export class Home extends PureComponent {
         <div>Environment: {envConfig.name}</div>
 
         <MaintainerList items={this.props.items} />
+
+        <div>
+          <Link to={`${this.props.match.url}/contact`}>Contact</Link>
+        </div>
 
         <LanguageSelector
           language={this.props.language}
