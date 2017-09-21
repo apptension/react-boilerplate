@@ -92,7 +92,7 @@ Here's a curated list of packages that you should have knowledge of, before star
 
 #### `app/`
 
-You will write your app in the this folder. This is the folder you will spend most, if not all, of your time in.
+You will write your app in this folder. You will spend most, if not all, of your time in here.
 
 #### `app/routes`
 
