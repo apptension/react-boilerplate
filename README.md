@@ -1,6 +1,6 @@
 # React Boilerplate
 
-Apptension's react boilerplate built on top of [react-boilerplate](https://github.com/react-boilerplate/react-boilerplate):
+Apptension's react boilerplate built on top of [react-boilerplate](https://github.com/react-boilerplate/react-boilerplate).
 
 ## Quick start
 
@@ -10,13 +10,13 @@ Apptension's react boilerplate built on top of [react-boilerplate](https://githu
   ```
 
 2. To install dependencies and clean the git repo run:
-  
+
   ```shell
   $ npm run setup
   ```
 
-  *We auto-detect `yarn` for installing packages by default, if you wish to force `npm` usage do*: 
-  
+  *We auto-detect `yarn` for installing packages by default, if you wish to force `npm` usage do*:
+
   ```shell
   $ USE_YARN=false npm run setup
   ```
@@ -92,7 +92,7 @@ Here's a curated list of packages that you should have knowledge of, before star
 
 #### `app/`
 
-You will write your app in the this folder. This is the folder you will spend most, if not all, of your time in. 
+You will write your app in this folder. You will spend most, if not all, of your time in here.
 
 #### `app/routes`
 
@@ -104,12 +104,12 @@ of view relationship.
 
 This folder contains `reducers`, `actions`, `constants`, `sagas` and `selectors` grouped in modules which means thath you
 should keep your business loigc here
- 
+
 #### `app/environment`
- 
-This folder contains environment configs. Webpack uses proper config depending on application environment. Config can be used 
+
+This folder contains environment configs. Webpack uses proper config depending on application environment. Config can be used
 by importing `env-config`
-  
+
 #### `app/fixtures`
 
 This boilerplate comes with preconfigured fixtures integration which means that you can put any `.json` files in this
@@ -121,9 +121,9 @@ In this folder you should put any global styles that cannot be placed in routes.
 
 #### `app/translations`
 
-This is the place to keep `.json` files with translation messages. You should not move this directory in order for messages 
- generation feature to work. 
- 
+This is the place to keep `.json` files with translation messages. You should not move this directory in order for messages
+ generation feature to work.
+
 #### `app/images`
 
 This folder contain any images used in your application. `/sprites` directory is used by `spritesimth` plugin.
@@ -131,7 +131,7 @@ This folder contain any images used in your application. `/sprites` directory is
 #### `internals/`
 
 You can call this area the "engine" of your app. Your source code cannot be executed as-is in the web browser.
-It needs to pass through webpack to get converted into a form that web browsers understand. While it's certainly 
+It needs to pass through webpack to get converted into a form that web browsers understand. While it's certainly
 helpful to understand what is happening here, for real world usage you won't have to mess around with this folder much.
 
 - `internals/webpack`: `webpack` configuration
