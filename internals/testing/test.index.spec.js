@@ -5,7 +5,10 @@ import Module from 'module';
 import chai from 'chai';
 import chaiEnzyme from 'chai-enzyme';
 import { JSDOM } from 'jsdom';
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
+Enzyme.configure({ adapter: new Adapter() });
 
 chai.use(chaiEnzyme());
 chai.config.includeStack = true;
