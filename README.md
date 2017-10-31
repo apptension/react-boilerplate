@@ -78,7 +78,7 @@ Here's a curated list of packages that you should have knowledge of, before star
 
 #### Testing
 
-- [ ] [Mocha](https://mochajs.org/)
+- [ ] [Jest](https://facebook.github.io/jest/)
 - [ ] [Sinon](http://sinonjs.org/)
 - [ ] [Chai](http://chaijs.com/)
 - [ ] [Enzyme](https://github.com/airbnb/enzyme)
@@ -204,6 +204,13 @@ npm run test:coverage
 ```
 
 Generates test coverage.
+
+```Shell
+npm run test:junit
+```
+
+Generates test report in junit format.
+
 
 ```Shell
 npm run analyze
