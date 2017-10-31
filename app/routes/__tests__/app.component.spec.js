@@ -87,7 +87,7 @@ describe('App: Component', () => {
     };
 
     mount(component(router));
-    expect(router.history.push.firstCall.args[0]).to.equal('/404');
+    expect(router.history.push).to.have.been.calledWith('/404');
   });
 
   it('should set DEFAULT_LOCALE when no lang param is given', () => {
@@ -102,7 +102,7 @@ describe('App: Component', () => {
     };
 
     mount(component({ ...router, setLanguage }));
-    expect(setLanguage.firstCall.args[0]).to.equal(DEFAULT_LOCALE);
+    expect(setLanguage).to.have.been.calledWith(DEFAULT_LOCALE);
   });
 
   it('should set proper language from param', () => {
@@ -119,6 +119,6 @@ describe('App: Component', () => {
     };
 
     mount(component({ ...router, setLanguage }));
-    expect(setLanguage.firstCall.args[0]).to.equal('de');
+    expect(setLanguage).to.have.been.calledWith('de');
   });
 });

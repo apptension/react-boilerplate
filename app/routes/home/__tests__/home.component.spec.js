@@ -79,14 +79,14 @@ describe('Home: Component', () => {
     expect(languageSelectorProps.history).to.equal(defaultProps.history);
 
     languageSelectorProps.setLanguage();
-    expect(setLanguage.calledOnce).to.be.true;
+    expect(setLanguage).to.have.been.called;
   });
 
   it('should dispatch fetchMaintainers action on mount', () => {
     const fetchMaintainers = spy();
     shallow(component({ fetchMaintainers }));
 
-    expect(fetchMaintainers.firstCall.args[0]).to.equal(defaultProps.language);
+    expect(fetchMaintainers).to.have.been.calledWith(defaultProps.language);
   });
 
   it('should dispatch fetchMaintainers action on language change', () => {
@@ -96,6 +96,6 @@ describe('Home: Component', () => {
     fetchMaintainers.reset();
     wrapper.setProps({ language: newLanguage });
 
-    expect(fetchMaintainers.firstCall.args[0]).to.equal(newLanguage);
+    expect(fetchMaintainers).to.have.been.calledWith(newLanguage);
   });
 });

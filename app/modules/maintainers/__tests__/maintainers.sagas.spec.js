@@ -36,9 +36,7 @@ describe('Maintainers: sagas', () => {
 
     sagaTester.dispatch(MaintainersActions.fetch('en'));
 
-    expect(apiSaga.get.firstCall.args).to.deep.equal([
-      '/fixtures/maintainers.json', { language: 'en' },
-    ]);
+    expect(apiSaga.get).to.have.been.calledWith('/fixtures/maintainers.json', { language: 'en' });
   });
 
   it('should dispatch fetchSuccess action after successful API call', () => {
