@@ -39,11 +39,11 @@
     "lint:staged": "lint-staged",
     "lint:watch": "esw app --color -w",
     "pretest": "npm run test:clean",
-    "test": "cross-env NODE_ENV=test mocha --compilers js:babel-core/register internals/testing/test.index.spec.js --recursive \"./app/**/*.spec.js\"",
+    "test": "cross-env NODE_ENV=test jest",
     "test:clean": "rimraf ./coverage",
-    "test:watch": "npm run test -- --watch --no-single-run",
-    "test:junit": "npm test -- --reporter mocha-junit-reporter --reporter-options mochaFile=./junit/junitOutput.xml",
-    "test:coverage": "cross-env NODE_ENV=test nyc mocha --compilers js:babel-core/register internals/testing/test.index.spec.js --recursive \"app/**/*.spec.js\" "
+    "test:watch": "npm run test -- --watch",
+    "test:junit": "JEST_JUNIT_OUTPUT=./junit/junitOutput.xml npm test -- --ci --testResultsProcessor='jest-junit'",
+    "test:coverage": "npm run test -- --coverage "
   },
   "dllPlugin": {
     "path": "node_modules/react-boilerplate-dlls",
@@ -119,6 +119,7 @@
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
     "babel-eslint": "8.0.0",
+    "babel-jest": "^21.2.0",
     "babel-loader": "7.1.2",
     "babel-plugin-dynamic-import-node": "1.1.0",
     "babel-plugin-istanbul": "^4.0.0",
@@ -140,7 +141,7 @@
     "coveralls": "^2.11.16",
     "css-loader": "^0.28.4",
     "enzyme": "^3.1.0",
-    "enzyme-adapter-react-16": "^1.0.1",
+    "enzyme-adapter-react-16": "^1.0.2",
     "eslint": "4.7.1",
     "eslint-config-apptension-react": "^0.0.10",
     "eslint-import-resolver-webpack": "0.8.3",
@@ -155,6 +156,9 @@
     "husky": "^0.14.3",
     "image-webpack-loader": "3.4.2",
     "imports-loader": "0.7.1",
+    "isomorphic-fetch": "^2.2.1",
+    "jest": "^21.2.1",
+    "jest-junit": "^3.1.0",
     "jsdom": "^11.1.0",
     "lint-staged": "4.2.1",
     "mocha": "^3.2.0",
@@ -179,5 +183,29 @@
     "webpack-dev-middleware": "1.12.0",
     "webpack-hot-middleware": "2.19.1",
     "webpack-spritesmith": "^0.3.1"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "./internals/testing/test.index.js",
+    "testRegex": "(/__tests__/.*|(\\.|/)(spec))\\.jsx?$",
+    "clearMocks": true,
+    "collectCoverageFrom": [
+      "app/**/*.js",
+      "!app/main.js",
+      "!app/i18n.js",
+      "!**/node_modules/**"
+    ],
+    "moduleNameMapper": {
+      "env-config": "<rootDir>/app/environment/test.js",
+      "report-error": "<rootDir>/app/utils/reportError.js"
+    },
+    "coverageDirectory": "coverage",
+    "coverageThreshold": {
+      "global": {
+        "branches": 0,
+        "functions": 0,
+        "lines": 0,
+        "statements": 0
+      }
+    }
   }
 }

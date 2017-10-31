@@ -136,7 +136,7 @@ helpful to understand what is happening here, for real world usage you won't hav
 
 - `internals/webpack`: `webpack` configuration
 - `internals/scripts`: scripts used in `package.json`
-- `internals/testing/test.index.spec.js`: entry point for unit tests. You should put any global mocks and add unit test configuration here
+- `internals/testing/test.index.js`: entry point for unit tests. You should put any global mocks and add unit test configuration here
 
 #### `server/`
 
