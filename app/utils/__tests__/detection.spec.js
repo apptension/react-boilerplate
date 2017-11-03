@@ -1,11 +1,6 @@
-import chai, { expect } from 'chai';
+import { expect } from 'chai';
 import { spy } from 'sinon';
-import sinonChai from 'sinon-chai';
 import Detection from '../detection';
-
-chai.should();
-chai.use(sinonChai);
-
 /* eslint-disable max-len*/
 const CHROME_UA = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36';
 const IE_UA = 'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)';
@@ -145,8 +140,8 @@ describe('Utils: Detection Class', () => {
       const detector = component({ config });
       detector.check(successCallback, failureCallback);
 
-      successCallback.should.have.been.called;
-      failureCallback.should.not.have.been.called;
+      expect(successCallback).to.have.been.called;
+      expect(failureCallback).not.to.have.been.called;
     });
 
     it('should run failureCallback when browser is not supported', () => {
@@ -157,8 +152,8 @@ describe('Utils: Detection Class', () => {
       const detector = component({ config });
       detector.check(successCallback, failureCallback);
 
-      successCallback.should.not.have.been.called;
-      failureCallback.should.have.been.called;
+      expect(successCallback).not.to.have.been.called;
+      expect(failureCallback).to.have.been.called;
     });
   });
 });
