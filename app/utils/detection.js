@@ -2,38 +2,43 @@ import UAParser from 'ua-parser-js';
 import semverCompare from 'semver-compare';
 import identity from 'lodash/identity';
 
+const DEFAULT_SUPPORTED_BROWSERS_CONFIG = {
+  desktop: [{
+    browser: 'firefox', minversion: 41,
+  }, {
+    browser: 'ie', versions: [11, 'edge'],
+  }, {
+    browser: 'chrome', minversion: 45,
+  }, {
+    browser: 'edge',
+  }, {
+    os: 'mac os', minos: '10.10.0', browser: 'safari', minversion: 8,
+  }],
+  tablet: [{
+    os: 'ios', minos: '9', browser: 'mobile safari',
+  }, {
+    os: 'android', minos: '5.0', browser: 'chrome',
+  }, {
+    browser: 'ie', versions: [11, 'edge'],
+  }, {
+    browser: 'edge',
+  }],
+  mobile: [{
+    os: 'ios', minos: '9', browser: 'mobile safari',
+  }, {
+    os: 'ios', minos: '5.0', browser: 'chrome',
+  }, {
+    os: 'android', minos: '5.0', browser: 'chrome', minversion: 50,
+  }],
+};
+
 export default class Detection {
   parser = new UAParser();
 
-  supportedBrowsersConfig = {
-    desktop: [{
-      browser: 'firefox', minversion: 41,
-    }, {
-      browser: 'ie', versions: [11, 'edge'],
-    }, {
-      browser: 'chrome', minversion: 45,
-    }, {
-      browser: 'edge',
-    }, {
-      os: 'mac os', minos: '10.10.0', browser: 'safari', minversion: 8,
-    }],
-    tablet: [{
-      os: 'ios', minos: '9', browser: 'mobile safari',
-    }, {
-      os: 'android', minos: '5.0', browser: 'chrome',
-    }, {
-      browser: 'ie', versions: [11, 'edge'],
-    }, {
-      browser: 'edge',
-    }],
-    mobile: [{
-      os: 'ios', minos: '9', browser: 'mobile safari',
-    }, {
-      os: 'ios', minos: '5.0', browser: 'chrome',
-    }, {
-      os: 'android', minos: '5.0', browser: 'chrome', minversion: 50,
-    }],
-  };
+  constructor(config = DEFAULT_SUPPORTED_BROWSERS_CONFIG, isInAppBrowserSupported = true) {
+    this.supportedBrowsersConfig = config;
+    this.isInAppBrowserSupported = isInAppBrowserSupported;
+  }
 
   get isInAppBrowser() {
     return (
@@ -77,7 +82,7 @@ export default class Detection {
 
     if (this.isInAppBrowser) {
       document.documentElement.className += ' in-app-browser';
-      return true;
+      return this.isInAppBrowserSupported;
     }
 
     const { version: browserVersion } = this.browser;
