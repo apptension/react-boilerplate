@@ -19,9 +19,12 @@ import { ConnectedRouter } from 'react-router-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import FontFaceObserver from 'fontfaceobserver';
 import 'normalize.css/normalize.css';
+import Detection from './utils/detection';
 import './main.scss';
-
 import configureStore from './modules/store';
+
+const detector = new Detection();
+detector.check();
 
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)

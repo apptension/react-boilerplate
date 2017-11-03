@@ -112,6 +112,8 @@
     "redux-saga": "0.15.6",
     "reduxsauce": "^0.6.0",
     "reselect": "3.0.1",
+    "semver-compare": "^1.0.0",
+    "ua-parser-js": "^0.7.17",
     "whatwg-fetch": "2.0.3"
   },
   "devDependencies": {
