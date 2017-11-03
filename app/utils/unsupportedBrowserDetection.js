@@ -32,7 +32,7 @@ const DEFAULT_SUPPORTED_BROWSERS_CONFIG = {
   }],
 };
 
-export default class Detection {
+export default class UnsupportedBrowserDetection {
   parser = new UAParser();
 
   constructor(config = DEFAULT_SUPPORTED_BROWSERS_CONFIG, isInAppBrowserSupported = true) {
@@ -87,32 +87,23 @@ export default class Detection {
 
     const { version: browserVersion } = this.browser;
 
-    const isSupported = !this.supportedBrowsersConfig[this.deviceType].every(options => {
-      const checkedOptions = Object.keys(options).map(optionKey => {
-        const value = options[optionKey];
+    const isSupported = !this.supportedBrowsersConfig[this.deviceType]
+      .every(options => {
+        const { os, minos, browser, minversion, versions } = options;
+        const parsedVersion = isNaN(parseInt(browserVersion, 10))
+          ? browserVersion.toLocaleLowerCase()
+          : parseInt(browserVersion, 10);
 
-        switch (optionKey) {
-          case 'os':
-            return value === this.os.name.toLowerCase();
-          case 'minos':
-            return this.compareVersions(value, this.os.version);
-          case 'browser':
-            return value === this.browser.name.toLowerCase();
-          case 'minversion':
-            return this.compareVersions(value, browserVersion);
-          case 'versions':
-            const v = isNaN(parseInt(browserVersion, 10))
-              ? browserVersion.toLocaleLowerCase()
-              : parseInt(browserVersion, 10);
+        const checked = {
+          os: os === this.os.name.toLowerCase(),
+          minos: this.compareVersions(minos, this.os.version),
+          browser: browser === this.browser.name.toLowerCase(),
+          minversion: this.compareVersions(minversion, browserVersion),
+          versions: versions ? versions.indexOf(parsedVersion) >= 0 : false,
+        };
 
-            return value.indexOf(v) >= 0;
-        }
-
-        return true;
+        return Object.keys(options).map(key => checked[key]).indexOf(false) !== -1;
       });
-
-      return checkedOptions.indexOf(false) !== -1;
-    });
 
     if (!isSupported) {
       document.documentElement.className += ' unsupported';

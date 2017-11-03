@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { spy } from 'sinon';
-import Detection from '../detection';
+import UnsupportedBrowserDetection from '../unsupportedBrowserDetection';
 /* eslint-disable max-len*/
 const CHROME_UA = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36';
 const IE_UA = 'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)';
@@ -13,7 +13,7 @@ function setUserAgent(userAgent) {
   navigator.__defineGetter__('userAgent', () => userAgent);
 }
 
-describe('Utils: Detection Class', () => {
+describe('Utils: UnsupportedBrowserDetection Class', () => {
   const config = {
     desktop: [{
       browser: 'firefox', minversion: 41,
@@ -45,7 +45,7 @@ describe('Utils: Detection Class', () => {
   };
 
   const component = ({ config, isInAppBrowserSupported }) => (
-    new Detection(config, isInAppBrowserSupported)
+    new UnsupportedBrowserDetection(config, isInAppBrowserSupported)
   );
 
   beforeEach(() => {

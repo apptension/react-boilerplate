@@ -19,7 +19,7 @@ import { ConnectedRouter } from 'react-router-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import FontFaceObserver from 'fontfaceobserver';
 import 'normalize.css/normalize.css';
-import Detection from './utils/detection';
+import Detection from './utils/unsupportedBrowserDetection';
 import './main.scss';
 import configureStore from './modules/store';
 
