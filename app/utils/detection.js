@@ -64,7 +64,7 @@ export default class Detection {
     return type;
   }
 
-  static compareVersions(a, b) {
+  compareVersions(a, b) {
     if (typeof a === 'string' || a instanceof String) {
       return semverCompare(a, b) <= 0;
     }
