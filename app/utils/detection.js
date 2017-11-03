@@ -116,11 +116,11 @@ export default class Detection {
     return isSupported;
   }
 
-  check = (successCallback = identity, failureCallback = identity) => {
+  check(successCallback = identity, failureCallback = identity) {
     if (this.isSupported()) {
       successCallback();
     } else {
       failureCallback();
     }
-  };
+  }
 }
