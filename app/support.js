@@ -7,6 +7,6 @@ const detection = new UnsupportedBrowserDetection();
 
 window.onload = () => {
   detection.check(() => {
-    setTimeout(() => window.initApp());
+    setTimeout(window.initApp);
   });
 };
