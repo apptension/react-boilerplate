@@ -82,6 +82,7 @@
     "chalk": "2.1.0",
     "compression": "1.7.0",
     "cross-env": "5.0.5",
+    "es5-shim": "^4.5.9",
     "express": "4.15.4",
     "fontfaceobserver": "2.0.13",
     "history": "^4.7.2",
@@ -112,6 +113,8 @@
     "redux-saga": "0.15.6",
     "reduxsauce": "^0.6.0",
     "reselect": "3.0.1",
+    "semver-compare": "^1.0.0",
+    "ua-parser-js": "^0.7.17",
     "whatwg-fetch": "2.0.3"
   },
   "devDependencies": {

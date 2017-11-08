@@ -5,3 +5,13 @@
 @import "styles/global";
 
 @import "routes/app";
+
+html.unsupported {
+  .unsupported-page {
+    display: block !important;
+  }
+
+  #app {
+    display: none;
+  }
+}

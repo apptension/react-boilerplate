@@ -20,7 +20,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import FontFaceObserver from 'fontfaceobserver';
 import 'normalize.css/normalize.css';
 import './main.scss';
-
 import configureStore from './modules/store';
 
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
@@ -77,21 +76,23 @@ const render = () => {
 };
 
 // Chunked polyfill for browsers without Intl support
-if (!window.Intl) {
-  (new Promise((resolve) => {
-    resolve(require('intl'));
-  }))
-    .then(() => Promise.all([
-      require('intl/locale-data/jsonp/en.js'),
-      require('intl/locale-data/jsonp/de.js'),
-    ]))
-    .then(() => render())
-    .catch((err) => {
-      throw err;
-    });
-} else {
-  render();
-}
+window.initApp = () => {
+  if (!window.Intl) {
+    (new Promise((resolve) => {
+      resolve(require('intl'));
+    }))
+      .then(() => Promise.all([
+        require('intl/locale-data/jsonp/en.js'),
+        require('intl/locale-data/jsonp/de.js'),
+      ]))
+      .then(() => render())
+      .catch((err) => {
+        throw err;
+      });
+  } else {
+    render();
+  }
+};
 
 /* istanbul ignore next */
 if (module.hot) {
