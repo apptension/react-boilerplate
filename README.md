@@ -108,7 +108,7 @@ of view relationship.
 #### `app/modules`
 
 This folder contains `reducers`, `actions`, `constants`, `sagas` and `selectors` grouped in modules which means that you
-should keep your business loigc here
+should keep your business logic here
 
 #### `app/services`
 
