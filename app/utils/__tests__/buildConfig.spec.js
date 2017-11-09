@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import localEnvConfig from 'local-env-config';
 
+import baseConfig from '../../environment/__baseConfig__';
 import buildConfig from '../buildConfig';
 
 describe('Utils: buildConfig', () => {
@@ -10,10 +11,11 @@ describe('Utils: buildConfig', () => {
         configProp: 'configValue',
       },
     })).to.deep.equal({
-      ...localEnvConfig,
+      ...baseConfig,
       configObject: {
         configProp: 'configValue',
       },
+      ...localEnvConfig,
     });
   });
 });

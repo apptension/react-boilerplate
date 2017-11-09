@@ -4,7 +4,7 @@ import reportError from 'report-error';
 import api from '../../services/api';
 import { MaintainersTypes, MaintainersActions } from './maintainers.redux';
 
-export function* fetchMaintainersSaga({ language }) {
+export function* fetchMaintainers({ language }) {
   try {
     const { data } = yield api.get('fixtures/maintainers.json', { params: { language } });
 
@@ -16,5 +16,5 @@ export function* fetchMaintainersSaga({ language }) {
 }
 
 export default function* maintainersSaga() {
-  yield takeLatest(MaintainersTypes.FETCH, fetchMaintainersSaga);
+  yield takeLatest(MaintainersTypes.FETCH, fetchMaintainers);
 }
