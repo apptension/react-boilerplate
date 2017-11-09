@@ -9,7 +9,27 @@ const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const WebpackAppversionPlugin = require('webpack-appversion-plugin');
 const SpritesmithPlugin = require('webpack-spritesmith');
 const autoprefixer = require('autoprefixer');
-/* eslint-enable import/no-extraneous-dependencies */ /* eslint-enable import/no-extraneous-dependencies */
+const fs = require('fs');
+/* eslint-enable import/no-extraneous-dependencies */
+/* eslint-enable import/no-extraneous-dependencies */
+
+const LOCAL_ENV_CONFIG_NAME = 'local-env-config';
+
+const appDirPath = path.join(process.cwd(), 'app');
+const envConfigDirPath = path.join(appDirPath, 'environment');
+const localEnvConfigPath = path.join(envConfigDirPath, 'local.js');
+
+const externals = {};
+const alias = {
+  'env-config': path.join(envConfigDirPath, `${process.env.ENV_CONFIG || 'development'}.js`),
+  'report-error': path.join(process.cwd(), 'app', 'utils', 'reportError.js'),
+};
+
+if (fs.existsSync(localEnvConfigPath)) {
+  alias[LOCAL_ENV_CONFIG_NAME] = localEnvConfigPath;
+} else {
+  externals[LOCAL_ENV_CONFIG_NAME] = JSON.stringify({});
+}
 
 const buildSpritePlugin = (name) => new SpritesmithPlugin({
   retina: '-2x',
@@ -130,10 +150,7 @@ module.exports = (options) => {
       new webpack.NamedModulesPlugin(),
     ]),
     resolve: {
-      alias: {
-        'env-config': path.join(process.cwd(), 'app', 'environment', `${process.env.ENV_CONFIG || 'development'}.js`),
-        'report-error': path.join(process.cwd(), 'app', 'utils', 'reportError.js'),
-      },
+      alias: alias,
       modules: ['app', 'node_modules'],
       extensions: [
         '.js',
@@ -146,6 +163,7 @@ module.exports = (options) => {
         'main',
       ],
     },
+    externals: externals,
     devtool: options.devtool,
     target: 'web',
     performance: options.performance || {},

@@ -15,3 +15,10 @@ chai.use(chaiJestDiff());
 chai.config.includeStack = true;
 
 global.requestAnimationFrame = (callback) => setTimeout(callback, 0);
+
+/**
+ * This object overrides environment configuration
+ */
+jest.mock('local-env-config', () => ({
+  localEnvConfigLoaded: true,
+}));
