@@ -96,8 +96,47 @@ You will write your app in this folder. You will spend most, if not all, of your
 
 #### `app/environment`
 
-This folder contains environment configs. Webpack uses proper config depending on application environment. Config can be used
-by importing `env-config`
+This folder contains environment configs. Webpack uses proper config depending on defined application environment. 
+By default `development.js` file will be used unless you build the application with environmental variable `ENV_CONFIG` set to different value.
+
+Example:
+```bash
+ENV_CONFIG=production npm run build
+``` 
+
+> this will build the app with `production.js` under `env-config` module
+
+
+##### Usage
+
+Config can be used in your code by importing `env-config` module, which is an alias to specific configration file.
+```js
+import envConfig from 'env-config';
+
+console.log(envConfig.baseURL);
+```
+
+##### Define new configuraiton
+
+Create a new file e.g. `staging.js`:
+```js
+import buildConfig from '../utils/buildConfig';
+
+export default buildConfig({
+  name: 'staging',
+  baseURL: 'http://staging.com/api'
+});
+```
+
+##### Local machine
+You can also set values specific for your machine and override those present in `env-config` by creating a `local.js` file, which should export an object:
+
+```js
+module.exports = {
+  baseURL: '/my-local-api'
+}
+```
+> `local.js` file is ignored in `.gitignore` so it will not be versioned.
 
 #### `app/routes`
 
