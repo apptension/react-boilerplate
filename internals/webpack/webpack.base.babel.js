@@ -132,6 +132,7 @@ module.exports = (options) => {
     resolve: {
       alias: {
         'env-config': path.join(process.cwd(), 'app', 'environment', `${process.env.ENV_CONFIG || 'development'}.js`),
+        'report-error': path.join(process.cwd(), 'app', 'utils', 'reportError.js'),
       },
       modules: ['app', 'node_modules'],
       extensions: [

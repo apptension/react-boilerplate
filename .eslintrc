@@ -15,7 +15,10 @@
       {
         "capIsNewExceptions": [
           "List",
-          "Map"
+          "Map",
+          "Record",
+          "OrderedMap",
+          "OrderedSet"
         ]
       }
     ],
@@ -48,7 +51,8 @@
   },
   "settings": {
     "import/core-modules": [
-      "env-config"
+      "env-config",
+      "report-error"
     ]
   }
 }

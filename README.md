@@ -94,6 +94,11 @@ Here's a curated list of packages that you should have knowledge of, before star
 
 You will write your app in this folder. You will spend most, if not all, of your time in here.
 
+#### `app/environment`
+
+This folder contains environment configs. Webpack uses proper config depending on application environment. Config can be used
+by importing `env-config`
+
 #### `app/routes`
 
 This folder contains subfolders - one for each route of your application with `components`, `containers`, `styles` and `tests`
@@ -102,13 +107,15 @@ of view relationship.
 
 #### `app/modules`
 
-This folder contains `reducers`, `actions`, `constants`, `sagas` and `selectors` grouped in modules which means thath you
-should keep your business loigc here
+This folder contains `reducers`, `actions`, `constants`, `sagas` and `selectors` grouped in modules which means that you
+should keep your business logic here
 
-#### `app/environment`
+#### `app/services`
 
-This folder contains environment configs. Webpack uses proper config depending on application environment. Config can be used
-by importing `env-config`
+This folder contains proxies for all services with which your app is going to communicate. 
+Initially there's only `api` proxy, which returns an `axios` instance for default backend API. You can put here an initialization of any
+other service, such as `firebase` or `contentful`.
+
 
 #### `app/fixtures`
 
