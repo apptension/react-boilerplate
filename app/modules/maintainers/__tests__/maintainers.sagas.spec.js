@@ -1,58 +1,50 @@
 import SagaTester from 'redux-saga-tester';
 import { expect } from 'chai';
 import { fromJS } from 'immutable';
-import { sandbox } from 'sinon';
+import MockAdapter from 'axios-mock-adapter';
 
+import api from '../../../services/api';
 import maintainersSaga from '../maintainers.sagas';
-import * as apiSaga from '../../api/api.sagas';
-import { MaintainersActions } from '../maintainers.redux';
+import { MaintainersActions, MaintainersTypes } from '../maintainers.redux';
 
+const mockApi = new MockAdapter(api);
 
 describe('Maintainers: sagas', () => {
-  let sagaTester = null;
-  let userSandbox = null;
+  const defaultState = fromJS({});
 
-  beforeEach(() => {
-    sagaTester = new SagaTester({
-      initialState: fromJS({
-        // locales: { language: 'en' },
-        // user: { redirectUrl: '/some-url' },
-      }),
+  const getSagaTester = (initialState = {}) => {
+    const sagaTester = new SagaTester({
+      initialState: defaultState.mergeDeep(initialState),
     });
     sagaTester.start(maintainersSaga);
-
-    userSandbox = sandbox.create();
-    userSandbox.stub(global, 'fetch').callsFake(() => Promise.resolve({
-      json: () => { },
-    }));
-  });
+    return sagaTester;
+  };
 
   afterEach(() => {
-    userSandbox.restore();
+    mockApi.reset();
   });
 
-  it('should pass proper params to get', () => {
-    userSandbox.stub(apiSaga, 'get').callsFake(() => 'somedata');
+  it('should dispatch fetchSuccess action after successful API call', async () => {
+    const sagaTester = getSagaTester();
+    const language = 'en';
+    const response = { respProp: 'respValue' };
+    mockApi.onGet('/fixtures/maintainers.json', { params: { language } }).reply(200, response);
 
-    sagaTester.dispatch(MaintainersActions.fetch('en'));
+    sagaTester.dispatch(MaintainersActions.fetch(language));
+    await sagaTester.waitFor(MaintainersTypes.FETCH_SUCCESS);
 
-    expect(apiSaga.get).to.have.been.calledWith('/fixtures/maintainers.json', { language: 'en' });
+    expect(sagaTester.getCalledActions()).to.deep.include(MaintainersActions.fetchSuccess(response));
   });
 
-  it('should dispatch fetchSuccess action after successful API call', () => {
-    userSandbox.stub(apiSaga, 'get').callsFake(() => 'somedata');
+  it('should dispatch fetchError action after unsuccessful API call', async () => {
+    const sagaTester = getSagaTester();
+    const language = 'en';
+    const response = { errorProp: 'errorValue' };
+    mockApi.onGet('/fixtures/maintainers.json', { params: { language } }).reply(400, response);
 
-    sagaTester.dispatch(MaintainersActions.fetch('en'));
-    expect(sagaTester.getCalledActions()).to.deep.include(MaintainersActions.fetchSuccess('somedata'));
-  });
+    sagaTester.dispatch(MaintainersActions.fetch(language));
+    await sagaTester.waitFor(MaintainersTypes.FETCH_ERROR);
 
-  it('should dispatch fetchError action after not successful API call', () => {
-    userSandbox.stub(apiSaga, 'get').callsFake(() => {
-      throw 'error';
-    });
-
-    sagaTester.dispatch(MaintainersActions.fetch('en'));
-
-    expect(sagaTester.getCalledActions()).to.deep.include(MaintainersActions.fetchError('error'));
+    expect(sagaTester.getCalledActions()).to.deep.include(MaintainersActions.fetchError(response));
   });
 });

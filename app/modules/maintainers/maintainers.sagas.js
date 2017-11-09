@@ -1,21 +1,20 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
+import reportError from 'report-error';
 
-import { get } from '../api/api.sagas';
+import api from '../../services/api';
 import { MaintainersTypes, MaintainersActions } from './maintainers.redux';
-
 
 export function* fetchMaintainersSaga({ language }) {
   try {
-    const data = yield call(get, '/fixtures/maintainers.json', { language });
+    const { data } = yield api.get('fixtures/maintainers.json', { params: { language } });
 
     yield put(MaintainersActions.fetchSuccess(data));
   } catch (e) {
-    yield put(MaintainersActions.fetchError(e));
+    yield put(MaintainersActions.fetchError(e.response ? e.response.data : e));
+    yield reportError(e);
   }
 }
 
 export default function* maintainersSaga() {
-  yield [
-    takeLatest(MaintainersTypes.FETCH, fetchMaintainersSaga),
-  ];
+  yield takeLatest(MaintainersTypes.FETCH, fetchMaintainersSaga);
 }
