@@ -6,4 +6,4 @@ node_js:
 cache: yarn
 env:
   global:
-    - NODE_ENV=production
+    - NODE_ENV=test
