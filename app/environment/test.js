@@ -1,7 +1,5 @@
-import defaultsDeep from 'lodash/defaultsDeep';
+import buildConfig from '../utils/buildConfig';
 
-import base from './base';
-
-export default defaultsDeep({
+export default buildConfig({
   name: 'test',
-}, base);
+});
