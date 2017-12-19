@@ -49,8 +49,6 @@ const buildSpritePlugin = (name) => new SpritesmithPlugin({
   },
 });
 
-const isProduction = process.env.NODE_ENV === 'production';
-
 module.exports = (options) => {
   const webpackConfig = {
     entry: options.entry,
@@ -75,10 +73,10 @@ module.exports = (options) => {
         loaders: [{
           loader: 'style-loader',
           options: {
-            hmr: !isProduction
-          }
+            hmr: options.styleHMR,
+          },
         }, {
-          loader: 'css-loader'
+          loader: 'css-loader',
         }],
       }, {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
@@ -88,8 +86,8 @@ module.exports = (options) => {
         use: [{
           loader: 'style-loader',
           options: {
-            hmr: !isProduction
-          }
+            hmr: options.styleHMR,
+          },
         }, {
           loader: 'css-loader',
         }, {
