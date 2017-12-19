@@ -74,5 +74,5 @@ module.exports = require('./webpack.base.babel')({
     assetFilter: (assetFilename) => !(/(\.map$)|(^(main\.|favicon\.))/.test(assetFilename)),
   },
 
-  styleHMR: true,
+  styleHMR: false,
 });

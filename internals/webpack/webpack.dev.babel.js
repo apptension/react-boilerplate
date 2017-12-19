@@ -61,8 +61,6 @@ module.exports = require('./webpack.base.babel')({
   performance: {
     hints: false,
   },
-
-  styleHMR: true,
 });
 
 /**
