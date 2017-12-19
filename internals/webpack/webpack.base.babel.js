@@ -49,6 +49,8 @@ const buildSpritePlugin = (name) => new SpritesmithPlugin({
   },
 });
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 module.exports = (options) => {
   const webpackConfig = {
     entry: options.entry,
@@ -70,7 +72,14 @@ module.exports = (options) => {
         // So, no need for ExtractTextPlugin here.
         test: /\.css$/,
         include: /node_modules/,
-        loaders: ['style-loader', 'css-loader'],
+        loaders: [{
+          loader: 'style-loader',
+          options: {
+            hmr: !isProduction
+          }
+        }, {
+          loader: 'css-loader'
+        }],
       }, {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
         loader: 'file-loader',
@@ -78,6 +87,9 @@ module.exports = (options) => {
         test: /\.scss$/,
         use: [{
           loader: 'style-loader',
+          options: {
+            hmr: !isProduction
+          }
         }, {
           loader: 'css-loader',
         }, {
