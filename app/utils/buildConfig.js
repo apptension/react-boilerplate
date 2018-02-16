@@ -1,4 +1,4 @@
-import defaultsDeep from 'lodash/defaultsDeep';
+import defaultsDeep from 'lodash.defaultsdeep';
 import localConfig from 'local-env-config';
 
 import base from '../environment/__baseConfig__';

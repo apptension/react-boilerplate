@@ -94,7 +94,7 @@ describe('Home: Component', () => {
     const fetchMaintainers = spy();
     const newLanguage = 'de';
     const wrapper = shallow(component({ fetchMaintainers, language: 'en' }));
-    fetchMaintainers.reset();
+    fetchMaintainers.resetHistory();
     wrapper.setProps({ language: newLanguage });
 
     expect(fetchMaintainers).to.have.been.calledWith(newLanguage);

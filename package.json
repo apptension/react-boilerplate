@@ -13,7 +13,7 @@
   "author": "Apptension",
   "license": "MIT",
   "scripts": {
-    "precommit": "npm run lint:eslint .",
+    "precommit": "lint-staged",
     "analyze:clean": "rimraf stats.json",
     "preanalyze": "npm run analyze:clean",
     "analyze": "node ./internals/scripts/analyze.js",
@@ -36,7 +36,6 @@
     "lint": "npm run lint:js",
     "lint:eslint": "eslint --ignore-path .gitignore --ignore-pattern internals/scripts",
     "lint:js": "npm run lint:eslint -- . ",
-    "lint:staged": "lint-staged",
     "lint:watch": "esw app --color -w",
     "pretest": "npm run test:clean",
     "test": "cross-env NODE_ENV=test jest",
@@ -58,24 +57,8 @@
     ],
     "include": [
       "core-js",
-      "lodash",
       "eventsource-polyfill"
     ]
-  },
-  "nyc": {
-    "include": [
-      "app/*.js"
-    ],
-    "require": [
-      "babel-register"
-    ],
-    "reporter": [
-      "lcov",
-      "html",
-      "text"
-    ],
-    "sourceMap": false,
-    "instrument": false
   },
   "dependencies": {
     "axios": "^0.17.0",
@@ -90,9 +73,11 @@
     "immutable": "3.8.2",
     "intl": "1.2.5",
     "ip": "1.1.5",
-    "lodash": "4.17.5",
+    "lodash.defaultsdeep": "^4.6.0",
+    "lodash.pullall": "^4.2.0",
+    "lodash.uniq": "^4.5.0",
     "minimist": "1.2.0",
-    "normalize.css": "^7.0.0",
+    "normalize.css": "^8.0.0",
     "prop-types": "^15.6.0",
     "query-string": "^5.0.0",
     "react": "^16.0.0",
@@ -103,7 +88,7 @@
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-router-redux": "^5.0.0-alpha.6",
+    "react-router-redux": "^5.0.0-alpha.9",
     "react-tap-event-plugin": "^3.0.2",
     "redux": "3.7.2",
     "redux-devtools": "^3.4.0",
@@ -115,19 +100,17 @@
     "reduxsauce": "^0.7.0",
     "reselect": "3.0.1",
     "semver-compare": "^1.0.0",
-    "ua-parser-js": "^0.7.17",
-    "whatwg-fetch": "2.0.3"
+    "ua-parser-js": "^0.7.17"
   },
   "devDependencies": {
-    "autoprefixer": "^7.1.4",
+    "autoprefixer": "^8.0.0",
     "axios-mock-adapter": "^1.9.0",
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
     "babel-eslint": "8.2.1",
-    "babel-jest": "^21.2.0",
+    "babel-jest": "^22.2.2",
     "babel-loader": "7.1.2",
     "babel-plugin-dynamic-import-node": "1.2.0",
-    "babel-plugin-istanbul": "^4.0.0",
     "babel-plugin-react-intl": "2.4.0",
     "babel-plugin-react-transform": "3.0.0",
     "babel-plugin-transform-es2015-modules-commonjs": "6.26.0",
@@ -144,7 +127,6 @@
     "cheerio": "1.0.0-rc.2",
     "circular-dependency-plugin": "4.4.0",
     "copy-webpack-plugin": "^4.0.1",
-    "coveralls": "^2.11.16",
     "css-loader": "^0.28.7",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.2",
@@ -156,24 +138,20 @@
     "eventsource-polyfill": "0.9.6",
     "exports-loader": "0.7.0",
     "favicons-webpack-plugin": "^0.0.7",
-    "file-loader": "0.11.2",
+    "file-loader": "1.1.6",
     "html-loader": "0.5.5",
     "html-webpack-plugin": "^2.30.1",
     "husky": "^0.14.3",
-    "image-webpack-loader": "3.4.2",
+    "image-webpack-loader": "4.1.0",
     "imports-loader": "0.7.1",
     "isomorphic-fetch": "^2.2.1",
-    "jest": "^21.2.1",
+    "jest": "^22.3.0",
     "jest-junit": "^3.1.0",
-    "jsdom": "^11.1.0",
-    "lint-staged": "4.2.1",
-    "mocha": "^3.2.0",
-    "mocha-junit-reporter": "^1.13.0",
+    "lint-staged": "6.1.0",
     "ngrok": "2.2.26",
     "node-plop": "0.9.0",
     "node-sass": "^4.5.0",
     "null-loader": "0.1.1",
-    "nyc": "^11.1.0",
     "offline-plugin": "4.9.0",
     "postcss-loader": "^2.0.6",
     "react-test-renderer": "^16.0.0",
@@ -181,13 +159,13 @@
     "rimraf": "2.6.2",
     "sass-loader": "^6.0.6",
     "shelljs": "0.8.1",
-    "sinon": "^3.3.0",
+    "sinon": "^4.3.0",
     "sinon-chai": "^2.14.0",
     "style-loader": "^0.20.2",
     "url-loader": "0.6.2",
     "webpack": "^3.4.1",
     "webpack-appversion-plugin": "^1.2.1",
-    "webpack-dev-middleware": "1.12.0",
+    "webpack-dev-middleware": "2.0.5",
     "webpack-hot-middleware": "2.21.0",
     "webpack-spritesmith": "^0.4.0"
   },
@@ -217,5 +195,10 @@
         "statements": 0
       }
     }
+  },
+  "lint-staged": {
+    "**/*.{js,jsx}": [
+      "eslint --ignore-path .gitignore --ignore-pattern internals/scripts -- --fix"
+    ]
   }
 }

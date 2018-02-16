@@ -144,10 +144,6 @@ module.exports = (options) => {
       new FaviconsWebpackPlugin(path.join(process.cwd(), 'app', 'images', 'favicon.png')),
       buildSpritePlugin('mobile'),
       buildSpritePlugin('desktop'),
-      new webpack.ProvidePlugin({
-        // make fetch available
-        fetch: 'exports-loader?self.fetch!whatwg-fetch',
-      }),
 
       // Always expose NODE_ENV to webpack, in order to use `process.env.NODE_ENV`
       // inside your code for any environment checks; UglifyJS will automatically
