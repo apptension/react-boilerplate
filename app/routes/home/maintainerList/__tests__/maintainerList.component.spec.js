@@ -11,7 +11,7 @@ import messages from '../maintainersList.messages';
 
 describe('MaintainerList: Component', () => {
   const defaultProps = {
-    items: fromJS([1, 2, 3]),
+    items: fromJS([{ name: 'name-1' }, { name: 'name-2' }, { name: 'name-3' }]),
   };
 
   const component = (props) => (

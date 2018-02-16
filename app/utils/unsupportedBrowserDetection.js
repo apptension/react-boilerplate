@@ -1,6 +1,7 @@
 import UAParser from 'ua-parser-js';
 import semverCompare from 'semver-compare';
-import identity from 'lodash/identity';
+
+const identity = (arg) => arg;
 
 const DEFAULT_SUPPORTED_BROWSERS_CONFIG = {
   desktop: [{

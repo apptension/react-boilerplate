@@ -8,10 +8,13 @@ export function* fetchMaintainers({ language }) {
   try {
     const { data } = yield api.get('fixtures/maintainers.json', { params: { language } });
 
-    yield put(MaintainersActions.fetchSuccess(data));
+    return yield put(MaintainersActions.fetchSuccess(data));
   } catch (e) {
-    yield put(MaintainersActions.fetchError(e.response ? e.response.data : e));
-    yield reportError(e);
+    if (e.response) {
+      return yield put(MaintainersActions.fetchError(e.response.data));
+    }
+
+    return yield reportError(e);
   }
 }
 
