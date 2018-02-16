@@ -47,17 +47,19 @@ const browserHistory = createHistory();
 const store = configureStore(initialState, browserHistory);
 
 if (process.env.NODE_ENV === 'development') {
-  const DevToolsComponent = require('./utils/devtools.component').default;
-  const devToolsRoot = window.document.createElement('div');
+  if (!window.__REDUX_DEVTOOLS_EXTENSION__) {
+    const DevToolsComponent = require('./utils/devtools.component').default;
+    const devToolsRoot = window.document.createElement('div');
 
-  window.document.body.appendChild(devToolsRoot);
+    window.document.body.appendChild(devToolsRoot);
 
-  ReactDOM.render(
-    <Provider store={store}>
-      <DevToolsComponent />
-    </Provider>,
-    devToolsRoot
-  );
+    ReactDOM.render(
+      <Provider store={store}>
+        <DevToolsComponent />
+      </Provider>,
+      devToolsRoot
+    );
+  }
 }
 
 const render = () => {

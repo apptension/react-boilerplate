@@ -17,8 +17,15 @@ export default function configureStore(initialState = {}, history) {
 
   const enhancers = [];
 
-  if (process.env.NODE_ENV === 'development') {
+  if (window.__REDUX_DEVTOOLS_EXTENSION__) {
+    enhancers.push(window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+  } else if (process.env.NODE_ENV === 'development') {
     const { persistState } = require('redux-devtools');
+
+    const getDebugSessionKey = () => {
+      const matches = window.location.href.match(/[?&]debug_session=([^&#]+)\b/);
+      return (matches && matches.length > 0) ? matches[1] : null;
+    };
 
     const stateTransformer = (state) => {
       if (Iterable.isIterable(state)) {
@@ -28,11 +35,6 @@ export default function configureStore(initialState = {}, history) {
     };
 
     middlewares.push(createLogger({ stateTransformer }));
-
-    const getDebugSessionKey = () => {
-      const matches = window.location.href.match(/[?&]debug_session=([^&#]+)\b/);
-      return (matches && matches.length > 0) ? matches[1] : null;
-    };
 
     Array.prototype.push.apply(enhancers, [
       require('../utils/devtools.component').default.instrument(),
