@@ -4,6 +4,7 @@ import { shallow } from 'enzyme';
 import { spy } from 'sinon';
 import { FormattedMessage } from 'react-intl';
 import Helmet from 'react-helmet';
+import { fromJS } from 'immutable';
 
 import { Home } from '../home.component';
 import messages from '../home.messages';
@@ -14,12 +15,12 @@ import { LanguageSelector } from '../languageSelector/languageSelector.component
 describe('Home: Component', () => {
   const defaultProps = {
     fetchMaintainers: () => {},
-    items: [1, 2, 3],
+    items: fromJS([{ name: 'name-1' }, { name: 'name-2' }, { name: 'name-3' }]),
     language: 'en',
     setLanguage: () => {},
     location: {},
     match: {},
-    histrory: { push: () => {} },
+    history: { push: () => {} },
   };
 
   const component = (props) => (

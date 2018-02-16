@@ -21,6 +21,7 @@ describe('App: Component', () => {
         lang: 'en',
       },
     },
+    location: {},
     history: {
       push: () => { },
     },
