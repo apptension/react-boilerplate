@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from '../modules/locales/locales.redux';
 
@@ -7,7 +7,7 @@ import Contact from './contact';
 import Home from './home';
 import NotFound from './notFound';
 
-export class RootContainer extends PureComponent {
+export class RootContainer extends Component {
   render() {
     return (
       <Switch>
