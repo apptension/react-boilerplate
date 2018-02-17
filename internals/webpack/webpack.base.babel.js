@@ -8,7 +8,6 @@ const webpack = require('webpack');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const WebpackAppversionPlugin = require('webpack-appversion-plugin');
 const SpritesmithPlugin = require('webpack-spritesmith');
-const autoprefixer = require('autoprefixer');
 const fs = require('fs');
 /* eslint-enable import/no-extraneous-dependencies */
 /* eslint-enable import/no-extraneous-dependencies */
@@ -81,25 +80,6 @@ module.exports = (options) => {
       }, {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
         loader: 'file-loader',
-      }, {
-        test: /\.scss$/,
-        use: [{
-          loader: 'style-loader',
-          options: {
-            hmr: options.styleHMR,
-          },
-        }, {
-          loader: 'css-loader',
-        }, {
-          loader: 'postcss-loader',
-          options: {
-            plugins: function () {
-              return [autoprefixer('last 2 versions', 'ie 10')];
-            },
-          },
-        }, {
-          loader: 'sass-loader',
-        }],
       }, {
         test: /\.(jpg|png|gif)$/,
         use: [

@@ -52,8 +52,7 @@
       "cross-env",
       "express",
       "ip",
-      "minimist",
-      "sanitize.css"
+      "minimist"
     ],
     "include": [
       "core-js",
@@ -106,7 +105,6 @@
     "ua-parser-js": "^0.7.17"
   },
   "devDependencies": {
-    "autoprefixer": "^8.0.0",
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
     "babel-eslint": "8.2.1",
@@ -152,15 +150,12 @@
     "lint-staged": "6.1.0",
     "ngrok": "2.2.26",
     "node-plop": "0.9.0",
-    "node-sass": "^4.5.0",
     "null-loader": "0.1.1",
     "offline-plugin": "4.9.0",
     "plop": "^1.9.1",
-    "postcss-loader": "^2.0.6",
     "react-test-renderer": "^16.0.0",
     "redux-saga-tester": "^1.0.197",
     "rimraf": "2.6.2",
-    "sass-loader": "^6.0.6",
     "shelljs": "0.8.1",
     "sinon": "^4.3.0",
     "sinon-chai": "^2.14.0",
