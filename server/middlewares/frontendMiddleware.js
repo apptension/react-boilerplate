@@ -2,7 +2,17 @@
 const express = require('express');
 const path = require('path');
 const compression = require('compression');
+const jsonServer = require('json-server');
 const pkg = require('../../package.json');
+
+const addJsonServer = (app) => {
+  const router = express.Router(); //eslint-disable-line
+
+  router.use(jsonServer.defaults());
+  router.use(jsonServer.router(path.join(__dirname, '../jsonServer/db.json')));
+
+  app.use('/mock-api', router);
+};
 
 // Dev middleware
 const addDevMiddlewares = (app, webpackConfig) => {
@@ -64,6 +74,8 @@ const addProdMiddlewares = (app, options) => {
  */
 module.exports = (app, options) => {
   const isProd = process.env.NODE_ENV === 'production';
+
+  addJsonServer(app);
 
   if (isProd) {
     addProdMiddlewares(app, options);

@@ -3,6 +3,7 @@ import 'isomorphic-fetch';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import chai from 'chai';
+import nock from 'nock';
 import chaiEnzyme from 'chai-enzyme';
 import sinonChai from 'sinon-chai';
 import chaiJestDiff from 'chai-jest-diff';
@@ -14,7 +15,7 @@ chai.use(sinonChai);
 chai.use(chaiJestDiff());
 chai.config.includeStack = true;
 
-global.requestAnimationFrame = (callback) => setTimeout(callback, 0);
+nock.disableNetConnect();
 
 /**
  * This object overrides environment configuration
@@ -22,3 +23,7 @@ global.requestAnimationFrame = (callback) => setTimeout(callback, 0);
 jest.mock('local-env-config', () => ({
   localEnvConfigLoaded: true,
 }));
+
+afterEach(() => {
+  nock.cleanAll();
+});

@@ -7,7 +7,6 @@ const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 const cheerio = require('cheerio');
 const logger = require('../../server/logger');
@@ -16,10 +15,6 @@ const dllPlugin = pkg.dllPlugin;
 /* eslint-enable import/no-extraneous-dependencies */
 
 const plugins = [
-  new CopyWebpackPlugin([{
-    from: path.join(process.cwd(), 'app', 'fixtures'),
-    to: 'fixtures',
-  }]),
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NoEmitOnErrorsPlugin(),
   new HtmlWebpackPlugin({

@@ -53,7 +53,8 @@
     "import/core-modules": [
       "local-env-config",
       "env-config",
-      "report-error"
+      "report-error",
+      "json-server"
     ]
   }
 }

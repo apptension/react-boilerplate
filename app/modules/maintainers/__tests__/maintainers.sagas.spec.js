@@ -1,13 +1,12 @@
 import SagaTester from 'redux-saga-tester';
 import { expect } from 'chai';
 import { fromJS } from 'immutable';
-import MockAdapter from 'axios-mock-adapter';
+import { OK, BAD_REQUEST } from 'http-status-codes';
 
-import api from '../../../services/api';
 import maintainersSaga from '../maintainers.sagas';
 import { MaintainersActions, MaintainersTypes } from '../maintainers.redux';
 
-const mockApi = new MockAdapter(api);
+import mockApi from '../../../utils/mockApi';
 
 describe('Maintainers: sagas', () => {
   const defaultState = fromJS({});
@@ -20,15 +19,11 @@ describe('Maintainers: sagas', () => {
     return sagaTester;
   };
 
-  afterEach(() => {
-    mockApi.reset();
-  });
-
   it('should dispatch fetchSuccess action after successful API call', async () => {
     const sagaTester = getSagaTester();
     const language = 'en';
     const response = { respProp: 'respValue' };
-    mockApi.onGet('/fixtures/maintainers.json', { params: { language } }).reply(200, response);
+    mockApi.get('/mock-api/maintainers').reply(OK, response);
 
     sagaTester.dispatch(MaintainersActions.fetch(language));
     await sagaTester.waitFor(MaintainersTypes.FETCH_SUCCESS);
@@ -40,7 +35,7 @@ describe('Maintainers: sagas', () => {
     const sagaTester = getSagaTester();
     const language = 'en';
     const response = { errorProp: 'errorValue' };
-    mockApi.onGet('/fixtures/maintainers.json', { params: { language } }).reply(400, response);
+    mockApi.get('/mock-api/maintainers').reply(BAD_REQUEST, response);
 
     sagaTester.dispatch(MaintainersActions.fetch(language));
     await sagaTester.waitFor(MaintainersTypes.FETCH_ERROR);
