@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import messages from './home.messages';
 import { MaintainerList } from './maintainerList/maintainerList.component';
 import { LanguageSelector } from './languageSelector/languageSelector.component';
-
+import { TitleLogo } from './home.styles';
 
 export class Home extends PureComponent {
   static propTypes = {
@@ -39,7 +39,7 @@ export class Home extends PureComponent {
         <Helmet title="Homepage" />
 
         <h1 className="home__title">
-          <i className="home__title-logo" />
+          <TitleLogo name="logo" />
           <FormattedMessage {...messages.welcome} />
         </h1>
 

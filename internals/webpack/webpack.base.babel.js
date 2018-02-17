@@ -39,7 +39,7 @@ const buildSpritePlugin = (name) => new SpritesmithPlugin({
   },
   target: {
     image: path.join(process.cwd(), `app/images/generated/${name}-sprite.png`),
-    css: path.join(process.cwd(), `app/styles/generated/${name}-sprites.scss`),
+    css: path.join(process.cwd(), `app/images/generated/${name}-sprite.json`),
   },
   apiOptions: {
     cssImageRef: `images/generated/${name}-sprite.png`,
