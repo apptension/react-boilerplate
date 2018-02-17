@@ -102,6 +102,7 @@
     "reduxsauce": "^0.7.0",
     "reselect": "3.0.1",
     "semver-compare": "^1.0.0",
+    "styled-components": "^3.1.6",
     "ua-parser-js": "^0.7.17"
   },
   "devDependencies": {

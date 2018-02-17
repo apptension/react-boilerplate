@@ -19,7 +19,6 @@ import { ConnectedRouter } from 'react-router-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import FontFaceObserver from 'fontfaceobserver';
 import 'normalize.css/normalize.css';
-import './main.scss';
 import configureStore from './modules/store';
 
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
@@ -85,7 +84,6 @@ window.initApp = () => {
     }))
       .then(() => Promise.all([
         require('intl/locale-data/jsonp/en.js'),
-        require('intl/locale-data/jsonp/de.js'),
       ]))
       .then(() => render())
       .catch((err) => {
