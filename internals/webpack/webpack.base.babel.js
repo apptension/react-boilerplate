@@ -8,7 +8,6 @@ const webpack = require('webpack');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const WebpackAppversionPlugin = require('webpack-appversion-plugin');
 const SpritesmithPlugin = require('webpack-spritesmith');
-const autoprefixer = require('autoprefixer');
 const fs = require('fs');
 /* eslint-enable import/no-extraneous-dependencies */
 /* eslint-enable import/no-extraneous-dependencies */
@@ -39,7 +38,7 @@ const buildSpritePlugin = (name) => new SpritesmithPlugin({
   },
   target: {
     image: path.join(process.cwd(), `app/images/generated/${name}-sprite.png`),
-    css: path.join(process.cwd(), `app/styles/generated/${name}-sprites.scss`),
+    css: path.join(process.cwd(), `app/images/generated/${name}-sprite.json`),
   },
   apiOptions: {
     cssImageRef: `images/generated/${name}-sprite.png`,
@@ -81,25 +80,6 @@ module.exports = (options) => {
       }, {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
         loader: 'file-loader',
-      }, {
-        test: /\.scss$/,
-        use: [{
-          loader: 'style-loader',
-          options: {
-            hmr: options.styleHMR,
-          },
-        }, {
-          loader: 'css-loader',
-        }, {
-          loader: 'postcss-loader',
-          options: {
-            plugins: function () {
-              return [autoprefixer('last 2 versions', 'ie 10')];
-            },
-          },
-        }, {
-          loader: 'sass-loader',
-        }],
       }, {
         test: /\.(jpg|png|gif)$/,
         use: [
@@ -175,7 +155,7 @@ module.exports = (options) => {
     performance: options.performance || {},
   };
 
-  if (process.env.SHOW_VERSION) {
+  if (process.env.SHOW_VERSION === 'true') {
     webpackConfig.plugins.push(
       new WebpackAppversionPlugin({
         entries: ['main'],

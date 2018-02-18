@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import messages from './maintainersList.messages';
-import { Maintainer } from '../maintainer/maintainer.component';
-
+import { Container, Title, List, ListItem } from './maintainerList.styles';
 
 export class MaintainerList extends PureComponent {
   static propTypes = {
@@ -13,17 +12,21 @@ export class MaintainerList extends PureComponent {
 
   render() {
     return (
-      <div className="maintainer-list">
-        <h2 className="maintainer-list__title">
-          <FormattedMessage {...messages.title} />:
-        </h2>
+      <Container>
+        <Title>
+          <FormattedMessage {...messages.title} />
+        </Title>
 
-        <ul>
+        <List>
           {this.props.items.toArray().map((item, key) => (
-            <Maintainer key={key} data={item} />
+            <ListItem key={key}>
+              <a href={`mailto:${item.get('email')}`}>
+                {item.get('firstName')} {item.get('lastName')}
+              </a>
+            </ListItem>
           ))}
-        </ul>
-      </div>
+        </List>
+      </Container>
     );
   }
 }

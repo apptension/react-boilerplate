@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import { hot } from 'react-hot-loader';
 
 import { Home } from './home.component';
 import { MaintainersActions } from '../../modules/maintainers/maintainers.redux';
@@ -18,4 +19,4 @@ export const mapDispatchToProps = (dispatch) => bindActionCreators({
   setLanguage: LocalesActions.setLanguage,
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default hot(module)(connect(mapStateToProps, mapDispatchToProps)(Home));

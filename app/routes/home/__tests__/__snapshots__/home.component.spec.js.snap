@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home: Component should render Home root 1`] = `
+<styled.div>
+  <HelmetWrapper
+    defer={true}
+    encodeSpecialCharacters={true}
+    title="Homepage"
+  />
+  <styled.h1>
+    <styled.i
+      name="logo"
+    />
+    <FormattedMessage
+      defaultMessage="Hello World!"
+      id="home.welcome"
+      values={Object {}}
+    />
+  </styled.h1>
+  <styled.div>
+    Environment: 
+  </styled.div>
+  <MaintainerList
+    items={
+      Immutable.List [
+        Immutable.Map {
+          "name": "name-1",
+        },
+        Immutable.Map {
+          "name": "name-2",
+        },
+        Immutable.Map {
+          "name": "name-3",
+        },
+      ]
+    }
+  />
+</styled.div>
+`;

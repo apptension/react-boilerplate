@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MaintainerList: Component should render MaintainerList root 1`] = `
+<styled.div>
+  <styled.h3>
+    <FormattedMessage
+      defaultMessage="Maintainers"
+      id="home.maintainerList.title"
+      values={Object {}}
+    />
+  </styled.h3>
+  <styled.ul>
+    <styled.li
+      key="0"
+    >
+      <a
+        href="mailto:undefined"
+      >
+         
+      </a>
+    </styled.li>
+    <styled.li
+      key="1"
+    >
+      <a
+        href="mailto:undefined"
+      >
+         
+      </a>
+    </styled.li>
+    <styled.li
+      key="2"
+    >
+      <a
+        href="mailto:undefined"
+      >
+         
+      </a>
+    </styled.li>
+  </styled.ul>
+</styled.div>
+`;

@@ -34,7 +34,6 @@ module.exports = require('./webpack.base.babel')({
     main: [
       // Necessary for hot reloading with IE
       'eventsource-polyfill',
-      'react-hot-loader/patch',
       'webpack-hot-middleware/client',
       path.join(process.cwd(), 'app/main.js'),
     ],

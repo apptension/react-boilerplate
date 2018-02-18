@@ -3,7 +3,6 @@ import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from '../modules/locales/locales.redux';
 
 import App from './app.container';
-import Contact from './contact';
 import Home from './home';
 import NotFound from './notFound';
 
@@ -21,7 +20,6 @@ export class RootContainer extends Component {
             <Switch>
               <Route exact path="/:lang" component={Home} />
 
-              <Route exact path="/:lang/contact" component={Contact} />
 
               <Route component={NotFound} />
             </Switch>
