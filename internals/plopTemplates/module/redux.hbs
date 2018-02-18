@@ -1,0 +1,14 @@
+import { createActions, createReducer } from 'reduxsauce';
+import { Record } from 'immutable';
+
+export const { Types: {{ pascalCase name }}Types, Creators: {{ pascalCase name }}Actions } = createActions({
+  noop: null, // TODO: remove this action
+}, { prefix: '{{ constantCase name }}_' });
+
+const {{ pascalCase name }}Record = new Record({
+});
+
+export const INITIAL_STATE = new {{ pascalCase name }}Record({});
+
+export const reducer = createReducer(INITIAL_STATE, {
+});

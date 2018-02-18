@@ -1,0 +1,30 @@
+import SagaTester from 'redux-saga-tester';
+import { expect } from 'chai';
+import { fromJS } from 'immutable';
+
+import mockApi from '../../../utils/mockApi';
+import { watch{{ pascalCase name }} } from '../{{ camelCase name }}.sagas';
+import {
+  {{ pascalCase name }}Actions,
+  {{ pascalCase name }}Types
+} from '../{{ camelCase name }}.redux';
+
+describe('{{ pascalCase name }}: sagas', () => {
+  const defaultState = fromJS({});
+
+  const getSagaTester = (initialState = {}) => {
+    const sagaTester = new SagaTester({
+      initialState: defaultState.mergeDeep(initialState),
+    });
+    sagaTester.start(watch{{ pascalCase name }});
+    return sagaTester;
+  };
+
+  it('should implement a test', () => {
+    const sagaTester = getSagaTester();
+
+    sagaTester.dispatch({{ pascalCase name }}Actions.noop());
+
+    expect(sagaTester.getCalledActions()).to.deep.equal([{{ pascalCase name }}Actions.noop()]);
+  });
+});

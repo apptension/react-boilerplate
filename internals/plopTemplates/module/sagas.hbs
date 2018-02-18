@@ -1,0 +1,14 @@
+import { put, takeLatest } from 'redux-saga/effects';
+import reportError from 'report-error';
+
+import { {{ pascalCase name }}Types, {{ pascalCase name }}Actions } from './{{ camelCase name }}.redux';
+
+
+export function* watch{{ pascalCase name }}() {
+  try {
+    console.log('{{ pascalCase name }} saga started!');
+  } catch(error) {
+    /* istanbul ignore next */
+    reportError(error);
+  }
+}

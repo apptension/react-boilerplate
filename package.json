@@ -154,6 +154,7 @@
     "node-sass": "^4.5.0",
     "null-loader": "0.1.1",
     "offline-plugin": "4.9.0",
+    "plop": "^1.9.1",
     "postcss-loader": "^2.0.6",
     "react-test-renderer": "^16.0.0",
     "redux-saga-tester": "^1.0.197",
