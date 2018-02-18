@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App: Component should not render App when language is not set 1`] = `""`;
+
+exports[`App: Component should render App when language is set 1`] = `
+<React.Fragment>
+  <HelmetWrapper
+    defaultTitle="Apptension React Boilerplate"
+    defer={true}
+    encodeSpecialCharacters={true}
+    meta={
+      Array [
+        Object {
+          "content": "Apptension's React Boilerplate application",
+          "name": "description",
+        },
+      ]
+    }
+    titleTemplate="%s - Apptension React Boilerplate"
+  />
+  <IntlProvider
+    locale="en"
+    location={Object {}}
+    messages={
+      Object {
+        "contact.title": "Contact page",
+        "home.maintainerList.title": "Maintainers",
+        "home.welcome": "Welcome to Apptension React Boilerplate!",
+      }
+    }
+  >
+    <div
+      className="app__children"
+    >
+      Children
+    </div>
+  </IntlProvider>
+</React.Fragment>
+`;

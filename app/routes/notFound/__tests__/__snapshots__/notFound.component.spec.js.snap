@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotFound: Component should not render not-found root 1`] = `
+<styled.div>
+  <HelmetWrapper
+    defer={true}
+    encodeSpecialCharacters={true}
+    title="Not Found"
+  />
+  <h1>
+    404
+  </h1>
+</styled.div>
+`;

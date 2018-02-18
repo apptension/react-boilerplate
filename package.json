@@ -25,7 +25,7 @@
     "build": "cross-env NODE_ENV=production webpack --config internals/webpack/webpack.prod.babel.js --color -p --progress",
     "build:clean": "npm run test:clean && rimraf ./dist/*",
     "build:dll": "node ./internals/scripts/dependencies.js",
-    "start": "cross-env NODE_ENV=development SHOW_VERSION=true node server",
+    "start": "cross-env NODE_ENV=development SHOW_VERSION=false node server",
     "start:tunnel": "cross-env NODE_ENV=development ENABLE_TUNNEL=true node server",
     "start:production": "npm run test && npm run build && npm run start:prod",
     "start:prod": "cross-env NODE_ENV=production node server",
@@ -52,7 +52,8 @@
       "cross-env",
       "express",
       "ip",
-      "minimist"
+      "minimist",
+      "styled-components"
     ],
     "include": [
       "core-js",
@@ -77,14 +78,13 @@
     "lodash.pullall": "^4.2.0",
     "lodash.uniq": "^4.5.0",
     "minimist": "1.2.0",
-    "nock": "^9.1.6",
     "normalize.css": "^8.0.0",
     "prop-types": "^15.6.0",
     "query-string": "^5.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-helmet": "5.2.0",
-    "react-hot-loader": "^3.0.0",
+    "react-hot-loader": "4.0.0-beta.22",
     "react-intl": "^2.4.0",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
@@ -113,6 +113,7 @@
     "babel-plugin-dynamic-import-node": "1.2.0",
     "babel-plugin-react-intl": "2.4.0",
     "babel-plugin-react-transform": "3.0.0",
+    "babel-plugin-styled-components": "^1.5.0",
     "babel-plugin-transform-es2015-modules-commonjs": "6.26.0",
     "babel-plugin-transform-react-constant-elements": "6.23.0",
     "babel-plugin-transform-react-inline-elements": "6.22.0",
@@ -145,10 +146,13 @@
     "imports-loader": "0.7.1",
     "isomorphic-fetch": "^2.2.1",
     "jest": "^22.3.0",
+    "jest-enzyme": "^4.2.0",
     "jest-junit": "^3.1.0",
+    "jest-styled-components": "^4.10.0",
     "json-server": "^0.12.1",
     "lint-staged": "6.1.0",
     "ngrok": "2.2.26",
+    "nock": "^9.1.6",
     "node-plop": "0.9.0",
     "null-loader": "0.1.1",
     "offline-plugin": "4.9.0",
@@ -184,6 +188,10 @@
       "env-config": "<rootDir>/app/environment/test.js",
       "report-error": "<rootDir>/app/utils/reportError.js"
     },
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest",
+      "\\.(jpg|jpeg|png|svg)$": "<rootDir>/internals/testing/fileTransformer.js"
+    },
     "coverageDirectory": "coverage",
     "coverageThreshold": {
       "global": {
@@ -193,6 +201,9 @@
         "statements": 0
       }
     },
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
     "testURL": "http://localhost"
   },
   "lint-staged": {

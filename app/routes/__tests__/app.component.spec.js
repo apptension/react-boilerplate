@@ -2,10 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow, mount } from 'enzyme';
 import { spy } from 'sinon';
-import Helmet from 'react-helmet';
-import { IntlProvider } from 'react-intl';
 
-import { translationMessages } from '../../i18n';
 import { DEFAULT_LOCALE } from '../../modules/locales/locales.redux';
 import { App } from '../app.component';
 
@@ -35,44 +32,12 @@ describe('App: Component', () => {
 
   it('should not render App when language is not set', () => {
     const wrapper = shallow(component({ language: undefined }));
-    expect(wrapper.find('.app')).to.have.length(0);
+    global.expect(wrapper).toMatchSnapshot();
   });
 
   it('should render App when language is set', () => {
     const wrapper = shallow(component({ language: 'en' }));
-    expect(wrapper.find('.app')).to.have.length(1);
-  });
-
-  it('should render <Helmet/>', () => {
-    const wrapper = shallow(component({}));
-    expect(wrapper.find(Helmet)).to.have.length(1);
-  });
-
-  it('should pass props to <Helmet/>', () => {
-    const wrapper = shallow(component({}));
-    const helmetProps = wrapper.find(Helmet).props();
-
-    expect(helmetProps.titleTemplate).to.be.a('string');
-    expect(helmetProps.defaultTitle).to.be.a('string');
-    expect(helmetProps.meta).to.be.an('array');
-  });
-
-  it('should render <IntlProvider/>', () => {
-    const wrapper = shallow(component({}));
-    expect(wrapper.find(IntlProvider)).to.have.length(1);
-  });
-
-  it('should pass props to <IntlProvider/>', () => {
-    const wrapper = shallow(component({}));
-    const intlProps = wrapper.find(IntlProvider).props();
-
-    expect(intlProps.locale).to.equal(defaultProps.language);
-    expect(intlProps.messages).to.equal(translationMessages[defaultProps.language]);
-  });
-
-  it('should render children inside <IntlProvider/>', () => {
-    const wrapper = shallow(component({}));
-    expect(wrapper.find(IntlProvider).contains(children)).to.be.true;
+    global.expect(wrapper).toMatchSnapshot();
   });
 
   it('should redirect to /404 when given locale doesn\'t exist', () => {
@@ -104,22 +69,5 @@ describe('App: Component', () => {
 
     mount(component({ ...router, setLanguage }));
     expect(setLanguage).to.have.been.calledWith(DEFAULT_LOCALE);
-  });
-
-  it('should set proper language from param', () => {
-    const setLanguage = spy();
-    const router = {
-      match: {
-        params: {
-          lang: 'de',
-        },
-      },
-      history: {
-        push: () => {},
-      },
-    };
-
-    mount(component({ ...router, setLanguage }));
-    expect(setLanguage).to.have.been.calledWith('de');
   });
 });

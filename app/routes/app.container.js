@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { withRouter } from 'react-router-dom';
+import { hot } from 'react-hot-loader';
 
 import { App } from './app.component';
 import { selectLocalesLanguage } from '../modules/locales/locales.selectors';
@@ -16,4 +17,4 @@ export const mapDispatchToProps = (dispatch) => bindActionCreators({
   setLanguage: LocalesActions.setLanguage,
 }, dispatch);
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+export default hot(module)(withRouter(connect(mapStateToProps, mapDispatchToProps)(App)));

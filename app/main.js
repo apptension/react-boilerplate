@@ -12,7 +12,6 @@ import ReactDOM from 'react-dom';
 import 'babel-polyfill';
 
 // Import all the third party stuff
-import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import createHistory from 'history/createBrowserHistory';
 import { ConnectedRouter } from 'react-router-redux';
@@ -65,13 +64,11 @@ const render = () => {
   const NextApp = require('./routes').default;
 
   ReactDOM.render(
-    <AppContainer>
-      <Provider store={store}>
-        <ConnectedRouter history={browserHistory}>
-          <NextApp />
-        </ConnectedRouter>
-      </Provider>
-    </AppContainer>,
+    <Provider store={store}>
+      <ConnectedRouter history={browserHistory}>
+        <NextApp />
+      </ConnectedRouter>
+    </Provider>,
     document.getElementById('app')
   );
 };
@@ -93,13 +90,6 @@ window.initApp = () => {
     render();
   }
 };
-
-/* istanbul ignore next */
-if (module.hot) {
-  module.hot.accept('./routes', () => {
-    render();
-  });
-}
 
 // Install ServiceWorker and AppCache in the end since
 // it's not most important operation and if main code fails,

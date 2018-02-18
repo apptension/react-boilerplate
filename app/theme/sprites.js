@@ -1,41 +1,59 @@
 import { css } from 'styled-components';
-import { media, highDPI } from './media';
+import { media } from './media';
 
-import mobileSpriteImg from '../images/generated/mobile-sprite.png';
-import mobileSpriteRetinaImg from '../images/generated/mobile-sprite-2x.png';
-import mobileSpriteManifest from '../images/generated/mobile-sprite.json';
-
-import desktopSpriteImg from '../images/generated/desktop-sprite.png';
-import desktopSpriteRetinaImg from '../images/generated/desktop-sprite-2x.png';
-import desktopSpriteManifest from '../images/generated/desktop-sprite.json';
-
-const buildSprite = (manifest, spriteImg, spriteRetinaImg) => (imageName) => {
-  if (process.env.NODE_ENV === 'development') {
-    if (!manifest[imageName]) {
-      throw new Error(`No image named "${imageName}" available in sprite!`);
-    }
-  }
-
-  const data = manifest[imageName] || { normal: {}, retina: {} };
-
-  return css`
-    background-image: url(${spriteImg});
-    background-position: -${data.normal.x}px -${data.normal.y}px;
-    width: ${data.normal.width}px;
-    height: ${data.normal.height}px;
-    ${highDPI`
-      background-image: url(${spriteRetinaImg});
-      background-position: -${data.retina.x / 2}px -${data.retina.y / 2}px;
-      background-size: ${data.retina.total_width / 2}px ${data.retina.total_height / 2}px;
-    `}
-  `;
+const spriteMap = {
+  mobile: {
+    manifest: require('../images/generated/mobile-sprite.json'),
+    img: require('../images/generated/mobile-sprite.png'),
+    retinaImg: require('../images/generated/mobile-sprite-2x.png'),
+  },
+  desktop: {
+    manifest: require('../images/generated/desktop-sprite.json'),
+    img: require('../images/generated/desktop-sprite.png'),
+    retinaImg: require('../images/generated/desktop-sprite-2x.png'),
+  },
 };
 
-const mobileSprite = buildSprite(mobileSpriteManifest, mobileSpriteImg, mobileSpriteRetinaImg);
-const desktopSprite = buildSprite(desktopSpriteManifest, desktopSpriteImg, desktopSpriteRetinaImg);
+const buildSprite = (name) => {
+  if (!spriteMap[name]) {
+    throw new Error(`Sprite ${name} is not configured!`);
+  }
 
-export const mobile = mobileSprite;
+  const { manifest, img, retinaImg } = spriteMap[name];
 
-export const desktop = (name) => media.desktop`
-  ${desktopSprite(name)}
-`;
+  return (imageName) => {
+    if (process.env.NODE_ENV === 'development') {
+      if (!manifest[imageName]) {
+        throw new Error(`No image named "${imageName}" available in "${name}" sprite!`);
+      }
+    }
+
+    const data = manifest[imageName] || { normal: {}, retina: {} };
+
+    const base = css`
+      width: ${data.normal.width}px;
+      height: ${data.normal.height}px;
+    `;
+
+    const regular = css`
+      ${base};
+      background-image: url(${img});
+      background-position: -${data.normal.x}px -${data.normal.y}px;
+    `;
+
+    const retina = css`
+      ${base};
+      background-image: url(${retinaImg});
+      background-position: -${data.retina.x / 2}px -${data.retina.y / 2}px;
+      background-size: ${data.retina.total_width / 2}px ${data.retina.total_height / 2}px;
+    `;
+
+    return css`
+      ${media[name]`${regular}`}
+      ${media[`${name}Retina`]`${retina}`}
+    `;
+  };
+};
+
+export const mobile = buildSprite('mobile');
+export const desktop = buildSprite('desktop');

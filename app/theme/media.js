@@ -16,6 +16,11 @@ export const media = Object.keys(sizes).reduce((acc, label) => {
       ${css(...args)}
     }
   `;
+  acc[`${label}Retina`] = (...args) => css`
+    @media (min-width: ${sizes[label]}px) and (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      ${css(...args)}
+    }
+  `;
   acc[`${label}Landscape`] = (...args) => css`
     @media (min-width: ${sizes[label]}px) and (orientation: landscape) {
       ${css(...args)}
@@ -23,12 +28,6 @@ export const media = Object.keys(sizes).reduce((acc, label) => {
   `;
   return acc;
 }, {});
-
-export const highDPI = (...args) => css`
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    ${css(...args)}
-  }
-`;
 
 export const isMobile = () => {
   const width = getWindowWidth();

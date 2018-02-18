@@ -1,8 +1,7 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { IntlProvider } from 'react-intl';
-import { get } from 'lodash';
 
 import { appLocales, translationMessages } from '../i18n';
 import { DEFAULT_LOCALE } from '../modules/locales/locales.redux';
@@ -21,8 +20,7 @@ export class App extends PureComponent {
   };
 
   componentWillMount() {
-    const language = get(this.props.match, 'params.lang', DEFAULT_LOCALE);
-
+    const language = this.props.match.params.lang || DEFAULT_LOCALE;
     if (appLocales.indexOf(language) === -1) {
       this.props.setLanguage(DEFAULT_LOCALE);
       this.props.history.push('/404');
@@ -37,12 +35,12 @@ export class App extends PureComponent {
     }
 
     return (
-      <div className="app">
+      <Fragment>
         <Helmet
           titleTemplate="%s - Apptension React Boilerplate"
           defaultTitle="Apptension React Boilerplate"
           meta={[
-            { name: 'description', content: 'Apptension React Boilerplate application' },
+            { name: 'description', content: 'Apptension\'s React Boilerplate application' },
           ]}
         />
 
@@ -53,7 +51,7 @@ export class App extends PureComponent {
         >
           {React.Children.only(this.props.children)}
         </IntlProvider>
-      </div>
+      </Fragment>
     );
   }
 }

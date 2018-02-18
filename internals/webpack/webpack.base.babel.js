@@ -155,7 +155,7 @@ module.exports = (options) => {
     performance: options.performance || {},
   };
 
-  if (process.env.SHOW_VERSION) {
+  if (process.env.SHOW_VERSION === 'true') {
     webpackConfig.plugins.push(
       new WebpackAppversionPlugin({
         entries: ['main'],

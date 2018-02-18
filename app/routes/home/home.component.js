@@ -3,12 +3,10 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 import envConfig from 'env-config';
-import { Link } from 'react-router-dom';
 
 import messages from './home.messages';
 import { MaintainerList } from './maintainerList/maintainerList.component';
-import { LanguageSelector } from './languageSelector/languageSelector.component';
-import { TitleLogo } from './home.styles';
+import { Container, Title, TitleLogo, EnvName } from './home.styles';
 
 export class Home extends PureComponent {
   static propTypes = {
@@ -35,30 +33,18 @@ export class Home extends PureComponent {
 
   render() {
     return (
-      <div className="home">
+      <Container>
         <Helmet title="Homepage" />
 
-        <h1 className="home__title">
+        <Title>
           <TitleLogo name="logo" />
           <FormattedMessage {...messages.welcome} />
-        </h1>
+        </Title>
 
-        <div>Environment: {envConfig.name}</div>
+        <EnvName>Environment: {envConfig.name}</EnvName>
 
         <MaintainerList items={this.props.items} />
-
-        <div>
-          <Link to={`${this.props.match.url}/contact`}>Contact</Link>
-        </div>
-
-        <LanguageSelector
-          language={this.props.language}
-          setLanguage={this.props.setLanguage}
-          match={this.props.match}
-          history={this.props.history}
-          location={this.props.location}
-        />
-      </div>
+      </Container>
     );
   }
 }
