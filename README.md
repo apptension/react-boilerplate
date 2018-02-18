@@ -88,6 +88,9 @@ Here's a curated list of packages that you should have knowledge of, before star
 
 - [ ] [ESlint](http://eslint.org/)
 
+### Code generation
+- [ ] [Plop](https://github.com/amwmedia/plop)
+
 ## Project Structure
 
 #### `app/`
@@ -281,6 +284,14 @@ npm run extract-intl
 ```
 
 Automatically generates `.json` files with messages gathered from application.
+
+#### Code generation
+
+```Shell
+yarn plop module
+```
+
+Automatically generates module boilerplate
 
 ## License
 
