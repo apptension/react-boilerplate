@@ -5,27 +5,29 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+- Update react-hot-loader to v4 release
+
 
 ## 1.0.0 - 2018-03-02
 ### Added
 - This CHANGELOG file.
-- Add a Plop generator for redux modules kept in `app/modules` directory. It also appends generated reducer to root 
+- Plop generator for redux modules kept in `app/modules` directory. It also appends generated reducer to root 
 reducer and generated saga to root saga.
 
 ### Changed
-- **BREAKING** [styled-component](https://github.com/styled-components/styled-components) as a primary way of styling
+- [**BREAKING**] [styled-component](https://github.com/styled-components/styled-components) as a primary way of styling
 elements
 - Update [react-hot-loader](https://github.com/gaearon/react-hot-loader) to v4 (beta-22)
 - Hide component from [webpack-appversion-plugin](https://github.com/apptension/webpack-appversion-plugin) in 
 development env by default
 - Update React to v16.2
-- Update redux-sga to v0.16
+- Update redux-saga to v0.16
 - Update jest to v22.3
 - Update sinon to v4.3
 - Update other less important dependencies
 
 ### Removed
-- **BREAKING** SASS support
+- [**BREAKING**] SASS support
 
 [Unreleased]: https://github.com/apptension/react-boilerplate/compare/v1.0.0...HEAD
 
