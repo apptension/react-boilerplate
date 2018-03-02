@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Plop generator for React Redux container
 - Plop generator for React components
+- Ramda dependency
 
 ### Changed
 - Update react-hot-loader to v4 release
