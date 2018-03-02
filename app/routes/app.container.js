@@ -17,4 +17,4 @@ export const mapDispatchToProps = (dispatch) => bindActionCreators({
   setLanguage: LocalesActions.setLanguage,
 }, dispatch);
 
-export default hot(module)(withRouter(connect(mapStateToProps, mapDispatchToProps)(App)));
+export default hot(module)(connect(mapStateToProps, mapDispatchToProps)(withRouter(App)));
