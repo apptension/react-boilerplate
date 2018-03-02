@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.0.1] – 2018-03-02
 ### Added
 - Plop generator for React Redux container
 - Plop generator for React components
@@ -13,7 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Update react-hot-loader to v4 release
 
-## 1.0.0 - 2018-03-02
+## 1.0.0 – 2018-03-02
 ### Added
 - This CHANGELOG file.
 - Plop generator for redux modules kept in `app/modules` directory. It also appends generated reducer to root 
@@ -34,5 +36,6 @@ development env by default
 ### Removed
 - [**BREAKING**] SASS support
 
-[Unreleased]: https://github.com/apptension/react-boilerplate/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/apptension/react-boilerplate/compare/1.0.1...HEAD
+[1.0.1]: https://github.com/apptension/react-boilerplate/compare/1.0.0...1.0.1
 
