@@ -64,6 +64,7 @@ Here's a curated list of packages that you should have knowledge of, before star
 - [ ] [Redux Sauce](https://github.com/skellock/reduxsauce/)
 - [ ] [Reselect](https://github.com/reactjs/reselect)
 - [ ] [ImmutableJS](https://facebook.github.io/immutable-js/)
+- [ ] [Ramda](https://github.com/ramda/ramda)
 
 #### Development
 

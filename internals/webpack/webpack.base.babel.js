@@ -60,6 +60,9 @@ module.exports = (options) => {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
+        options: {
+          cacheDirectory: true,
+        },
         query: options.babelQuery,
       }, {
         // Do not transform vendor's CSS with CSS-modules

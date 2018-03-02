@@ -54,7 +54,9 @@
       "local-env-config",
       "env-config",
       "report-error",
-      "json-server"
+      "json-server",
+      "nock",
+      "inquirer-directory"
     ]
   }
 }
