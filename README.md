@@ -56,8 +56,8 @@ Here's a curated list of packages that you should have knowledge of, before star
 
 #### Core
 
-- [ ] [React](https://facebook.github.io/react/)
-- [ ] [React Router](https://github.com/ReactTraining/react-router)
+- [ ] [React 16.2](https://facebook.github.io/react/)
+- [ ] [React Router 4](https://github.com/ReactTraining/react-router)
 - [ ] [React Intl](https://github.com/yahoo/react-intl)
 - [ ] [Redux](http://redux.js.org/)
 - [ ] [Redux Saga](https://redux-saga.github.io/redux-saga/)
@@ -67,13 +67,12 @@ Here's a curated list of packages that you should have knowledge of, before star
 
 #### Development
 
-- [ ] [Webpack 2](https://webpack.js.org/)
+- [ ] [Webpack 3](https://webpack.js.org/)
 - [ ] [Redux Devtools](https://github.com/gaearon/redux-devtools/)
-- [ ] [React Hot Loader 3](https://github.com/gaearon/react-hot-loader/)
+- [ ] [React Hot Loader 4](https://github.com/gaearon/react-hot-loader/)
 
 #### Styling
 
-- [ ] [Sass](http://sass-lang.com/)
 - [ ] [Normalize.css](https://necolas.github.io/normalize.css/)
 
 #### Testing
@@ -82,7 +81,6 @@ Here's a curated list of packages that you should have knowledge of, before star
 - [ ] [Sinon](http://sinonjs.org/)
 - [ ] [Chai](http://chaijs.com/)
 - [ ] [Enzyme](https://github.com/airbnb/enzyme)
-- [ ] [Istanbul](https://github.com/gotwarlost/istanbul/)
 
 #### Linting
 
@@ -158,12 +156,6 @@ This folder contains proxies for all services with which your app is going to co
 Initially there's only `api` proxy, which returns an `axios` instance for default backend API. You can put here an initialization of any
 other service, such as `firebase` or `contentful`.
 
-
-#### `app/fixtures`
-
-This boilerplate comes with preconfigured fixtures integration which means that you can put any `.json` files in this
-folder and easily fetch it as fixtures using sagas. Those files are available by calling `/fixtures/*.json` url.
-
 #### `app/styles`
 
 In this folder you should put any global styles that cannot be placed in routes.
@@ -186,7 +178,7 @@ helpful to understand what is happening here, for real world usage you won't hav
 - `internals/webpack`: `webpack` configuration
 - `internals/scripts`: scripts used in `package.json`
 - `internals/testing/test.index.js`: entry point for unit tests. You should put any global mocks and add unit test configuration here
-
+- `internals/plop`: `plop` configuration and templates
 #### `server/`
 
 As the name suggests, this folder contains development and production server configuration.
@@ -196,7 +188,7 @@ As the name suggests, this folder contains development and production server con
 #### Initialization
 
 ```Shell
-npm run setup
+yarn run setup
 ```
 
 Initializes a new project with this boilerplate. Deletes the `react-boilerplate`
@@ -209,13 +201,13 @@ history irreversibly by accident.
 #### Development
 
 ```Shell
-npm start
+yarn start
 ```
 
 Starts the development server running on `http://localhost:3000`
 
 ```Shell
-npm start:tunnel
+yarn start:tunnel
 ```
 
 Starts the development server and makes your application accessible at
@@ -225,7 +217,7 @@ accessible anywhere! Changes in the application code will be hot-reloaded.
 #### Building
 
 ```Shell
-npm run build
+yarn build
 ```
 
 Preps your app for deployment (does not run tests). Optimizes and minifies all files, piping them to the `build` folder.
@@ -236,33 +228,33 @@ see your work live!
 #### Testing
 
 ```Shell
-npm run test
+yarn test
 ```
 
 Tests your application with the unit tests specified in the `**/__tests__/*.spec.js` files
 throughout the application.
 
 ```Shell
-npm run test:watch
+yarn test:watch
 ```
 
 Watches changes to your application and re-runs tests whenever a file changes.
 
 ```Shell
-npm run test:coverage
+yarn test:coverage
 ```
 
 Generates test coverage.
 
 ```Shell
-npm run test:junit
+yarn test:junit
 ```
 
 Generates test report in junit format.
 
 
 ```Shell
-npm run analyze
+yarn analyze
 ```
 This command will generate a `stats.json` file from your production build, which
 you can upload to the [webpack analyzer](https://webpack.github.io/analyse/). This
@@ -280,18 +272,27 @@ Lints your JavaScript.
 #### Messages
 
 ```Shell
-npm run extract-intl
+yarn extract-intl
 ```
 
 Automatically generates `.json` files with messages gathered from application.
 
 #### Code generation
 
+- Generate Redux module (reducer, saga, selectors, action types, action creators, tests):
 ```Shell
 yarn plop module
 ```
 
-Automatically generates module boilerplate
+- Generate Redux container and its react component in specified path:
+```Shell
+yarn plop container
+```
+
+- Generate React component in specified path
+```Shell
+yarn plop component
+```
 
 ## License
 
