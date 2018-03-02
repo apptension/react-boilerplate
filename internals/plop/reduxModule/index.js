@@ -8,7 +8,7 @@ module.exports = (plop) => {
     prompts: [{
       type: 'input',
       name: 'name',
-      message: 'Module name:',
+      message: 'Name:',
     }],
     actions: [{
       type: 'add',

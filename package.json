@@ -72,6 +72,7 @@
     "history": "^4.7.2",
     "http-status-codes": "^1.3.0",
     "immutable": "3.8.2",
+    "inquirer-directory": "^2.1.0",
     "intl": "1.2.5",
     "ip": "1.1.5",
     "lodash.defaultsdeep": "^4.6.0",
