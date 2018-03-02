@@ -1,0 +1,24 @@
+import React from 'react';
+import { expect } from 'chai';
+import { shallow } from 'enzyme';
+import { spy } from 'sinon';
+import { fromJS } from 'immutable';
+
+import { {{ pascalCase name }} } from '../{{ camelCase name }}.component';
+
+
+describe('<{{ pascalCase name }} />', () => {
+  const defaultProps = {
+  };
+
+  const component = (props) => (
+    <{{ pascalCase name }} {...defaultProps} {...props} />
+  );
+
+  const render = (props = {}) => shallow(component(props));
+
+  it('should render correctly', () => {
+    const wrapper = render();
+    global.expect(wrapper).toMatchSnapshot();
+  });
+});

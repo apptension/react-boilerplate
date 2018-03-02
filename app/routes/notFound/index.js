@@ -1,3 +1,1 @@
-import { NotFound } from './notFound.component';
-
-export default NotFound;
+export { NotFound } from './notFound.component';
