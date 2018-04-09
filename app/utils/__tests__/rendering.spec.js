@@ -1,14 +1,11 @@
 import { spy } from 'sinon';
 import { expect } from 'chai';
-import { List } from 'immutable';
 import { always } from 'ramda';
 
-import { intlMock } from '../testUtils';
 import {
   renderWhen,
   renderWhenNotNil,
   renderWhenTrue,
-  getFormFieldHelperText,
   renderWhenTrueOtherwise,
 } from '../rendering';
 
@@ -114,51 +111,5 @@ describe('renderWhenTrueOtherwise: Function', () => {
     renderWhenTrueOtherwise(fn1, fn2)(condition);
     expect(fn1).to.not.have.been.called;
     expect(fn2).to.have.been.calledOnce;
-  });
-});
-
-describe('getFormFieldHelperText', () => {
-  const messages = {
-    message1: { id: 'test.message1', defaultMessage: 'Test error 1' },
-    message2: { id: 'test.message2', defaultMessage: 'Test error 2' },
-  };
-
-  it('should return proper error message when error is a string', () => {
-    const meta = {
-      error: 'message1',
-      invalid: true,
-      touched: true,
-    };
-
-    expect(getFormFieldHelperText(intlMock(), messages, meta)).to.equal('test.message1 / Test error 1 / {}');
-  });
-
-  it('should return first error message when error is a List', () => {
-    const meta = {
-      error: List(['message2', 'message1']),
-      invalid: true,
-      touched: true,
-    };
-
-    expect(getFormFieldHelperText(intlMock(), messages, meta)).to.equal('test.message2 / Test error 2 / {}');
-  });
-
-  it('should return empty string when field hasn\'t been touched', () => {
-    const meta = {
-      error: 'message1',
-      invalid: true,
-      touched: false,
-    };
-
-    expect(getFormFieldHelperText(intlMock(), messages, meta)).to.equal('');
-  });
-
-  it('should return empty string when field isn\'t invalid', () => {
-    const meta = {
-      invalid: false,
-      touched: true,
-    };
-
-    expect(getFormFieldHelperText(intlMock(), messages, meta)).to.equal('');
   });
 });
