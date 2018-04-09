@@ -8,6 +8,7 @@ import nock from 'nock';
 import chaiEnzyme from 'chai-enzyme';
 import sinonChai from 'sinon-chai';
 import chaiJestDiff from 'chai-jest-diff';
+import 'jest-styled-components';
 import { css as mockCss } from 'styled-components';
 
 Enzyme.configure({ adapter: new Adapter() });

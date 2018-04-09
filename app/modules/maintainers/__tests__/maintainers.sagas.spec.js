@@ -23,7 +23,7 @@ describe('Maintainers: sagas', () => {
     const sagaTester = getSagaTester();
     const language = 'en';
     const response = { respProp: 'respValue' };
-    mockApi.get('/mock-api/maintainers').reply(OK, response);
+    mockApi.get('/mock-api/maintainers/').reply(OK, response);
 
     sagaTester.dispatch(MaintainersActions.fetch(language));
     await sagaTester.waitFor(MaintainersTypes.FETCH_SUCCESS);
@@ -35,7 +35,7 @@ describe('Maintainers: sagas', () => {
     const sagaTester = getSagaTester();
     const language = 'en';
     const response = { errorProp: 'errorValue' };
-    mockApi.get('/mock-api/maintainers').reply(BAD_REQUEST, response);
+    mockApi.get('/mock-api/maintainers/').reply(BAD_REQUEST, response);
 
     sagaTester.dispatch(MaintainersActions.fetch(language));
     await sagaTester.waitFor(MaintainersTypes.FETCH_ERROR);

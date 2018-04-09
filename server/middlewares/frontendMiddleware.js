@@ -4,6 +4,7 @@ const path = require('path');
 const compression = require('compression');
 const jsonServer = require('json-server');
 const pkg = require('../../package.json');
+const proxy = require('express-http-proxy');
 
 const addJsonServer = (app) => {
   const router = express.Router(); //eslint-disable-line
@@ -43,6 +44,8 @@ const addDevMiddlewares = (app, webpackConfig) => {
       res.sendFile(path.join(process.cwd(), pkg.dllPlugin.path, filename));
     });
   }
+
+  app.use('/api', proxy('localhost:8000'));
 
   app.get('*', (req, res) => {
     fs.readFile(path.join(compiler.outputPath, 'index.html'), (err, file) => {
