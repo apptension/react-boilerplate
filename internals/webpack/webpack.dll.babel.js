@@ -10,7 +10,7 @@
 
 /* eslint-disable import/no-extraneous-dependencies */
 const { join } = require('path');
-const defaults = require('lodash/defaultsDeep');
+const defaults = require('lodash.defaultsdeep');
 const webpack = require('webpack');
 const pkg = require('../../package.json');
 const dllPlugin = require('../config').dllPlugin;
