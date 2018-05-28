@@ -25,9 +25,9 @@ export class Home extends PureComponent {
     this.props.fetchMaintainers(this.props.language);
   }
 
-  componentDidUpdate(nextProps) {
-    if (nextProps.language !== this.props.language) {
-      this.props.fetchMaintainers(nextProps.language);
+  componentDidUpdate(prevProps) {
+    if (prevProps.language !== this.props.language) {
+      this.props.fetchMaintainers(this.props.language);
     }
   }
 
