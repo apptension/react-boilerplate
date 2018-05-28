@@ -156,7 +156,7 @@
     "lint-staged": "6.1.1",
     "ngrok": "2.2.26",
     "nock": "^9.2.6",
-    "node-plop": "0.13.0",
+    "node-plop": "0.9.0",
     "null-loader": "0.1.1",
     "offline-plugin": "4.9.0",
     "plop": "^1.9.1",
