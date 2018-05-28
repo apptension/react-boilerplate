@@ -19,7 +19,7 @@ export class App extends PureComponent {
     location: PropTypes.object.isRequired,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     const language = this.props.match.params.lang || DEFAULT_LOCALE;
     if (appLocales.indexOf(language) === -1) {
       this.props.setLanguage(DEFAULT_LOCALE);

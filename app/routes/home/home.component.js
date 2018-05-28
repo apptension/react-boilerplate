@@ -21,11 +21,11 @@ export class Home extends PureComponent {
     }).isRequired,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchMaintainers(this.props.language);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(nextProps) {
     if (nextProps.language !== this.props.language) {
       this.props.fetchMaintainers(nextProps.language);
     }

@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+- Update React to v.16.4.0 - [Changelog](https://reactjs.org/blog/2018/05/23/react-v-16-4.html)
+- Change componentWillReceiveProps to componentDidUpdate [Migration Guide](https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#side-effects-on-props-change)
+- Change componentWillMount to componentDidMount (Migration Guide)[https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#fetching-external-data] 
+
 ## [1.0.1] – 2018-03-02
 ### Added
 - Plop generator for React Redux container
