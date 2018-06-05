@@ -6,6 +6,7 @@ const OfflinePlugin = require('offline-plugin');
 /* eslint-enable import/no-extraneous-dependencies */
 
 module.exports = require('./webpack.base.babel')({
+  mode: 'production',
   // In production, we skip all hot-reloading stuff
   entry: {
     support: path.join(process.cwd(), 'app/support.js'),
@@ -18,14 +19,33 @@ module.exports = require('./webpack.base.babel')({
     chunkFilename: '[name].[chunkhash].chunk.js',
   },
 
-  plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      children: true,
+  optimization: {
+    minimize: false,
+    concatenateModules: false,
+    noEmitOnErrors: true,
+    namedModules: true,
+    namedChunks: true,
+    runtimeChunk: false,
+    splitChunks: {
+      chunks: 'async',
       minChunks: 2,
-      async: true,
-    }),
+      name: true,
+      cacheGroups: {
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+        },
+      },
+    },
+  },
 
+
+  plugins: [
     // Minify and optimize the index.html
     new HtmlWebpackPlugin({
       template: 'app/index.html',
@@ -70,9 +90,9 @@ module.exports = require('./webpack.base.babel')({
     }),
   ],
 
-  performance: {
-    assetFilter: (assetFilename) => !(/(\.map$)|(^(main\.|favicon\.))/.test(assetFilename)),
-  },
+  // performance: {
+  //   assetFilter: (assetFilename) => !(/(\.map$)|(^(main\.|favicon\.))/.test(assetFilename)),
+  // },
 
   styleHMR: false,
 });

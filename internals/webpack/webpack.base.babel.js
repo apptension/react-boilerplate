@@ -56,14 +56,16 @@ module.exports = (options) => {
       publicPath: '/',
     }, options.output),
     module: {
-      loaders: [{
+      rules: [{
         test: /\.js$/,
-        loader: 'babel-loader',
         exclude: /node_modules/,
-        options: {
-          cacheDirectory: true,
-        },
-        query: options.babelQuery,
+        use: [{
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+          },
+          query: options.babelQuery,
+        }],
       }, {
         // Do not transform vendor's CSS with CSS-modules
         // The point is that they remain in global scope.
@@ -113,18 +115,17 @@ module.exports = (options) => {
         test: /\.html$/,
         loader: 'html-loader',
       }, {
-        test: /\.json$/,
-        loader: 'json-loader',
-      }, {
         test: /\.(mp4|webm)$/,
-        loader: 'url-loader',
-        query: {
-          limit: 10000,
-        },
+        use: [{
+          loader: 'url-loader',
+          query: {
+            limit: 10000,
+          },
+        }],
       }],
     },
     plugins: options.plugins.concat([
-      new FaviconsWebpackPlugin(path.join(process.cwd(), 'app', 'images', 'favicon.png')),
+      // new FaviconsWebpackPlugin(path.join(process.cwd(), 'app', 'images', 'favicon.png')),
       buildSpritePlugin('mobile'),
       buildSpritePlugin('desktop'),
 
