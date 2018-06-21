@@ -19,6 +19,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import FontFaceObserver from 'fontfaceobserver';
 import 'normalize.css/normalize.css';
 import configureStore from './modules/store';
+import UnsupportedBrowserDetection from './utils/unsupportedBrowserDetection';
 
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
@@ -73,8 +74,13 @@ const render = () => {
   );
 };
 
-// Chunked polyfill for browsers without Intl support
-window.initApp = () => {
+const initApp = () => {
+  const detection = new UnsupportedBrowserDetection();
+  if (!detection.isSupported()) {
+    return;
+  }
+
+  // Chunked polyfill for browsers without Intl support
   if (!window.Intl) {
     (new Promise((resolve) => {
       resolve(require('intl'));
@@ -90,6 +96,8 @@ window.initApp = () => {
     render();
   }
 };
+
+initApp();
 
 // Install ServiceWorker and AppCache in the end since
 // it's not most important operation and if main code fails,
