@@ -74,8 +74,13 @@ const render = () => {
   );
 };
 
-// Chunked polyfill for browsers without Intl support
 const initApp = () => {
+  const detection = new UnsupportedBrowserDetection();
+  if (!detection.isSupported()) {
+    return;
+  }
+
+  // Chunked polyfill for browsers without Intl support
   if (!window.Intl) {
     (new Promise((resolve) => {
       resolve(require('intl'));
@@ -92,22 +97,7 @@ const initApp = () => {
   }
 };
 
-const detection = new UnsupportedBrowserDetection();
-const checkSupportedBrowser = () => {
-  if (detection.isSupported()) {
-    setTimeout(() => {
-      initApp();
-    });
-  }
-};
-const setOnLoadCheckSupportedBrowserListener = () => {
-  window.onload = () => {
-    checkSupportedBrowser();
-  };
-};
-document.readyState === 'complete' ? checkSupportedBrowser() : setOnLoadCheckSupportedBrowserListener();
-
-
+initApp();
 
 // Install ServiceWorker and AppCache in the end since
 // it's not most important operation and if main code fails,
