@@ -19,6 +19,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import FontFaceObserver from 'fontfaceobserver';
 import 'normalize.css/normalize.css';
 import configureStore from './modules/store';
+import UnsupportedBrowserDetection from './utils/unsupportedBrowserDetection';
 
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
@@ -90,6 +91,23 @@ window.initApp = () => {
     render();
   }
 };
+
+const detection = new UnsupportedBrowserDetection();
+const checkSupportedBrowser = () => {
+  if (detection.isSupported()) {
+    setTimeout(() => {
+      window.initApp();
+    });
+  }
+};
+const setOnLoadCheckSupportedBrowserListener = () => {
+  window.onload = () => {
+    checkSupportedBrowser();
+  };
+};
+document.readyState === 'complete' ? checkSupportedBrowser() : setOnLoadCheckSupportedBrowserListener();
+
+
 
 // Install ServiceWorker and AppCache in the end since
 // it's not most important operation and if main code fails,

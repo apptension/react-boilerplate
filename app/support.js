@@ -6,7 +6,13 @@ import UnsupportedBrowserDetection from './utils/unsupportedBrowserDetection';
 const detection = new UnsupportedBrowserDetection();
 
 window.onload = () => {
-  detection.check(() => {
-    setTimeout(window.initApp);
-  });
+  document.documentElement.className += ` device-${detection.deviceType}`;
+
+  if (detection.isInAppBrowser) {
+    document.documentElement.className += ' in-app-browser';
+  }
+
+  if (!detection.isSupported()) {
+    document.documentElement.className += ' unsupported';
+  }
 };

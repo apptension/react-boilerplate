@@ -1,8 +1,6 @@
 import UAParser from 'ua-parser-js';
 import semverCompare from 'semver-compare';
 
-const identity = (arg) => arg;
-
 const DEFAULT_SUPPORTED_BROWSERS_CONFIG = {
   desktop: [{
     browser: 'firefox', minversion: 41,
@@ -79,10 +77,7 @@ export default class UnsupportedBrowserDetection {
   }
 
   isSupported() {
-    document.documentElement.className += ` device-${this.deviceType}`;
-
     if (this.isInAppBrowser) {
-      document.documentElement.className += ' in-app-browser';
       return this.isInAppBrowserSupported;
     }
 
@@ -105,19 +100,6 @@ export default class UnsupportedBrowserDetection {
 
         return Object.keys(options).map(key => checked[key]).indexOf(false) !== -1;
       });
-
-    if (!isSupported) {
-      document.documentElement.className += ' unsupported';
-    }
-
     return isSupported;
-  }
-
-  check(successCallback = identity, failureCallback = identity) {
-    if (this.isSupported()) {
-      successCallback();
-    } else {
-      failureCallback();
-    }
   }
 }
