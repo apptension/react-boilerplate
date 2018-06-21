@@ -75,7 +75,7 @@ const render = () => {
 };
 
 // Chunked polyfill for browsers without Intl support
-window.initApp = () => {
+const initApp = () => {
   if (!window.Intl) {
     (new Promise((resolve) => {
       resolve(require('intl'));
@@ -96,7 +96,7 @@ const detection = new UnsupportedBrowserDetection();
 const checkSupportedBrowser = () => {
   if (detection.isSupported()) {
     setTimeout(() => {
-      window.initApp();
+      initApp();
     });
   }
 };
