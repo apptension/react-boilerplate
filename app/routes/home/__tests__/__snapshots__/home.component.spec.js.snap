@@ -8,7 +8,7 @@ exports[`Home: Component should render Home root 1`] = `
     title="Homepage"
   />
   <styled.h1>
-    <styled.i
+    <Styled(styled.i)
       name="logo"
     />
     <FormattedMessage
