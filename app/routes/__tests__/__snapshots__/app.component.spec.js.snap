@@ -3,7 +3,7 @@
 exports[`App: Component should not render App when language is not set 1`] = `""`;
 
 exports[`App: Component should render App when language is set 1`] = `
-<React.Fragment>
+<Fragment>
   <HelmetWrapper
     defaultTitle="Apptension React Boilerplate"
     defer={true}
@@ -35,5 +35,5 @@ exports[`App: Component should render App when language is set 1`] = `
       Children
     </div>
   </IntlProvider>
-</React.Fragment>
+</Fragment>
 `;

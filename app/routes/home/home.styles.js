@@ -17,7 +17,7 @@ export const Title = styled.h1`
  justify-content: center;
 `;
 
-export const TitleLogo = SpriteImage.extend`
+export const TitleLogo = styled(SpriteImage)`
   margin-bottom: 16px;
 `;
 
